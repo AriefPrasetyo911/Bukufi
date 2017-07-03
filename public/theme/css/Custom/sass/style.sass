@@ -1,0 +1,273 @@
+/* ======================================== */
+/* 		STYLE FOR KAIGAN WEB PROJECT		*/
+/* ======================================== */
+/* Author	: Arief Budi Prasetyo			*/
+/* Version	: 1.0							*/
+/* Email	: Arief.Prasetyo911@gmail.com	*/
+/* ======================================== */
+/* 		STYLE FOR KAIGAN WEB PROJECT		*/
+/* ======================================== */
+
+//import mixins
+@import mixins
+
+/* # GENERAL SETTING# */
+body
+	font-size: 14px
+	font-weight: normal
+
+nav, header, main, article, section, aside, footer
+	display: block
+
+h1, h2, h3, h4, h5, h6, p
+	padding: 0
+	margin: 0
+
+/*# COLOR #*/
+$a-hover-color		: #6495ed
+$navbar-color 		: #404040
+$navbar-color-hover	: #353535
+$divider-color		: #212121
+$dropdown-hover		: #00bfff
+$list-hover			: #636363
+//for active element
+#active
+	font-weight: bold
+
+a
+	color: black
+
+	&:hover
+		color: $a-hover-color !important
+		text-decoration: none
+		transition: all 0.5s
+		-webkit-transition: all 0.5s
+		-moz-transition: all 0.5s
+
+.nav > li > a
+	+padding-left(20px)
+	+padding-right(20px)
+
+//divider each menu
+li.need-divider~li.need-divider
+	border-left: 1px solid $divider-color
+
+li.need-divider:last-child
+	border-right: 1px solid $divider-color
+
+//dropdown color
+.dropdown-hover-color
+	background-color: $navbar-color-hover
+
+.panel
+	+border-radius(0)
+	+margin-bottom(10px)
+
+	.panel-heading
+		+padding-left(30px)
+		+padding-right(30px)
+
+	.panel-body
+		padding: 30px
+
+//carousel
+.slide
+	.carousel-indicators
+		bottom: -35px
+
+	.carousel-inner
+		img
+			width: 100%
+			object-fit: cover
+
+.carousel-control
+	width: 5%
+
+/*# START FROM CONTAINER MASTER-HOME#*/
+.container
+	.navbar-default
+		+border-radius(0)
+		+margin-bottom(0)
+
+	//for top navbar
+	.top-navbar
+		height: 70px
+		background-color: transparent
+		border-style: hidden
+
+		.container-fluid
+			+padding-left(0)
+			+padding-right(0)
+
+			.navbar-brand
+				+padding-top(30px)
+
+			.navbar-collapse
+				+padding-top(15px)
+				+padding-bottom(15px)
+
+				.navbar-right
+					+padding-top(15px)
+
+				.navbar-nav > li > a
+					+padding-bottom(0)
+					+padding-top(0)
+
+	//for main navbar
+	.main-navbar
+		background-color: $navbar-color
+		height: 40px
+
+		.container-fluid
+			+padding-left(0)
+			+padding-right(0)
+			
+			#navbar-menu
+				+padding-left(0)
+				+padding-right(0)
+
+				.col-md-7
+					+padding-left(0)
+					font-weight: bold
+
+					.active
+						background-color: $navbar-color-hover
+						color: white
+						height: 40px
+
+					.dropdown
+						.dropdown-menu
+							background-color: $navbar-color-hover
+							
+							li
+								a
+									&:hover
+										background-color: $dropdown-hover
+
+					a
+						color: white
+						height: 40px
+						+padding-top(10px)
+
+						&:hover
+							color: white !important
+							background-color: $navbar-color-hover 
+
+				.col-md-5
+					.navbar-form
+						+margin-top(5px)
+
+					.navbar-right, #searchinput
+						width: 100%
+						
+						.col-md-12
+							+padding-right(0)
+							+padding-left(0)
+
+
+	//for sub navbar
+	.sub-navbar,
+		height: 30px
+		background-color: white
+		border: 1px solid black
+
+		.container-fluid, #sub-menu
+			+padding-left(0)
+			+padding-right(0)
+			height: 30px
+
+			.navbar-nav
+				height: 30px
+
+				li
+					a
+						+padding-top(3px)
+						height: 25px
+						
+
+						&:hover
+							color: black
+
+				#active
+					a						
+						color: $a-hover-color
+
+			
+
+/*# MAIN CONTENT #*/
+.main-content
+	.col-md-9
+		+padding-left(0)
+		+padding-right(0)
+		+padding-top(10px)
+
+		.carosuel-2
+			.panel-body
+				background-color: #f5f5f5
+
+	.col-md-3
+		+padding-right(0)
+		+padding-top(10px)
+
+		.panel, .panel-body
+			padding: 0
+
+			img
+				width: 100%
+
+		.sidebar-2
+			.panel-heading
+				+padding-left(15px)
+				+padding-right(15px)
+
+			.panel-body
+				.list-group
+					+margin-bottom(0)
+
+					a
+						color: black
+
+						&:hover
+							background-color: $list-hover
+							color: white
+
+						li
+							+border-radius(0)
+							border-style: hidden
+
+							&:hover
+								background-color: $list-hover
+								color: white
+						
+
+		.sidebar-3
+			.panel-heading
+				display: flex
+				+padding-left(15px)
+				+padding-right(15px)
+
+				.left
+					+padding-right(0)
+					+padding-left(0)
+
+				.right
+					+padding-right(0)
+
+			.panel-body
+				.list-group
+					+margin-bottom(0)
+
+					a
+						color: black
+
+						&:hover
+							background-color: $list-hover
+							color: white
+
+						li
+							+border-radius(0)
+							border-style: hidden
+
+							&:hover
+								background-color: $list-hover
+								color: white

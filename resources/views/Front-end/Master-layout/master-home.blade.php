@@ -112,7 +112,37 @@
 		<!--/for content -->
 
 		<!-- Static bottom navbar -->
-		
+		<nav class="navbar-static-bottom">
+			<div class="col-md-2 footer-about-us">
+				<h4 class="footer-titles">About Us</h4>
+				<ul>
+					<li><a href="#"> OUR STORY </a></li>
+					<li><a href="#"> CONTACS US </a></li>
+					<li><a href="#"> CAREER </a></li>
+					<li><a href="#"> FAQS </a></li>
+				</ul>
+			</div>
+			<div class="col-md-2 footer-more">
+				<h4 class="footer-titles">More</h4>
+				<ul>
+					<li><a href="#"> UNLIMITED </a></li>
+					<li><a href="#"> SUBMIT </a></li>
+					<li><a href="#"> REEDEM </a></li>
+					<li><a href="#"> PULL LIST </a></li>
+				</ul>
+			</div>
+			<div class="col-md-2 footer-ways-to-read">
+				<h4 class="footer-titles">Ways to Read</h4>
+				<ul>
+					<li><a href="#"> IPHONE / IPAD APP </a></li>
+					<li><a href="#"> ANDROID APP </a></li>
+					<li><a href="#"> KINDLE FIRE APP </a></li>
+				</ul>
+			</div>
+			<div class="col-md-6 footer-subscribe">
+				4
+			</div>
+		</nav>
 	</div>
 </body>
 	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/jquery-3.2.1.min.js')}}"></script>

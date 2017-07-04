@@ -59,6 +59,7 @@ li.need-divider:last-child
 .dropdown-hover-color
 	background-color: $navbar-color-hover
 
+//panel general
 .panel
 	+border-radius(0)
 	+margin-bottom(10px)
@@ -82,6 +83,25 @@ li.need-divider:last-child
 
 .carousel-control
 	width: 5%
+
+//list group
+.list-group
+	+margin-bottom(0)
+
+	a
+		color: black
+
+		&:hover
+			background-color: $list-hover
+			color: white
+
+		li
+			+border-radius(0)
+			border-style: hidden
+
+			&:hover
+				background-color: $list-hover
+				color: white
 
 /*# START FROM CONTAINER MASTER-HOME#*/
 .container
@@ -196,6 +216,9 @@ li.need-divider:last-child
 
 /*# MAIN CONTENT #*/
 .main-content
+	+padding-left(0)
+	+padding-right(0)
+		
 	.col-md-9
 		+padding-left(0)
 		+padding-right(0)
@@ -271,3 +294,24 @@ li.need-divider:last-child
 							&:hover
 								background-color: $list-hover
 								color: white
+
+/*# FOOTER #*/
+.navbar-static-bottom
+	display: block
+	
+	.footer-about-us
+		+padding-left(0)
+
+	.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
+		+padding-right(0)
+		border: 1px solid #ddd
+
+		.footer-titles
+			padding: 10px 15px
+
+		ul 
+			+padding-left(15px)
+
+			li
+				list-style-type: none
+				line-height: 2em

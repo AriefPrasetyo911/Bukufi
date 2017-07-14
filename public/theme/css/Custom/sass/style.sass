@@ -11,6 +11,14 @@
 //import mixins
 @import mixins
 
+/*# COLOR #*/
+$a-hover-color		: #6495ed
+$navbar-color 		: #404040
+$navbar-color-hover	: #353535
+$divider-color		: #212121
+$list-hover			: #636363
+$list-hover-blue	: #008b8b
+
 /* # GENERAL SETTING# */
 body
 	font-size: 14px
@@ -23,19 +31,25 @@ h1, h2, h3, h4, h5, h6, p
 	padding: 0
 	margin: 0
 
-/*# COLOR #*/
-$a-hover-color		: #6495ed
-$navbar-color 		: #404040
-$navbar-color-hover	: #353535
-$divider-color		: #212121
-$dropdown-hover		: #00bfff
-$list-hover			: #636363
+
 //for active element
 #active
 	font-weight: bold
 
-a
-	color: black
+.nav, .list-group, .col-md-2, .social-media
+	a
+		color: black
+
+		&:hover
+			color: $a-hover-color
+			text-decoration: none
+			transition: all 0.5s
+			-webkit-transition: all 0.5s
+			-moz-transition: all 0.5s
+
+.nav > li > a
+	+padding-left(20px)
+	+padding-right(20px)
 
 	&:hover
 		color: $a-hover-color !important
@@ -43,10 +57,6 @@ a
 		transition: all 0.5s
 		-webkit-transition: all 0.5s
 		-moz-transition: all 0.5s
-
-.nav > li > a
-	+padding-left(20px)
-	+padding-right(20px)
 
 //divider each menu
 li.need-divider~li.need-divider
@@ -59,18 +69,6 @@ li.need-divider:last-child
 .dropdown-hover-color
 	background-color: $navbar-color-hover
 
-//panel general
-.panel
-	+border-radius(0)
-	+margin-bottom(10px)
-
-	.panel-heading
-		+padding-left(30px)
-		+padding-right(30px)
-
-	.panel-body
-		padding: 30px
-
 //carousel
 .slide
 	.carousel-indicators
@@ -81,27 +79,74 @@ li.need-divider:last-child
 			width: 100%
 			object-fit: cover
 
+#myCarousel
+	.carousel-inner
+		height: 350px
+		a
+			img
+				width: 100%
+				height: 350px
+
 .carousel-control
 	width: 5%
 
 //list group
 .list-group
+	+margin-top(5px)
 	+margin-bottom(0)
 
 	a
 		color: black
-
-		&:hover
-			background-color: $list-hover
-			color: white
-
+		
 		li
 			+border-radius(0)
 			border-style: hidden
+			padding: 5px
 
 			&:hover
-				background-color: $list-hover
-				color: white
+				color: blue
+
+//a
+a
+	color: black
+	
+	&:hover
+		text-decoration: none
+		color: blue
+
+input , .input-group
+	+border-radius(0) 
+
+//breadcrumb
+.breadcrumb
+	+border-radius(0)
+	background-color: transparent
+	+padding-left(0)
+	+padding-right(0)
+
+.top-image
+	padding: 0
+	margin: 0
+	background-color: transparent
+	+border-radius(0)
+	+margin-bottom(15px)
+
+	img
+		width: 100%
+		height: 250px
+		object-fit: cover
+
+//panel
+.panel-default
+	+border-radius(0)
+	+margin-bottom(10px)
+
+@media screen and (min-width: 768px)
+.container .jumbotron, .container-fluid .jumbotron
+	padding: 0
+
+
+/* # END GENERAL SETTING# */
 
 /*# START FROM CONTAINER MASTER-HOME#*/
 .container
@@ -137,6 +182,7 @@ li.need-divider:last-child
 	.main-navbar
 		background-color: $navbar-color
 		height: 40px
+		+margin-bottom(10px)
 
 		.container-fluid
 			+padding-left(0)
@@ -158,11 +204,12 @@ li.need-divider:last-child
 					.dropdown
 						.dropdown-menu
 							background-color: $navbar-color-hover
+							+border-radius(0)
 							
 							li
 								a
 									&:hover
-										background-color: $dropdown-hover
+										background-color: $list-hover-blue
 
 					a
 						color: white
@@ -184,122 +231,67 @@ li.need-divider:last-child
 							+padding-right(0)
 							+padding-left(0)
 
-
-	//for sub navbar
-	.sub-navbar,
-		height: 30px
-		background-color: white
-		border: 1px solid black
-
-		.container-fluid, #sub-menu
-			+padding-left(0)
-			+padding-right(0)
-			height: 30px
-
-			.navbar-nav
-				height: 30px
-
-				li
-					a
-						+padding-top(3px)
-						height: 25px
-						
-
-						&:hover
-							color: black
-
-				#active
-					a						
-						color: $a-hover-color
-
-			
-
 /*# MAIN CONTENT #*/
 .main-content
 	+padding-left(0)
 	+padding-right(0)
-		
+	display: flex
+
 	.col-md-9
+		+border-radius(0)
 		+padding-left(0)
 		+padding-right(0)
-		+padding-top(10px)
 
-		.carosuel-2
-			.panel-body
-				background-color: #f5f5f5
+		.col-md-12
+			+padding-left(0)
+			+padding-right(0)
+			+padding-top(5px)
+			+padding-bottom(5px)
+
+			.media
+				+padding-left(0)
+				+padding-right(5px)
+
+				.comic-image
+					object-fit: cover
+					width: 100%
+
+			.contents
+				+padding-left(5px)
+				+padding-right(0)
 
 	.col-md-3
 		+padding-right(0)
-		+padding-top(10px)
+		
+		.panel-heading
+			display: flow-root
 
-		.panel, .panel-body
-			padding: 0
+		.col-md-12
+			+padding-left(0)
+			+padding-right(0)
+			+padding-bottom(10px)
 
-			img
-				width: 100%
+			.media
+				+padding-left(0)
+				+padding-right(0)
 
-		.sidebar-2
-			.panel-heading
-				+padding-left(15px)
-				+padding-right(15px)
+				.media-object
+					height: 85px
+					width: 100%
 
-			.panel-body
-				.list-group
-					+margin-bottom(0)
+			.teks
+				+padding-left(10px)
+				+padding-right(0)
 
-					a
-						color: black
-
-						&:hover
-							background-color: $list-hover
-							color: white
-
-						li
-							+border-radius(0)
-							border-style: hidden
-
-							&:hover
-								background-color: $list-hover
-								color: white
-						
-
-		.sidebar-3
-			.panel-heading
-				display: flex
-				+padding-left(15px)
-				+padding-right(15px)
-
-				.left
-					+padding-right(0)
-					+padding-left(0)
-
-				.right
-					+padding-right(0)
-
-			.panel-body
-				.list-group
-					+margin-bottom(0)
-
-					a
-						color: black
-
-						&:hover
-							background-color: $list-hover
-							color: white
-
-						li
-							+border-radius(0)
-							border-style: hidden
-
-							&:hover
-								background-color: $list-hover
-								color: white
+				.comic-title
+					font-weight: bold
+					+margin-bottom(10px)
 
 /*# FOOTER #*/
 .navbar-static-bottom
 	display: block
 	
-	.footer-about-us
+	.footer-about-us ,.footer-more, .footer-ways-to-read, .footer-subscribe
 		+padding-left(0)
 
 	.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
@@ -315,3 +307,157 @@ li.need-divider:last-child
 			li
 				list-style-type: none
 				line-height: 2em
+
+	.footer-ways-to-read, .footer-subscribe
+		height: 163px
+
+	.footer-subscribe
+		p
+			+padding-left(15px)
+			+padding-right(15px)
+			+padding-bottom(5px)
+
+		.col-md-12
+			+padding-bottom(5px)
+
+			.col-md-8
+				+padding-left(0)
+				+padding-right(0)
+
+.navbar-static-bottom-2, .col-md-6
+	display: inline-block
+	+padding-right(0)
+	+padding-left(0)
+
+	.pull-left , .social-media
+		+padding-top(5px)
+		+padding-bottom(5px)
+		display: inline-block
+/*# END FROM CONTAINER MASTER-HOME#*/
+
+/*# NEW COMICS #*/
+.new-comics
+	display: block
+
+	.panel-default
+		+margin-top(10px)
+
+		.panel-heading
+			+padding-left(15px)
+			+padding-right(15px)
+			background-color: transparent
+
+			#add-all-to-cart
+				+padding-right(15px)
+
+			a
+				color: black
+
+				&:hover
+					color: $a-hover-color
+					text-decoration: none
+					
+
+		.panel-body
+			.col-md-2
+				+padding-left(3px)
+				+padding-right(3px)
+
+				.thumbnail
+					padding: 0
+					+border-radius(0)
+					height: 410px
+					+margin-bottom(0)
+					border-style: hidden
+
+					img
+						height: 285px
+						width: 100%
+
+				.caption
+					+padding-left(0)
+					+padding-right(0)
+
+					.text-center
+						font-weight: bold
+
+					p
+						+padding-top(5px)
+						+padding-bottom(0)
+
+					.btn-add-to-cart
+						width: 80%
+
+					.btn, .dropdown-menu
+						+border-radius(0)
+
+					.dropdown-menu
+						padding: 0
+						border-style: hidden
+
+						a
+							+border-radius(0)
+							color: black
+
+							&:hover
+								background-color: $list-hover-blue
+								color: white
+
+.panel-language
+	border-style: hidden
+
+	.panel-body
+		padding: 0
+/*# END NEW COMICS #*/
+
+/*# COMICS SALE #*/
+.breadcrumb-comic-sale
+	+margin-bottom(10px)
+
+.jumbotron
+	padding: 0
+	margin: 0
+	background-color: transparent
+	+border-radius(0)
+	+margin-bottom(15px)
+
+	img
+		width: 100%
+		height: 175px
+
+@media screen and (min-width: 768px)
+.container .jumbotron, .container-fluid .jumbotron
+	padding: 0
+
+/* FOR ADMIN PANEL BACK END*/
+.form-horizontal
+	.box-footer
+		+padding-right(30px)
+		+padding-left(30px)
+
+.add
+	+padding-right(0)
+	+padding-left(0)
+
+.modal-title
+	text-align: center
+
+.form-horizontal .control-label
+	text-align: left !important
+
+.btn-block + .btn-block
+	+margin-bottom(5px)
+
+.box-header
+	.add
+		+padding-right(0)
+		+padding-left(0)
+
+a.btn
+	+margin-bottom(5px)
+
+.content-header
+	display: list-item
+
+.col-sm-8
+	+padding-left(0)

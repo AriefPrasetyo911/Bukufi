@@ -18,6 +18,11 @@
 		margin-bottom: 0;
 		border-radius: 0;
 	}
+
+	.thumbnail a>img, .thumbnail>img{
+		height: 235px;
+		width: 100%;
+	}
 </style>
 @endsection
 
@@ -27,26 +32,28 @@
 			<!-- carousel started-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
-					@foreach($authors as $author)
-						<h4>Comic by Author : {{$author->comic_author}}</h4>
+					@foreach($s_auth as $author)
+					<h4>Comic by Author : {{$author->comic_author}}</h4>
 					@endforeach
 				</div>
 				<div class="panel-body">
-
+				<div class="col-md-12">
 					<div class="row">
+						@foreach($authors as $author)
 						<div class="col-sm-6 col-md-2">
 							<div class="thumbnail">
-								@foreach($authors as $author)
+								
 								<img src="/theme/images_cover/{{$author->comic_image}}" alt="...">
 								
 								<div class="caption">
 									<h4>{{$author->comic_title}}</h4>
 								</div>
-								@endforeach
+								
 							</div>
 						</div>
+						@endforeach
 					</div>
-
+				</div>
 				</div>
 			</div>
 			

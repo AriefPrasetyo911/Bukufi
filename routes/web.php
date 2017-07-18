@@ -14,15 +14,19 @@
 //home page
 Route::get('/', 'IndexController@index')->name('home.index');
 
+//latest comic
+Route::get('/comic/latest', 'LatestComicController@index')->name('latest.comic');
+
 //single comic
 Route::get('/comic/{id}/{comic_title}', 'IndexController@comic');
 
 //single genre
 Route::get('/comic/genre', 'SingleGenreController@index')->name('single.genre');
+Route::get('/comic-genre/{comic_genre}', 'SingleGenreController@show')->name('satu');
 
 //single author
 Route::get('/comic/comic-author', 'SingleAuthorController@index')->name('single.author');
-Route::get('/comic/comic-author/id/{id}', 'SingleAuthorController@author')->name('author');
+Route::get('/comic/comic-author/name/{comic_author}', 'SingleAuthorController@author')->name('author');
 
 Route::group(['middleware' => ['web']], function(){
 	//user

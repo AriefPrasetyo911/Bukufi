@@ -68,7 +68,7 @@ class ComicChapterController extends Controller
             //validation
             $this->validate($request, [
                 'comic_chapter'     => 'required',
-                'comic_image'       => 'required|max:2048',
+                'comic_image'       => 'required|max:15360',
                 'chapter_title'     => 'required',
             ]);
 
@@ -147,14 +147,13 @@ class ComicChapterController extends Controller
      */
     public function destroy($id)
     {
-        $data   = DB::table('comic_chapters')->where('comic_chapter', $id)->get();
+        $data   = Comic_chapter::where('comic_chapter', '=', $id)->get();
 
-        foreach ($data as $val) {
-            return($val->comic_image);
+        foreach ($data as $images) {
+            
+            $image_path     = public_path().'/theme/images_comic'.'/'.$images->comic_image;
+            $deletes        = unlink($image_path);
         }
-
-        /*$image_path     = public_path().'/theme/images_comic'.'/'.$data->comic_image;
-        $deletes = unlink($image_path);
 
         if ($deletes) {
             
@@ -164,6 +163,6 @@ class ComicChapterController extends Controller
         }
         else{
             return "image file doesn't deleted";
-        }*/
+        }
     }   
 }

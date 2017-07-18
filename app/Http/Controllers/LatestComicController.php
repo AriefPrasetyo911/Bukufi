@@ -4,11 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comic;
-use App\Comic_chapter;
-use App\Comic_genre;
 use DB;
 
-class IndexController extends Controller
+class LatestComicController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,15 +14,19 @@ class IndexController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
+        $title      = 'Latest Comic';
+        $date_now   = date('Y-m-d h:i:s');
+        $date_3d    = date('Y-m-d h:i:s', strtotime('-3 days', time()));
 
-        $title  = "Welcome to Bukufi";
-        $comics = DB::table('comics')->limit(12)->get();
-        $genres = DB::table('comic_genres')->limit(10)->orderBy('comic_genre', 'asc')->get();
-        /*$chapter= Comic_chapter::find($id);*/
-        $id_comic  = DB::table('comic_chapters')->select('comic_id')->distinct()->get('comic_id');        
         
-        return view('Front-end.Home.home', compact('title', 'comics', 'genres', 'id_comic'));
+        /*$filter     = DB::table('comics')->whereBetween('created_at', [$date_3d, $date_now])->get();*/
+
+        $filter     = Comic::where('created_at', '>=', $date_3d)
+                            ->where('created_at', '<=', $date_now)->get();
+        $genres     = DB::table('comic_genres')->limit(10)->orderBy('comic_genre', 'asc')->get();
+
+        return view('Front-end.Single.single-latest-comic', compact('title', 'filter', 'genres'));
     }
 
     /**
@@ -91,22 +93,5 @@ class IndexController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function comic($id, $comic_title)
-    {
-        $single_comic   = DB::table('comics')->where('comic_title',$comic_title)->get();
-        $title          = "Comic".' '.$comic_title;
-        $genres         = DB::table('comic_genres')->limit(10)->orderBy('comic_genre', 'asc')->get();
-        
-        /*$get_id         = Comic::select('id')->where('id', '=', $id)->get();        
-
-        $comic_chapter  = DB::table('comic_chapters')->leftJoin('comics', '.comic_chapters'.$get_id, '=', 'comics'.$get_id)->distinct()->get(['comic_chapter', 'chapter_title']);*/
-
-        $comic_chapter  = Comic_chapter::where('comic_title', '=', $comic_title)->distinct()->get(['comic_chapter', 'chapter_title']);
-
-        $counts          = count($comic_chapter);
-
-        return view('Back-end.Comic.single-comic', compact('single_comic', 'title', 'genres', 'comic_chapter', 'counts'));
     }
 }

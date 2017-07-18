@@ -5,14 +5,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Home : Bukufi</title>
-	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Bootstrap/bootstrap.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Font-awesome/css/font-awesome.min.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/style.css')}}">
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/css/Bootstrap/bootstrap.min.css')); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/css/Font-awesome/css/font-awesome.min.css')); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/css/Custom/css/style.css')); ?>">
 	<!--plugin-->
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
-	<link rel="stylesheet" type="text/css" href="{{asset('theme/js/Plugins/slick/slick-theme.css')}}">
-	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/carousel.css')}}">
-	@yield('push-style')
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/js/Plugins/slick/slick-theme.css')); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/css/Custom/css/carousel.css')); ?>">
+	<?php echo $__env->yieldContent('push-style'); ?>
 </head>
 <body>
 	<div class="container">
@@ -34,7 +34,7 @@
 			    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			      <ul class="nav navbar-nav navbar-right">
 			        
-			        <li><a href="{{url('/login')}}">Login or Register </a></li>
+			        <li><a href="<?php echo e(url('/login')); ?>">Login or Register </a></li>
 			        <li><a href="#">Bookmark <i class="fa fa-bookmark" aria-hidden="true"></i></a></li>
 					<li><a href="#">Reading History <i class="fa fa-history" aria-hidden="true"></i></a></li> 
 		
@@ -60,10 +60,10 @@
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<div class="col-md-7">
 						<ul class="nav navbar-nav">
-	        				<li class="active need-divider"><a class="active" href="{{route('home.index')}}"><i class="fa fa-home" aria-hidden="true"></i> <span class="sr-only">(current)</span></a></li>
-	        				<li class="need-divider"><a href="{{route('latest.comic')}}">LATEST</a></li>
-	        				<li class="need-divider"><a href="{{route('single.genre')}}">GENRE</a></li>
-	        				<li class="need-divider"><a href="{{route('single.author')}}">AUTHOR</a></li>
+	        				<li class="active need-divider"><a class="active" href="<?php echo e(route('home.index')); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span class="sr-only">(current)</span></a></li>
+	        				<li class="need-divider"><a href="<?php echo e(route('latest.comic')); ?>">LATEST</a></li>
+	        				<li class="need-divider"><a href="<?php echo e(route('single.genre')); ?>">GENRE</a></li>
+	        				<li class="need-divider"><a href="<?php echo e(route('single.author')); ?>">AUTHOR</a></li>
 	        			</ul>
         			</div>
         			<div class="col-md-5">
@@ -79,7 +79,7 @@
 		<!-- /for main navbar -->
 
 		<!--for content -->
-		@yield('main-content')
+		<?php echo $__env->yieldContent('main-content'); ?>
 		<!--/for content -->
 
 		<!-- Static bottom navbar -->
@@ -142,11 +142,11 @@
 		</nav>
 	</div>
 
-	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/jquery-3.2.1.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/bootstrap.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('theme/js/Plugins/jq-sticky-anything.min.js')}}"></script>
+	<script type="text/javascript" src="<?php echo e(asset('theme/js/Bootstrap/jquery-3.2.1.min.js')); ?>"></script>
+	<script type="text/javascript" src="<?php echo e(asset('theme/js/Bootstrap/bootstrap.min.js')); ?>"></script>
+	<script type="text/javascript" src="<?php echo e(asset('theme/js/Plugins/jq-sticky-anything.min.js')); ?>"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-	@yield('push-script')
+	<?php echo $__env->yieldContent('push-script'); ?>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('ul.nav li.dropdown').hover(function() {

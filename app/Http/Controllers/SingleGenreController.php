@@ -48,9 +48,11 @@ class SingleGenreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($comic_genre)
     {
-        //
+        $selected   = DB::table('comics')->select('*')->where('comic_genre', 'LIKE', '%' .$comic_genre. '%')->get();
+        
+        return view('Front-end/Single/genre-select', compact('selected'));
     }
 
     /**

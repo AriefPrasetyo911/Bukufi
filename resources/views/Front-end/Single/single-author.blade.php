@@ -31,7 +31,7 @@
 					@foreach($authors as $author)
 						<ul class="col-md-6">
 							<i class="fa fa-caret-right" aria-hidden="true"></i> 
-							<a href="{{'/comic/comic-author/id/'.$author->id}}" id="com_auth">{{$author->comic_author}}</a>
+							<a href="{{'/comic/comic-author/name/'.$author->comic_author}}" id="com_auth">{{$author->comic_author}}</a>
 						</ul>
 					@endforeach
 					

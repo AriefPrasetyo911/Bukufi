@@ -1,5 +1,4 @@
 runtime: php
-service: phpmyadmin
 env: flex
 
 runtime_config:
@@ -23,9 +22,16 @@ env_variables:
   APP_LOG: errorlog
   APP_KEY: base64:+sNJxNSGDLONbWNyOlVY/Sivla+JR+rF8ikvEwqxVZY=
   STORAGE_DIR: /tmp
+  CACHE_DRIVER: database
+  SESSION_DRIVER: database
 
-  # Replace project, instance, database, user and password with the values obtained
-  # when configuring your Cloud SQL instance.
-  MYSQL_DSN: mysql:unix_socket=/cloudsql/bukufi:asia-northeast1:cloud-database;dbname=multiauth2
-  MYSQL_USER: root
-  MYSQL_PASSWORD: 'kaigangames-project'
+  ## Set these environment variables according to your CloudSQL configuration.
+  DB_HOST: localhost
+  DB_DATABASE: multiauth2
+  DB_USERNAME: root
+  DB_PASSWORD: kaigangames-project
+  DB_SOCKET: "/cloudsql/bukufi:asia-northeast1:cloud-database"
+
+# Use the connection name obtained when configuring your Cloud SQL instance.
+beta_settings:
+  cloud_sql_instances: bukufi:asia-northeast1:cloud-database

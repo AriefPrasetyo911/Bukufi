@@ -1,6 +1,4 @@
-@extends('Front-end/Master-layout/master-home')
-
-@section('push-style')
+<?php $__env->startSection('push-style'); ?>
 <style>
 	.panel-heading{
 		display: flex;
@@ -23,9 +21,9 @@
 		text-align: center;
 	}
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('main-content')
+<?php $__env->startSection('main-content'); ?>
 <main class="main-content col-md-12">
 	<div class="col-md-9">
 		<!-- carousel started-->
@@ -47,22 +45,22 @@
 				
 				<div class="col-md-12">
 					<div class="row">
-						@foreach($comics as $comic)
-						<a href="{{url('/comic').'/'.$comic->id.'/'.$comic->comic_title}}" class="link">
+						<?php $__currentLoopData = $comics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+						<a href="<?php echo e(url('/comic').'/'.$comic->id.'/'.$comic->comic_title); ?>" class="link">
 						<div class="col-md-2">
 							<div class="media col-md-12">
 								<figure>
-									<img src="/theme/images_cover/{{$comic->comic_image}}" class="comic-image" alt="image 1">
+									<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="comic-image" alt="image 1">
 								</figure>
 								<figure class="caption">
 									<figcaption id="posting-title">
-										<h5>{{str_replace('-', ' ', $comic->comic_title)}}</h5>
+										<h5><?php echo e(str_replace('-', ' ', $comic->comic_title)); ?></h5>
 									</figcaption>
 								</figure>
 							</div>
 						</div>
 						</a>
-						@endforeach
+						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</div>
 				</div>
 			</div>
@@ -78,15 +76,15 @@
 					<h4>Genre</h4>
 				</div>
 				<div class="pull-right">
-					<a href="{{route('single.genre')}}">More...</a>
+					<a href="<?php echo e(route('single.genre')); ?>">More...</a>
 				</div>
 			</div>
 			<div class="panel-body">
-				@foreach($genres as $genre)
+				<?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 				<ul class="col-md-6">
-					<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
+					<a href="<?php echo e(url('/comic-genre/'.$genre->comic_genre)); ?>"><p><?php echo e($genre->comic_genre); ?></p></a>
 				</ul>
-				@endforeach
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</div>
 		</div>
 
@@ -136,4 +134,5 @@
 		</div>
 	</div>
 </main>
-@endsection
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('Front-end/Master-layout/master-home', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

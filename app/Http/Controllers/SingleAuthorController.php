@@ -16,7 +16,7 @@ class SingleAuthorController extends Controller
     public function index()
     {
         $title      = "Comic Author";
-        $authors    = Comic::all();
+        $authors    = DB::table('comics')->distinct()->get(['comic_author']);
 
         return view('Front-end.Single.single-author', compact('title', 'authors'));
     }
@@ -87,11 +87,12 @@ class SingleAuthorController extends Controller
         //
     }
 
-    public function author($id)
+    public function author($comic_author)
     {
         $title      = "Comic by Author";
-        $authors    = DB::table('comics')->where('id', $id)->get();
+        $authors    = DB::table('comics')->where('comic_author', $comic_author)->get();
+        $s_auth     = DB::table('comics')->where('comic_author', $comic_author)->distinct()->get(['comic_author']);
 
-        return view('Front-end.Single.comic_by_author', compact('title', 'authors'));
+        return view('Front-end.Single.comic_by_author', compact('title', 'authors', 's_auth'));
     }
 }

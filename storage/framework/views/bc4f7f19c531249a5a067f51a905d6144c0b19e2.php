@@ -1,6 +1,4 @@
-@extends('Front-end/Master-layout/master-home')
-
-@section('push-style')
+<?php $__env->startSection('push-style'); ?>
 <style>
 	.panel-heading{
 		display: flex;
@@ -63,28 +61,28 @@
 	}
 
 </style>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@section('main-content')
+<?php $__env->startSection('main-content'); ?>
 <main class="main-content col-md-12">
 	<div class="col-md-12">
 		<!-- carousel started-->
 		<div class="panel panel-default">
 			<div class="panel-body">
 				
-				@foreach($single_comic as $comic)
+				<?php $__currentLoopData = $single_comic; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					<div class="col-md-12">
 						<div class="media col-md-2">
 							<figure>
-								<img src="/theme/images_cover/{{$comic->comic_image}}" class="comic-image" alt="image 1">
+								<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="comic-image" alt="image 1">
 							</figure>
 						</div>
 
 						<div class="contents col-md-10">
 							<figure class="caption">
-								<a href="{{url('/comic').'/'.$comic->comic_title}}" class="link">
+								<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
 									<figcaption id="posting-title">
-										<h4 id="comic_title">{{$comic->comic_title}}</h4>
+										<h4 id="comic_title"><?php echo e($comic->comic_title); ?></h4>
 									</figcaption>
 								</a>
 
@@ -99,10 +97,10 @@
 									</div>
 									<div class="col-md-10">
 										<ul class="list-group">
-											<li class="list-group-item">: {{$comic->comic_title}}</li>
-											<li class="list-group-item">: {{$comic->comic_author}}</li>
-											<li class="list-group-item">: {{$comic->comic_genre}}</li>
-											<li class="list-group-item">: {{$comic->comic_release}}</li>
+											<li class="list-group-item">: <?php echo e($comic->comic_title); ?></li>
+											<li class="list-group-item">: <?php echo e($comic->comic_author); ?></li>
+											<li class="list-group-item">: <?php echo e($comic->comic_genre); ?></li>
+											<li class="list-group-item">: <?php echo e($comic->comic_release); ?></li>
 											<li class="list-group-item">
 												<a href="#" class="btn btn-info add-fav"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add to Favourite</a>
 											</li>
@@ -116,7 +114,7 @@
 					<div class="col-md-12 sumarry">
 						<h4>Summary</h4>
 						<hr>
-						<p id="comic_desc">{{strip_tags($comic->comic_description)}}</p>
+						<p id="comic_desc"><?php echo e(strip_tags($comic->comic_description)); ?></p>
 					</div>
 
 					<div class="col-md-12 comic_chapter">
@@ -131,20 +129,22 @@
 								</div>
 								<div id="collapseOne" class="panel-collapse collapse in">
 									<div class="panel-body">
-										@foreach($comic_chapter as $chapter)
-											<a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
-										@endforeach
+										<?php $__currentLoopData = $comic_chapter; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $chapter): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+											<a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter <?php echo e($chapter->comic_chapter); ?> : <?php echo e($chapter->chapter_title); ?></a>
+										<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				@endforeach
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				
 			</div>
 		</div>		
 	</div>
 
 </main>
-@endsection
+<?php $__env->stopSection(); ?>
 
+
+<?php echo $__env->make('Front-end/Master-layout/master-home', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

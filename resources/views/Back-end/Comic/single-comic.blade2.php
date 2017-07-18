@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Home : Bukufi</title>
+	<title>Comic</title>
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Bootstrap/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Font-awesome/css/font-awesome.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/style.css')}}">
@@ -12,7 +12,73 @@
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/js/Plugins/slick/slick-theme.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/carousel.css')}}">
-	@yield('push-style')
+	<style type="text/css">
+		.panel-heading{
+			display: flex;
+		}
+
+		#comic_title{
+			text-align: center;
+		}
+
+		.list-group, .list-group .list-group-item{
+			border-color: transparent;
+			border-radius: 0;
+		}
+
+		.col-md-2, .col-md-10, .col-md-12{
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		hr{
+			margin-top: 5px;
+			margin-bottom: 5px;
+		}
+
+		.sumarry{
+			padding-top: 15px;
+		}
+
+		#comic_desc{
+			text-align: justify;
+			line-height: 1.5em;
+		}
+
+		.comic_chapter{
+			margin-top: 15px;
+		}
+
+		.input-group{
+			margin-left: 15px;
+		}
+
+		.panel-group .panel{
+			border-radius: 0;
+		}
+
+		.comic-image{
+			width: 100%;
+		}
+
+		a.add-fav, a.add-fav:hover
+		{
+			color: white;
+		}
+
+		.panel-heading .accordion-toggle:after {
+	    /* symbol for "opening" panels */
+	    font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+	    content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+	    float: right;        /* adjust as needed */
+	    color: grey;         /* adjust as needed */
+		}
+		.panel-heading .accordion-toggle.collapsed:after {
+		    /* symbol for "collapsed" panels */
+		    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+		}
+
+	</style>
 </head>
 <body>
 	<div class="container">
@@ -78,10 +144,93 @@
 		</nav>
 		<!-- /for main navbar -->
 
-		<!--for content -->
-		@yield('main-content')
-		<!--/for content -->
+		<main class="main-content col-md-12">
+				<div class="col-md-12">
+					<!-- carousel started-->
+					<div class="panel panel-default">
+						<div class="panel-body">					
+							@foreach($single_comic as $comic)
+							<div class="col-md-12">
+								<div class="media col-md-2">
+									<figure>
+										<img src="/theme/images_cover/{{$comic->comic_image}}" class="comic-image" alt="image 1">
+									</figure>
+								</div>
 
+								<div class="contents col-md-10">
+									<figure class="caption">
+										<a href="{{url('/comic').'/'.$comic->comic_title}}" class="link">
+											<figcaption id="posting-title">
+												<h4 id="comic_title">{{$comic->comic_title}}</h4>
+											</figcaption>
+										</a>
+
+										<col class="md-12">
+											<div class="col-md-2">
+												<ul class="list-group">
+													<li class="list-group-item">Title</li>
+													<li class="list-group-item">Author</li>
+													<li class="list-group-item">Genre</li>
+													<li class="list-group-item">Release</li>
+												</ul>
+											</div>
+											<div class="col-md-10">
+												<ul class="list-group">
+													<li class="list-group-item">: {{$comic->comic_title}}</li>
+													<li class="list-group-item">: {{$comic->comic_author}}</li>
+													<li class="list-group-item">: 
+														@foreach($comic->comic_genre as $ch)
+														<a href="#">
+															{{$ch}}
+														</a>
+														@enforeach
+													</li>
+													<li class="list-group-item">: {{$comic->comic_release}}</li>
+													<li class="list-group-item">
+														<a href="#" class="btn btn-info add-fav"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add to Favourite</a>
+													</li>
+												</ul>
+											</div>
+										</col>
+									</figure>
+								</div>
+							</div>
+
+							<div class="col-md-12 sumarry">
+								<h4>Summary</h4>
+								<hr>
+								<p id="comic_desc">{{strip_tags($comic->comic_description)}}</p>
+							</div>
+
+							<div class="col-md-12 comic_chapter">
+								
+								<div class="panel-group" id="accordion">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+											Chapter &nbsp;
+											</a>
+											</h4>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse in">
+											<div class="panel-body">
+												@foreach($comic_chapter as $chapter)
+													<a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+												@endforeach
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+							@endforeach
+						</div>
+					</div>
+					
+				</div>
+		</main>
+		
 		<!-- Static bottom navbar -->
 		<nav class="navbar-static-bottom">
 			<div class="col-md-3 footer-about-us">
@@ -141,12 +290,12 @@
 			</div>
 		</nav>
 	</div>
-
+</body>
 	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/jquery-3.2.1.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/bootstrap.min.js')}}"></script>
 	<script type="text/javascript" src="{{asset('theme/js/Plugins/jq-sticky-anything.min.js')}}"></script>
 	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-	@yield('push-script')
+	
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('ul.nav li.dropdown').hover(function() {
@@ -156,7 +305,5 @@
 			}, function(){
 				$(this).addClass('dropdown-hover-color');
 			});
-		})
+		});	
 	</script>
-</body>
-	

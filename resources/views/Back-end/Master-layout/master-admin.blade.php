@@ -203,4 +203,3 @@
 
 	@yield('push-script')
 </html>
-

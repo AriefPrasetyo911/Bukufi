@@ -6,7 +6,7 @@
 		display: flex;
 	}
 
-	#comic_title{
+	#comic_title, #center{
 		text-align: center;
 	}
 
@@ -84,7 +84,7 @@
 							<figure class="caption">
 								<a href="{{url('/comic').'/'.$comic->comic_title}}" class="link">
 									<figcaption id="posting-title">
-										<h4 id="comic_title">{{$comic->comic_title}}</h4>
+										<h4 id="comic_title">{{str_replace('-', ' ', $comic->comic_title)}}</h4>
 									</figcaption>
 								</a>
 
@@ -99,9 +99,9 @@
 									</div>
 									<div class="col-md-10">
 										<ul class="list-group">
-											<li class="list-group-item">: {{$comic->comic_title}}</li>
-											<li class="list-group-item">: {{$comic->comic_author}}</li>
-											<li class="list-group-item">: {{$comic->comic_genre}}</li>
+											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_title)}}</li>
+											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_author)}}</li>
+											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_genre)}}</li>
 											<li class="list-group-item">: {{$comic->comic_release}}</li>
 											<li class="list-group-item">
 												<a href="#" class="btn btn-info add-fav"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add to Favourite</a>
@@ -131,9 +131,14 @@
 								</div>
 								<div id="collapseOne" class="panel-collapse collapse in">
 									<div class="panel-body">
-										@foreach($comic_chapter as $chapter)
-											<a href="#"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
-										@endforeach
+										@if(count($comic_chapter))
+											@foreach($comic_chapter as $chapter)
+												<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+												<br>
+											@endforeach
+										@else
+											<h4 id="center">Sorry, this comic has no chapter yet</h4>
+										@endif
 									</div>
 								</div>
 							</div>

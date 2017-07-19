@@ -221,13 +221,13 @@
                     <td>{{$chap->comic_title}}</td>
                     <td>{{$chap->comic_chapter}}</td>
                     <td>{{$chap->chapter_title}}</td>
-                    <td>
+                    <!-- <td>
                       <form action="{{url('/admin/comic-chapter/delete/' .$chap->comic_chapter)}}" class="form-horizontal" method="post">
                         {{ method_field('delete')}}
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('Are you sure want to delete this data?')">Delete</button>
                       </form>       
-                    </td>
+                    </td> -->
                   </tr>
                   @endforeach
                 </tbody>

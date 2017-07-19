@@ -41,15 +41,14 @@
 					<div class="row">
 						@foreach($authors as $author)
 						<div class="col-sm-6 col-md-2">
+							<a href="{{url('/comic').'/'.$author->comic_title}}" class="link">
 							<div class="thumbnail">
-								
-								<img src="/theme/images_cover/{{$author->comic_image}}" alt="...">
-								
+								<img src="/theme/images_cover/{{$author->comic_image}}" alt="comic image">
 								<div class="caption">
 									<h4>{{$author->comic_title}}</h4>
 								</div>
-								
 							</div>
+							</a>
 						</div>
 						@endforeach
 					</div>

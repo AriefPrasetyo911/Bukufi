@@ -23,6 +23,13 @@
 		padding-right: 0;
 		padding-left: 0;
 	}
+
+	#not-found
+	{
+		text-align: center;
+		line-height: 1.5em;
+	}
+
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -34,22 +41,29 @@
 			<div class="panel-body">
 				<div class="col-md-12">
 					<div class="row">
-						<?php $__currentLoopData = $selected; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<a href="<?php echo e(url('/comic').'/'.$comic->id.'/'.$comic->comic_title); ?>" class="link">
-						<div class="col-md-2">
-							<div class="media col-md-12">
-								<figure>
-									<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="comic-image" alt="image 1">
-								</figure>
-								<figure class="caption">
-									<figcaption id="posting-title">
-										<h5><?php echo e(str_replace('-', ' ', $comic->comic_title)); ?></h5>
-									</figcaption>
-								</figure>
+						<?php if(count($selected)): ?>
+							<?php $__currentLoopData = $selected; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+							<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
+							<div class="col-md-2">
+								<div class="media col-md-12">
+									<figure>
+										<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="comic-image" alt="image 1">
+									</figure>
+									<figure class="caption">
+										<figcaption id="posting-title">
+											<h5><?php echo e(str_replace('-', ' ', $comic->comic_title)); ?></h5>
+										</figcaption>
+									</figure>
+								</div>
 							</div>
-						</div>
-						</a>
-						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							</a>
+							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							<?php echo e($selected->appends(Request::only('comic_genre'))->links('pagination.custom')); ?>
+
+
+						<?php else: ?>
+							<h3 id="not-found">Sorry, comic in this genre can not be found </h3>
+						<?php endif; ?>
 					</div>
 				</div>
 			</div>

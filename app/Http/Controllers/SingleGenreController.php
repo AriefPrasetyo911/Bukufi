@@ -50,7 +50,7 @@ class SingleGenreController extends Controller
      */
     public function show($comic_genre)
     {
-        $selected   = DB::table('comics')->select('*')->where('comic_genre', 'LIKE', '%' .$comic_genre. '%')->get();
+        $selected   = DB::table('comics')->select('*')->where('comic_genre', 'LIKE', '%' .$comic_genre. '%')->paginate(12);
         
         return view('Front-end/Single/genre-select', compact('selected'));
     }

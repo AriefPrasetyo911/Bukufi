@@ -23,7 +23,8 @@ class LatestComicController extends Controller
         /*$filter     = DB::table('comics')->whereBetween('created_at', [$date_3d, $date_now])->get();*/
 
         $filter     = Comic::where('created_at', '>=', $date_3d)
-                            ->where('created_at', '<=', $date_now)->get();
+                            ->where('created_at', '<=', $date_now)->orderBy('created_at', 'asc')->get();
+
         $genres     = DB::table('comic_genres')->limit(10)->orderBy('comic_genre', 'asc')->get();
 
         return view('Front-end.Single.single-latest-comic', compact('title', 'filter', 'genres'));

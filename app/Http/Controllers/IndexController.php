@@ -19,7 +19,7 @@ class IndexController extends Controller
     {   
 
         $title  = "Welcome to Bukufi";
-        $comics = DB::table('comics')->limit(12)->get();
+        $comics = DB::table('comics')->paginate(12);
         $genres = DB::table('comic_genres')->limit(10)->orderBy('comic_genre', 'asc')->get();
         /*$chapter= Comic_chapter::find($id);*/
         $id_comic  = DB::table('comic_chapters')->select('comic_id')->distinct()->get('comic_id');        
@@ -93,7 +93,7 @@ class IndexController extends Controller
         //
     }
 
-    public function comic($id, $comic_title)
+    public function comic($comic_title)
     {
         $single_comic   = DB::table('comics')->where('comic_title',$comic_title)->get();
         $title          = "Comic".' '.$comic_title;
@@ -103,10 +103,21 @@ class IndexController extends Controller
 
         $comic_chapter  = DB::table('comic_chapters')->leftJoin('comics', '.comic_chapters'.$get_id, '=', 'comics'.$get_id)->distinct()->get(['comic_chapter', 'chapter_title']);*/
 
-        $comic_chapter  = Comic_chapter::where('comic_title', '=', $comic_title)->distinct()->get(['comic_chapter', 'chapter_title']);
+        $comic_chapter  = Comic_chapter::where('comic_title', '=', $comic_title)->distinct()->get(['comic_title','comic_chapter', 'chapter_title']);
 
         $counts          = count($comic_chapter);
 
         return view('Back-end.Comic.single-comic', compact('single_comic', 'title', 'genres', 'comic_chapter', 'counts'));
+    }
+
+    public function showComic($comic_title, $comic_chapter){
+        
+        $shows2     = Comic_chapter::where('comic_title' ,$comic_title)->where('comic_chapter' ,$comic_chapter)->paginate(1);
+
+        $shows      = Comic_chapter::where('comic_title', '=' ,$comic_title)->distinct()->get(['comic_title', 'chapter_title', 'comic_chapter']);
+        /*$shows  = DB::select("select * from comic_chapters where comic_title =". $comic_title ." and comic_chapter =".$comic_chapter);*/
+
+       
+        return view('Front-end/Single/read-comic', compact('shows2', 'shows'));
     }
 }

@@ -22,6 +22,15 @@
 		padding-top: 5px;
 		text-align: center;
 	}
+
+	hr{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	#titles{
+		text-align: center;
+	}
 </style>
 @endsection
 
@@ -32,15 +41,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="col-md-12">
-					<div class="col-md-6">
-						<h4>Comic List</h4>
-					</div>
-
-					<div class="col-md-6">
-						<div class="pull-right">
-							<a href="#">More Comic</a>
-						</div>
-					</div>
+					<h4 id="titles">Comic List</h4>
 				</div>
 			</div>
 			<div class="panel-body panel-9">
@@ -48,7 +49,7 @@
 				<div class="col-md-12">
 					<div class="row">
 						@foreach($comics as $comic)
-						<a href="{{url('/comic').'/'.$comic->id.'/'.$comic->comic_title}}" class="link">
+						<a href="{{url('/comic').'/'.$comic->comic_title}}" class="link">
 						<div class="col-md-2">
 							<div class="media col-md-12">
 								<figure>
@@ -65,6 +66,8 @@
 						@endforeach
 					</div>
 				</div>
+				<div class="col-md-12"><hr></div>
+				{{ $comics->links('pagination.custom') }}
 			</div>
 		</div>
 		

@@ -68,10 +68,10 @@ class ComicController extends Controller
         $request->file('comic_image')->move('theme/images_cover/', $filename);
 
         $data   = new Comic();
-        $data->comic_title = str_replace(' ', '-', $request->comic_title);
-        $data->comic_image = $filename;
+        $data->comic_title          = str_replace(' ', '-', $request->comic_title);
+        $data->comic_image          = $filename;
         $data->comic_description    = $request->comic_description;
-        $data->comic_author         = $request->comic_author;
+        $data->comic_author         = str_replace(' ','-', $request->comic_author);
         $data->comic_genre          = implode(", " , $request->comic_genre);
         $data->comic_release        = $request->comic_release;
         $data->save();

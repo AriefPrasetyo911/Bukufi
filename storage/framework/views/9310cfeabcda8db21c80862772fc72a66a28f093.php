@@ -39,15 +39,14 @@
 					<div class="row">
 						<?php $__currentLoopData = $authors; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $author): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<div class="col-sm-6 col-md-2">
+							<a href="<?php echo e(url('/comic').'/'.$author->comic_title); ?>" class="link">
 							<div class="thumbnail">
-								
-								<img src="/theme/images_cover/<?php echo e($author->comic_image); ?>" alt="...">
-								
+								<img src="/theme/images_cover/<?php echo e($author->comic_image); ?>" alt="comic image">
 								<div class="caption">
 									<h4><?php echo e($author->comic_title); ?></h4>
 								</div>
-								
 							</div>
+							</a>
 						</div>
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</div>

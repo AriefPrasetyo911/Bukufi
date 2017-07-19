@@ -26,7 +26,7 @@
 				<div class="panel-body">
 						
 					@foreach($genres as $genre)
-						<ul class="col-md-6">
+						<ul class="col-md-4">
 							<i class="fa fa-caret-right" aria-hidden="true"></i> <a href="{{url('/comic-genre/'.$genre->comic_genre)}}">{{$genre->comic_genre}}</a>
 						</ul>
 					@endforeach

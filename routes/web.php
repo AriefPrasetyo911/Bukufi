@@ -18,15 +18,18 @@ Route::get('/', 'IndexController@index')->name('home.index');
 Route::get('/comic/latest', 'LatestComicController@index')->name('latest.comic');
 
 //single comic
-Route::get('/comic/{id}/{comic_title}', 'IndexController@comic');
+Route::get('/comic/{comic_title}', 'IndexController@comic');
+Route::get('/show/comic/{comic_title}/{comic_chapter}', 'IndexController@showComic');
 
 //single genre
-Route::get('/comic/genre', 'SingleGenreController@index')->name('single.genre');
+Route::get('/comics/genre', 'SingleGenreController@index')->name('single.genre');
 Route::get('/comic-genre/{comic_genre}', 'SingleGenreController@show')->name('satu');
 
 //single author
-Route::get('/comic/comic-author', 'SingleAuthorController@index')->name('single.author');
+Route::get('/comics/comic-author', 'SingleAuthorController@index')->name('single.author');
 Route::get('/comic/comic-author/name/{comic_author}', 'SingleAuthorController@author')->name('author');
+
+Route::get('keyword', 'SearchController@index')->name('search.form');
 
 Route::group(['middleware' => ['web']], function(){
 	//user

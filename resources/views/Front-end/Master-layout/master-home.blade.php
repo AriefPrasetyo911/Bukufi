@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Home : Bukufi</title>
+	<title>{{$title}}</title>
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Bootstrap/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Font-awesome/css/font-awesome.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/style.css')}}">
@@ -27,7 +27,7 @@
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			      </button>
-			      <a class="navbar-brand" class="navbar-brand" href="#">Bukufi</a>
+			      <a class="navbar-brand" class="navbar-brand" href="{{route('home.index')}}">Bukufi</a>
 			    </div>
 
 			    <!-- Collect the nav links and other content for toggling -->
@@ -67,9 +67,9 @@
 	        			</ul>
         			</div>
         			<div class="col-md-5">
-	        			<form class="navbar-form navbar-right form-horizontal" action="#" method="post">
+	        			<form class="navbar-form navbar-right form-horizontal" action="{{route('search.form')}}" method="get">
 							<div class="col-md-12">
-								<input type="email" class="form-control input-sm" id="searchinput" placeholder="Search by Title, Publisher, Genre or Creator">
+								<input type="text" class="form-control input-sm" name="search" id="searchinput" placeholder="Search by Title, Creator, Genre or Year and hit enter">
 							</div>
 						</form>
 				    </div>
@@ -89,7 +89,7 @@
 				<ul>
 					<li><a href="#"> OUR STORY </a></li>
 					<li><a href="#"> CONTACS US </a></li>
-					<li><a href="#"> CAREER </a></li>
+					
 					<li><a href="#"> FAQS </a></li>
 				</ul>
 			</div>

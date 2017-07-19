@@ -82,7 +82,7 @@
 				<div class="panel-body">
 					<?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 					<ul class="col-md-6">
-						<a href="#"><p><?php echo e($genre->comic_genre); ?></p></a>
+						<a href="<?php echo e(url('/comic-genre/'.$genre->comic_genre)); ?>"><p><?php echo e($genre->comic_genre); ?></p></a>
 					</ul>
 					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 				</div>

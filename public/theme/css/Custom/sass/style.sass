@@ -112,7 +112,10 @@ a
 	
 	&:hover
 		text-decoration: none
-		color: blue
+		color: #23527c
+		transition: all 0.5s
+		-webkit-transition: all 0.5s
+		-moz-transition: all 0.5s
 
 input , .input-group
 	+border-radius(0) 
@@ -308,8 +311,11 @@ input , .input-group
 				list-style-type: none
 				line-height: 2em
 
-	.footer-ways-to-read, .footer-subscribe
+	.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
 		height: 163px
+
+	.footer-about-us, .footer-ways-to-read
+		border-right-style: hidden
 
 	.footer-subscribe
 		p
@@ -328,6 +334,7 @@ input , .input-group
 	display: inline-block
 	+padding-right(0)
 	+padding-left(0)
+	+margin-bottom(0)
 
 	.pull-left , .social-media
 		+padding-top(5px)
@@ -461,3 +468,18 @@ a.btn
 
 .col-sm-8
 	+padding-left(0)
+
+/*pagination*/
+.pager
+	margin: 0
+	position: initial
+
+.pager li>a, .pager li>span
+	border-radius: 0
+	border-top-left-radius: 5px
+	border-bottom-right-radius: 5px
+
+.my-active span
+	background-color: #cdc9c9 !important
+	color: white !important
+	border-color: #7d7d7d !important

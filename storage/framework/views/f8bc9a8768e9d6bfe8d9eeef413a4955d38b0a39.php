@@ -20,6 +20,15 @@
 		padding-top: 5px;
 		text-align: center;
 	}
+
+	hr{
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+
+	#titles{
+		text-align: center;
+	}
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -30,15 +39,7 @@
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				<div class="col-md-12">
-					<div class="col-md-6">
-						<h4>Comic List</h4>
-					</div>
-
-					<div class="col-md-6">
-						<div class="pull-right">
-							<a href="#">More Comic</a>
-						</div>
-					</div>
+					<h4 id="titles">Comic List</h4>
 				</div>
 			</div>
 			<div class="panel-body panel-9">
@@ -46,7 +47,7 @@
 				<div class="col-md-12">
 					<div class="row">
 						<?php $__currentLoopData = $comics; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<a href="<?php echo e(url('/comic').'/'.$comic->id.'/'.$comic->comic_title); ?>" class="link">
+						<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
 						<div class="col-md-2">
 							<div class="media col-md-12">
 								<figure>
@@ -63,6 +64,9 @@
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</div>
 				</div>
+				<div class="col-md-12"><hr></div>
+				<?php echo e($comics->links('pagination.custom')); ?>
+
 			</div>
 		</div>
 		

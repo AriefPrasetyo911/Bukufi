@@ -6,7 +6,7 @@ use App\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Auth;
-
+use Session;
 use Illuminate\Http\Request;
 
 class AdminLoginController extends Controller
@@ -42,7 +42,8 @@ class AdminLoginController extends Controller
         {
             return redirect()->route('admin.dashboard');
         }else{
-            dd('your username and password are wrong.');
+            Session::flash('notif-fail', 'your username or password are wrong.');
+            return redirect()->route('admin.login');
         }
     }
 

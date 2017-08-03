@@ -10,6 +10,7 @@ use Session;
 use Illuminate\Support\Facades\Storage;
 use Redirect;
 use DB;
+use Auth;
 
 class ComicChapterController extends Controller
 {
@@ -90,11 +91,26 @@ class ComicChapterController extends Controller
 
                 $filechapter->chapter_title    = $request->chapter_title;
                 $filechapter->save();
-            
-            
+
+                //
+
+                $com_id     = $request->comic_id;
+                $chap_now   = $request->comic_chapter;
+                $check = DB::table('comics')->where('id', $com_id)->get();
+
+                foreach ($check as $check_conf) {
+                    if ($check_conf->last_chapter <= $chap_now) {
+                        
+                        $update_chapter = new Comic();
+                        $update_chapter->last_chapter   = $chap_now;
+                        $update_chapter->last_chapter_title = $request->comic_title;
+                        $update_chapter->update();
+                    }
+                }
         }
 
         if ($uploadCount == $file_count) {
+
             Session::flash('notif', 'Comic chapter successfully added.');
             return redirect()->route('comic.list');
         }

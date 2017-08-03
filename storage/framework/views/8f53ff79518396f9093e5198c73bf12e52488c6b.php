@@ -78,7 +78,6 @@
 		cursor:pointer;
 		display:none
 	}
-
 </style>
 <?php $__env->stopSection(); ?>
 
@@ -88,18 +87,55 @@
 		<!-- carousel started-->
 		<div class="panel panel-default">
 			<div class="panel-body">
-				
+				<?php if(Session::has('notif')): ?>
+		            <div class="alert alert-success">
+		            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+		              <?php echo e(Session::get('notif')); ?>
+
+		            </div>
+		        <?php endif; ?>
+		        <?php if(Session::has('error')): ?>
+		            <div class="alert alert-danger">
+		            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+		              <?php echo e(Session::get('error')); ?>
+
+		            </div>
+		        <?php endif; ?>
+
+
+		        <input type="hidden" name="valuez" id="valuez" value="<?php echo e($curr_page); ?>">
+		        
 				<div class="col-md-12">
-					
-					<div class="pull-right">
-						<select name="comic_chapter" class="form-control pick-chapter" onchange="pickone(this.value)">
-							<?php $__currentLoopData = $shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $show): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-								<option value="<?php echo e($show->comic_chapter); ?>" id="com_chapter" <?php echo e($show->comic_chapter == Request::segment(4) ? "selected":""); ?>>Chapter <?php echo e($show->comic_chapter); ?> : <?php echo e($show->chapter_title); ?></option>
-							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-						</select>
+					<div class="col-md-6">
+						<div class="pull-left">
+							<select name="comic_chapter" class="form-control pick-chapter" onchange="pickone(this.value)">
+								<?php $__currentLoopData = $shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $show): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+									<option value="<?php echo e($show->comic_chapter); ?>" id="com_chapter" <?php echo e($show->comic_chapter == Request::segment(4) ? "selected":""); ?>>Chapter <?php echo e($show->comic_chapter); ?> : <?php echo e($show->chapter_title); ?></option>
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+							</select>
+						</div>
 					</div>
-						
+					<div class="col-md-6">
+						<?php if(auth()->guard('user')->user()): ?>
+							
+							<form action="<?php echo e(url('bookmark/user/add'.'/'.auth()->guard('user')->user()->id)); ?>" method="post" class="form-horizontal">
+								<?php $__currentLoopData = $shows; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $show): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+								<?php echo e(csrf_field()); ?>
+
+								<input type="hidden" name="id_user" value="<?php echo e(auth()->guard('user')->user()->id); ?>">
+								<input type="hidden" name="comic_title" value="<?php echo e($show->comic_title); ?>">
+								<input type="hidden" name="comic_chapter" value="<?php echo e($show->comic_chapter); ?>">
+								<input type="hidden" name="chapter_title" value="<?php echo e($show->chapter_title); ?>">
+								<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+								<button type="submit" class="btn btn-primary add-fav pull-right">Add to Favourite</button>
+							</form>
+							
+						<?php else: ?>
+							<a href="#" class="btn btn-primary add-fav pull-right nologin"> Add to Favourite</a>
+						<?php endif; ?>
+					</div>
 				</div>
+				<div class="col-md-12"><hr></div>
 
 				<div class="col-md-8 col-md-offset-2 comic">
 					<!-- <div class="well">
@@ -108,7 +144,6 @@
 							<p class="center">Now you read <b><?php echo e($show->comic_title); ?> chapter <?php echo e($show->comic_chapter); ?> : <?php echo e($show->chapter_title); ?></b> at Bukufi.com </p> 
 						<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 					</div> -->
-					<hr>
 					<?php $__currentLoopData = $shows2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $show): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 						<img src="/theme/images_comic/<?php echo e($show->comic_image); ?>" alt="Comic" class="read">
 						<input type="hidden" name="comic_title" id="com_title" value="<?php echo e($show->comic_title); ?>">
@@ -116,8 +151,19 @@
 				</div>
 				
 			</div>
-			<?php echo e($shows2->links('pagination.custom')); ?>
 
+			<?php if(auth()->guard('user')->user()): ?>
+
+				<div class="login-user">
+					<?php echo e($shows2->appends(Request::except('page'))->links('pagination.custom')); ?>
+
+				</div>
+			<?php else: ?>
+				<div class="nologin-user">
+					<?php echo e($shows2->appends(Request::except('page'))->links('pagination.custom')); ?>
+
+				</div>
+			<?php endif; ?>
 		</div>		
 	</div>
 
@@ -137,11 +183,41 @@
 
 	$('#ScrollToTop').click(function(){$('html,body').animate({scrollTop:0},1000);return false})});
 
+	//bookmark function
 	function pickone(value){
 		var com_title	= $('#com_title').val();
 
 		window.location = "/show/comic/" + com_title + "/" + value;
 	}
+
+	//check login function. to limit page for unlogin user
+	var loggedIn = <?php echo e(auth()->guard('user')->check() ? 'true' : 'false'); ?>;
+
+	if (loggedIn){
+	    //user already login. no need do anything :)
+	}
+	else{
+
+		if($('#valuez').val() > 10)
+		{
+			$('.nologin-user').addClass('disabled');
+			$('.nologin-user .pager').addClass('disabled');
+			$('.nologin-user .pager li').addClass('disabled');
+
+			$('.nologin-user .pager li a').bind('click', function(e){
+			    e.preventDefault();
+			});
+
+			swal("Info!", "You must login first to continue reading", "info");
+		}
+	}
+
+	//to protect add bookmark button
+	$('.nologin').on('click', function() {
+		swal("Error!", "You must login first to use this menu", "error");
+	});
+	
+
 	/*$(document).ready(function() {
 		$('.pick-chapter').on('change', function() {
 			

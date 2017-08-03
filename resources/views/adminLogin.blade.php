@@ -3,11 +3,24 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
+            @if (Session::has('notif'))
+                <div class="alert alert-success">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                    {{ Session::get('notif') }}
+                </div>
+            @endif
+
+            @if (Session::has('notif-fail'))
+                <div class="alert alert-danger">
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+                    {{ Session::get('notif-fail') }}
+                </div>
+            @endif
             <div class="panel panel-default">
                 <div class="panel-heading">Admin Login</div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.auth') }}">
-                        {!! csrf_field() !!}
+                        {{ csrf_field() }}
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label class="col-md-3 control-label">E-Mail</label>
                             <div class="col-md-6">

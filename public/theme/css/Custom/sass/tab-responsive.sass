@@ -1,0 +1,323 @@
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+/* Author	: Arief Budi Prasetyo			*/
+/* Version	: 1.0							*/
+/* Email	: Arief.Prasetyo911@gmail.com	*/
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+
+/* MEDIA QUERY */
+/* MEDIA QUERY */
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px)
+	.container 
+		//for top navbar
+		.top-navbar
+			height: 55px
+			background-color: transparent
+			border-style: hidden
+
+			.container-fluid
+				+padding-left(0)
+				+padding-right(0)
+
+				.navbar-brand
+					+padding-top(30px)
+
+				.navbar-collapse
+					+padding-top(15px)
+
+					.navbar-right
+						+padding-top(15px)
+
+					.navbar-nav > li > a
+						+padding-bottom(0)
+						+padding-top(0)
+
+				.login-dropdown
+					box-shadow: none
+
+					.btn
+						border-style: hidden
+
+				li
+					+padding-top(0)
+
+					a
+						+padding-right(0)
+
+		//for main navbar
+		.main-navbar
+			background-color: $navbar-color
+			+margin-bottom(10px)
+
+			.container-fluid
+				+padding-left(0)
+				+padding-right(0)
+				
+				#navbar-menu
+					+padding-left(0)
+					+padding-right(0)
+
+					.col-md-7
+						+padding-left(0)
+						font-weight: bold
+
+						.actived
+							background-color: $navbar-color-hover
+							color: white
+							height: 40px
+
+						.dropdown
+							.dropdown-menu
+								background-color: $navbar-color-hover
+								+border-radius(0)
+								
+								li
+									a
+										&:hover
+											background-color: $list-hover-blue
+
+						a
+							color: white
+							height: 40px
+							+padding-top(10px)
+
+							&:hover
+								color: white !important
+								background-color: $navbar-color-hover 
+
+					.col-md-5
+						.navbar-form
+							+margin-top(5px)
+							+margin-bottom(5px)
+
+						.navbar-right, #searchinput
+							width: 100%
+							
+							.col-md-12
+								+padding-right(0)
+								+padding-left(0)
+
+	/*# MAIN CONTENT #*/
+	.main-content
+		+padding-left(0)
+		+padding-right(0)
+
+		.col-lg-9
+			+border-radius(0)
+			+padding-left(0)
+			+padding-right(0)
+
+			.col-md-12
+				+padding-left(0)
+				+padding-right(0)
+
+				.media
+					+padding-left(0)
+					+padding-right(5px)
+
+					.comic-image
+						object-fit: cover
+						width: 100%
+
+				.contents
+					+padding-left(5px)
+					+padding-right(0)
+
+				.mp
+					height: 250px
+
+		.col-lg-3
+			+padding-right(0)
+			
+			.panel-heading
+				display: flow-root
+
+			.col-md-12
+				+padding-left(0)
+				+padding-right(0)
+				
+				.media
+					+padding-left(0)
+					+padding-right(0)
+
+					.media-object
+						height: 85px
+						width: 100%
+
+				.teks
+					+padding-left(10px)
+					+padding-right(0)
+
+					.comic-title
+						font-weight: bold
+						+margin-bottom(10px)
+
+		//search
+		.search
+			.comic-image
+				width: 100%
+				height: 155px
+
+			.search-content
+				+padding-top(0)
+
+	.genre-select
+		.comic-image
+			height: 190px
+
+		.pager
+			padding-bottom: 15px
+
+	/*# FOOTER #*/
+	.navbar-static-bottom
+		
+		.footer-about-us ,.footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-left(0)
+
+		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-right(0)
+			border: 1px solid #ddd
+
+			.footer-titles
+				padding: 10px 15px
+
+			ul.list-group
+				+margin-top(0)
+				+padding-left(10px)
+				+padding-right(10px)
+
+				li
+					list-style-type: none
+
+		.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
+			height: 170px
+			+margin-bottom(0)
+
+		.footer-about-us, .footer-ways-to-read
+			border-right-style: hidden
+
+		.footer-subscribe
+			p
+				+padding-left(15px)
+				+padding-right(15px)
+				+padding-bottom(5px)
+
+			.subscribe
+				+padding-right(15px)
+				+padding-left(15px)
+				+padding-bottom(5px)
+
+				.col-md-8
+					+padding-left(0)
+					+padding-right(0)
+
+	.navbar-static-bottom-2, .col-md-6
+		display: inline-block
+		+padding-right(0)
+		+padding-left(0)
+		+margin-bottom(0)
+
+		.pull-left , .social-media
+			display: inline-block
+
+	/*comic author*/
+	.author
+		.thumbnail
+			img
+				height: 190px
+
+	.img-comic-standard
+		height: 180px
+
+	.panel-alphabet
+		height: 35px
+
+@media (min-width: 768px) and (orientation : portrait)
+	.container
+		//for top navbar
+		.top-navbar
+			height: 55px
+			background-color: transparent
+			border-style: hidden
+
+			.container-fluid
+				+padding-left(0)
+				+padding-right(0)
+
+				.navbar-brand
+					+padding-top(30px)
+
+				.navbar-collapse
+					+padding-top(15px)
+
+					.navbar-right
+						+padding-top(15px)
+
+					.navbar-nav > li > a
+						+padding-bottom(0)
+						+padding-top(0)
+
+				.login-dropdown
+					box-shadow: none
+
+					.btn
+						border-style: hidden
+
+				li
+					+padding-top(5px)
+
+					a
+						+padding-right(0)
+
+	.main-content
+		//search
+		.search
+			.visible-sm
+				.col-sm-12
+					+padding-left(0)
+
+					.col-sm-6:nth-child(1)
+						+padding-left(0)
+
+					.col-sm-6:nth-child(2)
+						+padding-right(0)
+
+					.comic-image
+						width: 100%
+						
+					.search-content
+						+padding-top(0)
+						+padding-right(0)
+						+padding-left(15px)
+
+	.genre-select
+		.panel-body
+			+padding-top(0)
+			
+/* @media (min-width: 768px) and (orientation : portrait)
+	.navbar-static-bottom 
+		.footer-ways-to-read
+			border-right-style: solid !important
+
+		.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
+			height: 175px !important
+			+margin-bottom(0)
+
+	.panel-heading			
+		height: 45px
+		
+
+		.visible-sm
+			+padding-top(5px)
+			+padding-bottom(5px)
+			+padding-left(0)
+			+padding-right(0)
+
+			.col-sm-6
+				+padding-left(0)
+				+padding-right(0) */

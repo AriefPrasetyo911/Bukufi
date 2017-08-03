@@ -10,6 +10,8 @@ use App\Comic_genre;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use File;
+use Auth;
+use DB;
 
 class ComicController extends Controller
 {
@@ -35,8 +37,9 @@ class ComicController extends Controller
     {
         $title      = "Add New Comic";
         $genres     = Comic_genre::all();
+        $status     = DB::table('comic_status')->get();
 
-        return view('Back-end.Comic.comic-add', compact('title', 'genres'));
+        return view('Back-end.Comic.comic-add', compact('title', 'genres', 'status'));
     }
 
     /**
@@ -53,7 +56,8 @@ class ComicController extends Controller
             'comic_description' => 'required',
             'comic_author'      => 'required',
             'comic_genre'       => 'required',
-            'comic_release'     => 'required'
+            'comic_release'     => 'required',
+            'comic_status'      => 'required'
         ]);
 
         /*$image_name = $request->comic_image->getClientOriginalName();
@@ -74,6 +78,7 @@ class ComicController extends Controller
         $data->comic_author         = str_replace(' ','-', $request->comic_author);
         $data->comic_genre          = implode(", " , $request->comic_genre);
         $data->comic_release        = $request->comic_release;
+        $data->comic_status         = $request->comic_status;
         $data->save();
 
         Session::flash('notif', 'Comic successfully added.');

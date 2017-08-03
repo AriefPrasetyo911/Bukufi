@@ -241,7 +241,7 @@
                 <div class="form-group">
                   <label class="control-label col-md-2">Comic Genre</label>
                   <div class="col-md-10">
-                    <select name="comic_genre[]" id="comic_genre" class="form-control" multiple>
+                    <select name="comic_genre[]" id="comic_genre" class="form-control" multiple style="height: 155px;">
                       <?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($genre->comic_genre); ?>"><?php echo e($genre->comic_genre); ?></option>
                       <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -252,6 +252,16 @@
                   <label class="control-label col-md-2">Comic Release</label>
                   <div class="col-md-10">
                     <input type="text" name="comic_release" id="comic_release" class="form-control" placeholder="Ex. 2010">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Comic Status</label>
+                  <div class="col-md-10">
+                    <select name="comic_status" id="comic_status" class="form-control">
+                      <?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                      <option value="<?php echo e($stat->comic_status); ?>"><?php echo e($stat->comic_status); ?></option>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </select>
                   </div>
                 </div>
               </div>

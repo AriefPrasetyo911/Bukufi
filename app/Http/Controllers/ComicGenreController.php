@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Comic_genre;
 use App\Http\Requests;
 use Session;
+use Auth;
 
 class ComicGenreController extends Controller
 {
@@ -45,7 +46,7 @@ class ComicGenreController extends Controller
         ]);
 
         $genres     = new Comic_genre();
-        $genres->comic_genre = $request->genre;
+        $genres->comic_genre = str_replace(' ', '-', $request->genre);
         $genres->save();
 
         Session::flash('notif', 'Comic genre successfully added.');

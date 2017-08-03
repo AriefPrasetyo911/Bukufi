@@ -8,6 +8,6 @@ class UserController extends Controller
 {
     public function dashboard(){
         $user = auth()->guard('user')->user();
-        return view('home');
+        return view('Back-end/User/user-dashboard');
     }
 }

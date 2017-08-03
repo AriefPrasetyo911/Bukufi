@@ -21,6 +21,10 @@ class CreateComicTable extends Migration
             $table->string('comic_author');
             $table->string('comic_genre');
             $table->integer('comic_release');
+            $table->string('comic_status');
+            $table->string('last_chapter')->nullable();    
+            $table->text('last_chapter_title')->nullable();
+            $table->date('dates');
             $table->timestamps();
         });
     }

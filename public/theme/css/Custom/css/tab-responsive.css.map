@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";;;;;;;;;;;;AAcA,yBAAyB;EAIrB,qDAAY;IACX,MAAM,EAAE,cAAc;;EAGzB,+HAA6D;IAC5D,kBAAkB,EAAE,KAAK;EAE1B,0CAAoB;IACnB,gBAAgB,EAAE,KAAK;;;EAKvB,sBAAG;IACF,MAAM,EAAE,KAAK;;EAEhB,mBAAmB;IAClB,MAAM,EAAE,KAAK;;EAEd,eAAe;IACd,MAAM,EAAE,IAAI",
+"sources": ["../sass/tab-responsive.sass"],
+"names": [],
+"file": "tab-responsive.css"
+}

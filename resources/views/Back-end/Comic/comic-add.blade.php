@@ -237,7 +237,7 @@
                 <div class="form-group">
                   <label class="control-label col-md-2">Comic Genre</label>
                   <div class="col-md-10">
-                    <select name="comic_genre[]" id="comic_genre" class="form-control" multiple>
+                    <select name="comic_genre[]" id="comic_genre" class="form-control" multiple style="height: 155px;">
                       @foreach($genres as $genre)
                         <option value="{{$genre->comic_genre}}">{{$genre->comic_genre}}</option>
                       @endforeach
@@ -248,6 +248,16 @@
                   <label class="control-label col-md-2">Comic Release</label>
                   <div class="col-md-10">
                     <input type="text" name="comic_release" id="comic_release" class="form-control" placeholder="Ex. 2010">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Comic Status</label>
+                  <div class="col-md-10">
+                    <select name="comic_status" id="comic_status" class="form-control">
+                      @foreach($status as $stat)
+                      <option value="{{$stat->comic_status}}">{{$stat->comic_status}}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
               </div>

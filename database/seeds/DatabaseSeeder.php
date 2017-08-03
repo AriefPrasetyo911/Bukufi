@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
     	$this->call(ComicsTableSeeder::class);
         $this->call(UsersTableSeeder::class);
         $this->call(ComicGenreTableSeeder::class);
+        $this->call(ComicStatusSeeder::class);
     }
 }

@@ -16,8 +16,8 @@
 @endsection
 
 @section('main-content')
-<main class="main-content col-md-12">
-		<div class="col-md-12">
+<main class="main-content col-md-12 col-lg-12 col-xs-12">
+		<div class="col-md-12 col-xs-12">
 			<!-- carousel started-->
 			<div class="panel panel-default">
 				<div class="panel-heading">
@@ -26,7 +26,7 @@
 				<div class="panel-body">
 						
 					@foreach($genres as $genre)
-						<ul class="col-md-4">
+						<ul class="col-md-3 col-sm-3 col-xs-6">
 							<i class="fa fa-caret-right" aria-hidden="true"></i> <a href="{{url('/comic-genre/'.$genre->comic_genre)}}">{{$genre->comic_genre}}</a>
 						</ul>
 					@endforeach

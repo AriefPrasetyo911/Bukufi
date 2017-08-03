@@ -80,7 +80,6 @@
 		cursor:pointer;
 		display:none
 	}
-
 </style>
 @endsection
 
@@ -90,18 +89,52 @@
 		<!-- carousel started-->
 		<div class="panel panel-default">
 			<div class="panel-body">
-				
+				@if (Session::has('notif'))
+		            <div class="alert alert-success">
+		            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+		              {{ Session::get('notif') }}
+		            </div>
+		        @endif
+		        @if (Session::has('error'))
+		            <div class="alert alert-danger">
+		            <a href="#" class="close" data-dismiss="alert" aria-label="close" title="close">×</a>
+		              {{ Session::get('error') }}
+		            </div>
+		        @endif
+
+
+		        <input type="hidden" name="valuez" id="valuez" value="{{$curr_page}}">
+		        
 				<div class="col-md-12">
-					
-					<div class="pull-right">
-						<select name="comic_chapter" class="form-control pick-chapter" onchange="pickone(this.value)">
-							@foreach($shows as $show)
-								<option value="{{$show->comic_chapter}}" id="com_chapter" {{ $show->comic_chapter == Request::segment(4) ? "selected":"" }}>Chapter {{$show->comic_chapter}} : {{$show->chapter_title}}</option>
-							@endforeach
-						</select>
+					<div class="col-md-6">
+						<div class="pull-left">
+							<select name="comic_chapter" class="form-control pick-chapter" onchange="pickone(this.value)">
+								@foreach($shows as $show)
+									<option value="{{$show->comic_chapter}}" id="com_chapter" {{ $show->comic_chapter == Request::segment(4) ? "selected":"" }}>Chapter {{$show->comic_chapter}} : {{$show->chapter_title}}</option>
+								@endforeach
+							</select>
+						</div>
 					</div>
-						
+					<div class="col-md-6">
+						@if(auth()->guard('user')->user())
+							
+							<form action="{{url('bookmark/user/add'.'/'.auth()->guard('user')->user()->id)}}" method="post" class="form-horizontal">
+								@foreach($shows as $show)
+								{{ csrf_field() }}
+								<input type="hidden" name="id_user" value="{{auth()->guard('user')->user()->id}}">
+								<input type="hidden" name="comic_title" value="{{$show->comic_title}}">
+								<input type="hidden" name="comic_chapter" value="{{$show->comic_chapter}}">
+								<input type="hidden" name="chapter_title" value="{{$show->chapter_title}}">
+								@endforeach
+								<button type="submit" class="btn btn-primary add-fav pull-right">Add to Favourite</button>
+							</form>
+							
+						@else
+							<a href="#" class="btn btn-primary add-fav pull-right nologin"> Add to Favourite</a>
+						@endif
+					</div>
 				</div>
+				<div class="col-md-12"><hr></div>
 
 				<div class="col-md-8 col-md-offset-2 comic">
 					<!-- <div class="well">
@@ -110,7 +143,6 @@
 							<p class="center">Now you read <b>{{$show->comic_title}} chapter {{$show->comic_chapter}} : {{$show->chapter_title}}</b> at Bukufi.com </p> 
 						@endforeach
 					</div> -->
-					<hr>
 					@foreach($shows2 as $show)
 						<img src="/theme/images_comic/{{$show->comic_image}}" alt="Comic" class="read">
 						<input type="hidden" name="comic_title" id="com_title" value="{{$show->comic_title}}">
@@ -118,7 +150,17 @@
 				</div>
 				
 			</div>
-			{{ $shows2->links('pagination.custom') }}
+
+			@if(auth()->guard('user')->user())
+
+				<div class="login-user">
+					{{ $shows2->appends(Request::except('page'))->links('pagination.custom') }}
+				</div>
+			@else
+				<div class="nologin-user">
+					{{ $shows2->appends(Request::except('page'))->links('pagination.custom') }}
+				</div>
+			@endif
 		</div>		
 	</div>
 
@@ -138,11 +180,41 @@
 
 	$('#ScrollToTop').click(function(){$('html,body').animate({scrollTop:0},1000);return false})});
 
+	//bookmark function
 	function pickone(value){
 		var com_title	= $('#com_title').val();
 
 		window.location = "/show/comic/" + com_title + "/" + value;
 	}
+
+	//check login function. to limit page for unlogin user
+	var loggedIn = {{ auth()->guard('user')->check() ? 'true' : 'false' }};
+
+	if (loggedIn){
+	    //user already login. no need do anything :)
+	}
+	else{
+
+		if($('#valuez').val() > 10)
+		{
+			$('.nologin-user').addClass('disabled');
+			$('.nologin-user .pager').addClass('disabled');
+			$('.nologin-user .pager li').addClass('disabled');
+
+			$('.nologin-user .pager li a').bind('click', function(e){
+			    e.preventDefault();
+			});
+
+			swal("Info!", "You must login first to continue reading", "info");
+		}
+	}
+
+	//to protect add bookmark button
+	$('.nologin').on('click', function() {
+		swal("Error!", "You must login first to use this menu", "error");
+	});
+	
+
 	/*$(document).ready(function() {
 		$('.pick-chapter').on('change', function() {
 			

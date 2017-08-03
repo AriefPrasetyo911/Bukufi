@@ -35,4 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'facebook' => [
+        'client_id'     => '1995949823975076',
+        'client_secret' => 'ef7fcea25dbd5a9ce6af797a92175794',
+        'redirect'      => 'http://localhost:8000/login/facebook/callback',
+    ],
+
+    'google' => [
+        'client_id'     => '1030201645650-grtc0u7o9cq671vu8pv1le57b85424ar.apps.googleusercontent.com',
+        'client_secret' => '2JAswW9n43ITZ9dQBGonnBaq',
+        'redirect'      => 'http://bukufi.appspot.com/social/handle/google',
+    ]
+
 ];

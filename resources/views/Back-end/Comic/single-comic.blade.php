@@ -2,12 +2,28 @@
 
 @section('push-style')
 <style>
-	.panel-heading{
-		display: flex;
+	a{
+		padding-bottom: 5px;
 	}
 
-	#comic_title, #center{
+	#center{
 		text-align: center;
+	}
+
+	.list-group{
+		margin-top: 0;
+	}
+
+	.list-group-item{
+		padding: 5px 15px;
+	}
+
+	#accordion{
+		margin-bottom: 0;
+	}
+
+	#comic_title{
+		font-weight: bold;
 	}
 
 	.list-group, .list-group .list-group-item{
@@ -38,16 +54,16 @@
 		margin-top: 15px;
 	}
 
-	.input-group{
-		margin-left: 15px;
-	}
-
 	.panel-group .panel{
 		border-radius: 0;
 	}
 
 	.comic-image{
 		width: 100%;
+	}
+
+	.no-margin-bottom{
+		margin-bottom: 0 !important;
 	}
 
 	.panel-heading .accordion-toggle:after {
@@ -62,66 +78,86 @@
 	    content: "\e080";    /* adjust as needed, taken from bootstrap.css */
 	}
 
+	h5#bold, h5#normal{
+		padding: 2.5px 15px;
+	}
+
+	h5#bold{
+		font-weight: bold;
+	}
 </style>
 @endsection
 
 @section('main-content')
-<main class="main-content col-md-12">
-	<div class="col-md-12">
+<main class="main-content col-md-12 col-xs-12 single-comic">
+	<div class="col-md-12 col-sm-12 col-xs-12">
 		<!-- carousel started-->
 		<div class="panel panel-default">
 			<div class="panel-body">
 				
 				@foreach($single_comic as $comic)
-					<div class="col-md-12">
-						<div class="media col-md-2">
+					<div class="col-md-12 col-xs-12">
+						<div class="media col-md-2 col-xs-5">
 							<figure>
 								<img src="/theme/images_cover/{{$comic->comic_image}}" class="comic-image" alt="image 1">
 							</figure>
 						</div>
 
-						<div class="contents col-md-10">
-							<figure class="caption">
-								<a href="{{url('/comic').'/'.$comic->comic_title}}" class="link">
-									<figcaption id="posting-title">
-										<h4 id="comic_title">{{str_replace('-', ' ', $comic->comic_title)}}</h4>
-									</figcaption>
-								</a>
+						<div class="contents col-md-10 col-xs-7">
+							<figure class="caption hidden-xs">
+								<figcaption class="panel-heading" id="posting-title">
+									<h4 id="comic_title">{{str_replace('-', ' ', $comic->comic_title)}}</h4>
+								</figcaption>
 
-								<col class="md-12">
-									<div class="col-md-2">
+								<div class="col-md-12 col-xs-12">
+									<div class="col-md-2 col-xs-4">
 										<ul class="list-group">
-											<li class="list-group-item">Title</li>
 											<li class="list-group-item">Author</li>
 											<li class="list-group-item">Genre</li>
 											<li class="list-group-item">Release</li>
+											<li class="list-group-item">Status</li>
 										</ul>
 									</div>
-									<div class="col-md-10">
+									<div class="col-md-10 col-xs-8">
 										<ul class="list-group">
-											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_title)}}</li>
 											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_author)}}</li>
 											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_genre)}}</li>
 											<li class="list-group-item">: {{$comic->comic_release}}</li>
-											<li class="list-group-item">
-												<a href="#" class="btn btn-info add-fav"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add to Favourite</a>
-											</li>
+											<li class="list-group-item">: {{$comic->comic_status}}</li>
 										</ul>
 									</div>
-								</col>
+								</div>
+							</figure>
+
+
+							<figure class="caption visible-xs">
+								<figcaption class="panel-heading no-padding-top no-padding-right" id="posting-title">
+									<h4 id="comic_title">{{str_replace('-', ' ', $comic->comic_title)}}</h4>
+								</figcaption>
+
+								<div class="col-md-12 col-xs-12">
+									<h5 id="bold">Author :</h5>
+									<h5 id="normal">{{str_replace('-', ' ', $comic->comic_author)}}</h5>
+									<h5 id="bold">Genre :</h5>
+									<h5 id="normal">{{str_replace('-', ' ', $comic->comic_genre)}}</h5>
+									<h5 id="bold">Release :</h5>
+									<h5 id="normal">{{$comic->comic_release}}</h5>
+									<h5 id="bold">Status :</h5>
+									<h5 id="normal">{{$comic->comic_status}}</h5>
+								</div>
 							</figure>
 						</div>
 					</div>
 
-					<div class="col-md-12 sumarry">
+					<div class="col-md-12 col-xs-12 sumarry">
 						<h4>Summary</h4>
 						<hr>
 						<p id="comic_desc">{{strip_tags($comic->comic_description)}}</p>
 					</div>
 
-					<div class="col-md-12 comic_chapter">
+					<div class="col-md-12 col-xs-12 comic_chapter">
 						<div class="panel-group" id="accordion">
-							<div class="panel panel-default">
+							<div class="panel panel-default no-margin-bottom">
 								<div class="panel-heading">
 									<h4 class="panel-title">
 									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">

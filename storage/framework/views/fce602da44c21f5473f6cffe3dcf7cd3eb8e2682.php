@@ -10,7 +10,6 @@
 	}
 
 	img{
-		height: 230px;
 		width: 100%;
 	}
 
@@ -30,21 +29,26 @@
 		line-height: 1.5em;
 	}
 
+	.col-md-2{
+		padding-bottom: 15px;
+		padding-top: 15px;
+	}
+
 </style>
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startSection('main-content'); ?>
-<main class="main-content col-md-12">
+<main class="main-content col-lg-12 col-md-12 col-sm-12 col-xs-12 genre-select">
 	<div class="col-md-12">
 		<!-- carousel started-->
 		<div class="panel panel-default">
 			<div class="panel-body">
-				<div class="col-md-12">
+				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="row">
 						<?php if(count($selected)): ?>
 							<?php $__currentLoopData = $selected; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 							<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
-							<div class="col-md-2">
+							<div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
 								<div class="media col-md-12">
 									<figure>
 										<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="comic-image" alt="image 1">
@@ -58,15 +62,14 @@
 							</div>
 							</a>
 							<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-							<?php echo e($selected->appends(Request::only('comic_genre'))->links('pagination.custom')); ?>
-
-
 						<?php else: ?>
 							<h3 id="not-found">Sorry, comic in this genre can not be found </h3>
 						<?php endif; ?>
 					</div>
 				</div>
 			</div>
+			<?php echo e($selected->appends(Request::only('comic_genre'))->links('pagination.custom')); ?>
+
 		</div>
 	</div>
 </main>

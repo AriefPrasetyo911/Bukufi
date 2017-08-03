@@ -26,4 +26,10 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+
+    public function comic_bookmark()
+    {
+        return $this->hasMany(Comic_bookmark::class);
+    }
 }

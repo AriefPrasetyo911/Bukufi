@@ -214,10 +214,7 @@
                 <input type="hidden" name="comic_id" value="<?php echo e($comics->id); ?>">
                 
                 <div class="form-group">
-                  <label class="control-label col-md-2">Comic Title</label>
-                  <div class="col-md-10">
-                    <input type="text" name="comic_title" id="comic_title" class="form-control" value="<?php echo e($comics->comic_title); ?>">
-                  </div>
+                  <input type="hidden" name="comic_title" id="comic_title" class="form-control" value="<?php echo e($comics->comic_title); ?>">
                 </div>
                 <div class="form-group">
                   <label class="control-label col-md-2">Comic Chapter</label>

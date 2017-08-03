@@ -1,0 +1,264 @@
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+/* Author	: Arief Budi Prasetyo			*/
+/* Version	: 1.0							*/
+/* Email	: Arief.Prasetyo911@gmail.com	*/
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+
+@import general-setting
+/* MEDIA QUERY */
+/*general smartphone*/
+@media (max-device-width : 767px)
+	.main-content
+		+margin-top(5px)
+		+padding-left(5px)
+		+padding-right(5px)
+
+		//search
+		.search
+			.visible-xs
+				.col-xs-6:nth-child(1)
+					+padding-left(0)
+
+				.col-xs-6:nth-child(2)
+					+padding-right(0)
+
+				.media
+					+padding-left(0)
+					+padding-right(0)
+
+				.comic-image
+					width: 100%
+					height: 100%
+
+				.search-content
+					+padding-top(15px)
+					+padding-right(0)
+					+padding-left(0 !important)
+
+		.col-sm-3
+			.col-xs-6
+				+padding-left(0)
+
+	.container
+		+padding-right(0)
+		+padding-left(0)
+
+		.col-xs-12.comic-status
+			+padding-right(0 !important)
+			+padding-left(0 !important)
+
+		.navbar-header
+			+margin-right(0)
+
+			.navbar-brand
+				+margin-left(15px)
+				font-weight: bold
+
+		.nav
+			margin: 0
+			+padding-right(5px)
+			+padding-left(5px)
+
+			li
+				a
+					+padding-right(12px)
+					+padding-left(12px)
+					+padding-bottom(5px)
+
+				.logined
+					+padding-top(0)
+					+margin-bottom(15px)
+
+				a.fb
+					+padding-top(5px)
+
+		.navbar-nav .open .dropdown-menu
+			background-color: #ddd
+
+			li
+				+padding-right(5px)
+				+padding-left(5px)
+
+				a
+					color: white
+
+			li:nth-child(1)
+				+margin-top(35px)
+
+		.navbar-form
+			+margin-right(15px)
+			+margin-left(15px)
+			border-top-style: none
+			border-bottom-style: none
+
+		.main-navbar
+			+margin-bottom(0 !important)
+			background-color: #404040
+
+			.container-fluid, .navbar-collapse
+				+padding-left(0)
+				+padding-right(0)
+
+		.footer-about-us
+			+margin-top(0 !important)
+
+		.col-xs-12
+			+padding-left(3px)
+			+padding-right(3px)
+			+margin-bottom(0)
+			+padding-top(0)
+
+			.pull-right
+				+padding-right(0)
+
+			.pull-left
+				+padding-left(0)
+
+			table
+				border-style: none
+
+		.sumarry
+			+padding-top(5px)
+
+		.panel-default
+			+margin-bottom(5px)
+
+			.list-smartphone-body
+				padding: 5px
+
+		.navbar-static-bottom
+			+padding-left(5px)
+			+padding-right(5px)
+
+			.footer-ways-to-read
+				border-right-style: solid !important
+
+			.footer-subscribe
+				.subscribe, .col-xs-12
+					+padding-right(0)
+					+padding-left(0)
+
+				.footer-titles
+					+padding-left(0)
+
+			.footer-about-us
+				+margin-bottom(5px !important)
+
+				h4
+					+padding-left(0)
+
+				ul.list-group
+					+padding-left(0)
+
+			.footer-about-us, .footer-subscribe
+				height: 100% !important
+				border: 1px solid #ddd
+				+padding-left(15px)
+				+padding-right(15px)
+				+padding-top(5px)
+				+padding-bottom(5px)
+
+				.list-group-item
+					+padding-right(0)
+					+padding-left(0)
+
+
+	/*pagination*/
+	.pager
+		margin: 0
+		position: initial
+
+	.pager li>a, .pager li>span
+		border-radius: 0
+		border-top-left-radius: 5px
+		border-bottom-right-radius: 5px
+		padding: 3px 7px
+
+	.my-active span
+		background-color: #cdc9c9 !important
+		color: white !important
+		border-color: #7d7d7d !important
+
+	.panel-body-15
+		+padding-right(15px)
+		+padding-left(15px)
+
+	h4
+		padding: 0
+
+	.list-filter
+		+padding-top(5px)
+
+@media (max-device-width : 767px) and (orientation : portrait)
+	/*# MAIN CONTENT #*/
+	.img-comic-standard
+		height: 110px !important
+
+
+	.main-content
+		.col-lg-3
+			.panel-body
+				ul.col-sm-6, ul.col-sm-12
+					+padding-left(0)
+			
+			.col-xs-6
+				+padding-left(0)
+
+		.list-smartphone-heading
+			height: 45px
+
+			.right 
+				+padding-right(0)
+
+		.list-smartphone-body
+			padding: 0
+			border-style: hidden
+			+padding-right(5px)
+			+padding-left(5px)
+			+padding-bottom(10px)
+
+			.table-responsive
+				border-style: none
+
+		//home
+		.home-xs
+			.col-xs-4
+				+padding-right(5px)
+				+padding-left(5px)
+				height: 185px
+
+	.single-comic
+		.sub-1
+			+margin-bottom(5px)
+
+/* @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait)
+	
+	.img-comic-standard
+		height: 130px
+
+	.navbar-static-bottom
+		.footer-subscribe
+			height: 100% !important
+
+	.navbar-static-bottom-2
+		+margin-top(0) */
+
+	/*pagination*/
+	/* .pager
+		margin: 0
+		position: initial
+
+	.pager li>a, .pager li>span
+		border-radius: 0
+		border-top-left-radius: 5px
+		border-bottom-right-radius: 5px
+		padding: 3px 7px
+
+	.my-active span
+		background-color: #cdc9c9 !important
+		color: white !important
+		border-color: #7d7d7d !important */

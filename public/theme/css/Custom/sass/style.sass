@@ -1,40 +1,19 @@
 /* ======================================== */
-/* 		STYLE FOR KAIGAN WEB PROJECT		*/
+/* 			STYLE FOR BUKUFI				*/
 /* ======================================== */
 /* Author	: Arief Budi Prasetyo			*/
 /* Version	: 1.0							*/
 /* Email	: Arief.Prasetyo911@gmail.com	*/
 /* ======================================== */
-/* 		STYLE FOR KAIGAN WEB PROJECT		*/
+/* 			STYLE FOR BUKUFI				*/
 /* ======================================== */
 
-//import mixins
+//import 
 @import mixins
+@import general-setting
+@import tab-responsive
+@import smartphone-responsive
 
-/*# COLOR #*/
-$a-hover-color		: #6495ed
-$navbar-color 		: #404040
-$navbar-color-hover	: #353535
-$divider-color		: #212121
-$list-hover			: #636363
-$list-hover-blue	: #008b8b
-
-/* # GENERAL SETTING# */
-body
-	font-size: 14px
-	font-weight: normal
-
-nav, header, main, article, section, aside, footer
-	display: block
-
-h1, h2, h3, h4, h5, h6, p
-	padding: 0
-	margin: 0
-
-
-//for active element
-#active
-	font-weight: bold
 
 .nav, .list-group, .col-md-2, .social-media
 	a
@@ -58,428 +37,695 @@ h1, h2, h3, h4, h5, h6, p
 		-webkit-transition: all 0.5s
 		-moz-transition: all 0.5s
 
-//divider each menu
-li.need-divider~li.need-divider
-	border-left: 1px solid $divider-color
-
-li.need-divider:last-child
-	border-right: 1px solid $divider-color
-
-//dropdown color
-.dropdown-hover-color
-	background-color: $navbar-color-hover
-
-//carousel
-.slide
-	.carousel-indicators
-		bottom: -35px
-
-	.carousel-inner
-		img
-			width: 100%
-			object-fit: cover
-
-#myCarousel
-	.carousel-inner
-		height: 350px
-		a
-			img
-				width: 100%
-				height: 350px
-
-.carousel-control
-	width: 5%
-
-//list group
-.list-group
-	+margin-top(5px)
-	+margin-bottom(0)
-
-	a
-		color: black
-		
-		li
-			+border-radius(0)
-			border-style: hidden
-			padding: 5px
-
-			&:hover
-				color: blue
-
-//a
-a
-	color: black
-	
-	&:hover
-		text-decoration: none
-		color: #23527c
-		transition: all 0.5s
-		-webkit-transition: all 0.5s
-		-moz-transition: all 0.5s
-
-input , .input-group
-	+border-radius(0) 
-
-//breadcrumb
-.breadcrumb
-	+border-radius(0)
-	background-color: transparent
-	+padding-left(0)
+.nav > li > .nologin
 	+padding-right(0)
+	+padding-left(0)
 
-.top-image
-	padding: 0
-	margin: 0
-	background-color: transparent
-	+border-radius(0)
-	+margin-bottom(15px)
+.fb
+	+padding-left(10px !important)
+	+padding-right(10px !important)
 
-	img
-		width: 100%
-		height: 250px
-		object-fit: cover
+//FOR LARGE DEKSTOP
+@media (min-width: 1200px)
+	/*# START FROM CONTAINER MASTER-HOME#*/
+	.container
+		.navbar-default
+			+border-radius(0)
+			+margin-bottom(0)
 
-//panel
-.panel-default
-	+border-radius(0)
-	+margin-bottom(10px)
+		//for top navbar
+		.top-navbar
+			height: 70px
+			background-color: transparent
+			border-style: hidden
 
-@media screen and (min-width: 768px)
-.container .jumbotron, .container-fluid .jumbotron
-	padding: 0
+			.container-fluid
+				+padding-left(0)
+				+padding-right(0)
 
+				.navbar-brand
+					+padding-top(30px)
 
-/* # END GENERAL SETTING# */
-
-/*# START FROM CONTAINER MASTER-HOME#*/
-.container
-	.navbar-default
-		+border-radius(0)
-		+margin-bottom(0)
-
-	//for top navbar
-	.top-navbar
-		height: 70px
-		background-color: transparent
-		border-style: hidden
-
-		.container-fluid
-			+padding-left(0)
-			+padding-right(0)
-
-			.navbar-brand
-				+padding-top(30px)
-
-			.navbar-collapse
-				+padding-top(15px)
-				+padding-bottom(15px)
-
-				.navbar-right
+				.navbar-collapse
 					+padding-top(15px)
 
-				.navbar-nav > li > a
-					+padding-bottom(0)
-					+padding-top(0)
+					.navbar-right
+						+padding-top(15px)
 
-	//for main navbar
-	.main-navbar
-		background-color: $navbar-color
-		height: 40px
-		+margin-bottom(10px)
+					.navbar-nav > li > a
+						+padding-bottom(0)
+						+padding-top(0)
 
-		.container-fluid
-			+padding-left(0)
-			+padding-right(0)
-			
-			#navbar-menu
+		//for main navbar
+		.main-navbar
+			background-color: $navbar-color
+			+margin-bottom(10px)
+
+			.container-fluid
 				+padding-left(0)
 				+padding-right(0)
-
-				.col-md-7
-					+padding-left(0)
-					font-weight: bold
-
-					.active
-						background-color: $navbar-color-hover
-						color: white
-						height: 40px
-
-					.dropdown
-						.dropdown-menu
-							background-color: $navbar-color-hover
-							+border-radius(0)
-							
-							li
-								a
-									&:hover
-										background-color: $list-hover-blue
-
-					a
-						color: white
-						height: 40px
-						+padding-top(10px)
-
-						&:hover
-							color: white !important
-							background-color: $navbar-color-hover 
-
-				.col-md-5
-					.navbar-form
-						+margin-top(5px)
-
-					.navbar-right, #searchinput
-						width: 100%
-						
-						.col-md-12
-							+padding-right(0)
-							+padding-left(0)
-
-/*# MAIN CONTENT #*/
-.main-content
-	+padding-left(0)
-	+padding-right(0)
-	display: flex
-
-	.col-md-9
-		+border-radius(0)
-		+padding-left(0)
-		+padding-right(0)
-
-		.col-md-12
-			+padding-left(0)
-			+padding-right(0)
-			+padding-top(5px)
-			+padding-bottom(5px)
-
-			.media
-				+padding-left(0)
-				+padding-right(5px)
-
-				.comic-image
-					object-fit: cover
-					width: 100%
-
-			.contents
-				+padding-left(5px)
-				+padding-right(0)
-
-	.col-md-3
-		+padding-right(0)
-		
-		.panel-heading
-			display: flow-root
-
-		.col-md-12
-			+padding-left(0)
-			+padding-right(0)
-			+padding-bottom(10px)
-
-			.media
-				+padding-left(0)
-				+padding-right(0)
-
-				.media-object
-					height: 85px
-					width: 100%
-
-			.teks
-				+padding-left(10px)
-				+padding-right(0)
-
-				.comic-title
-					font-weight: bold
-					+margin-bottom(10px)
-
-/*# FOOTER #*/
-.navbar-static-bottom
-	display: block
-	
-	.footer-about-us ,.footer-more, .footer-ways-to-read, .footer-subscribe
-		+padding-left(0)
-
-	.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
-		+padding-right(0)
-		border: 1px solid #ddd
-
-		.footer-titles
-			padding: 10px 15px
-
-		ul 
-			+padding-left(15px)
-
-			li
-				list-style-type: none
-				line-height: 2em
-
-	.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
-		height: 163px
-
-	.footer-about-us, .footer-ways-to-read
-		border-right-style: hidden
-
-	.footer-subscribe
-		p
-			+padding-left(15px)
-			+padding-right(15px)
-			+padding-bottom(5px)
-
-		.col-md-12
-			+padding-bottom(5px)
-
-			.col-md-8
-				+padding-left(0)
-				+padding-right(0)
-
-.navbar-static-bottom-2, .col-md-6
-	display: inline-block
-	+padding-right(0)
-	+padding-left(0)
-	+margin-bottom(0)
-
-	.pull-left , .social-media
-		+padding-top(5px)
-		+padding-bottom(5px)
-		display: inline-block
-/*# END FROM CONTAINER MASTER-HOME#*/
-
-/*# NEW COMICS #*/
-.new-comics
-	display: block
-
-	.panel-default
-		+margin-top(10px)
-
-		.panel-heading
-			+padding-left(15px)
-			+padding-right(15px)
-			background-color: transparent
-
-			#add-all-to-cart
-				+padding-right(15px)
-
-			a
-				color: black
-
-				&:hover
-					color: $a-hover-color
-					text-decoration: none
-					
-
-		.panel-body
-			.col-md-2
-				+padding-left(3px)
-				+padding-right(3px)
-
-				.thumbnail
-					padding: 0
-					+border-radius(0)
-					height: 410px
-					+margin-bottom(0)
-					border-style: hidden
-
-					img
-						height: 285px
-						width: 100%
-
-				.caption
+				
+				#navbar-menu
 					+padding-left(0)
 					+padding-right(0)
 
-					.text-center
+					.col-md-7
+						+padding-left(0)
 						font-weight: bold
 
-					p
-						+padding-top(5px)
-						+padding-bottom(0)
+						.actived
+							background-color: $navbar-color-hover
+							color: white
+							height: 40px
 
-					.btn-add-to-cart
-						width: 80%
-
-					.btn, .dropdown-menu
-						+border-radius(0)
-
-					.dropdown-menu
-						padding: 0
-						border-style: hidden
+						.dropdown
+							.dropdown-menu
+								background-color: $navbar-color-hover
+								+border-radius(0)
+								
+								li
+									a
+										&:hover
+											background-color: $list-hover-blue
 
 						a
-							+border-radius(0)
-							color: black
+							color: white
+							height: 40px
+							+padding-top(10px)
 
 							&:hover
-								background-color: $list-hover-blue
-								color: white
+								color: white !important
+								background-color: $navbar-color-hover 
 
-.panel-language
-	border-style: hidden
+					.col-md-5
+						.navbar-form
+							+margin-top(5px)
+							+margin-bottom(5px)
 
-	.panel-body
-		padding: 0
-/*# END NEW COMICS #*/
+						.navbar-right, #searchinput
+							width: 100%
+							
+							.col-md-12
+								+padding-right(0)
+								+padding-left(0)
 
-/*# COMICS SALE #*/
-.breadcrumb-comic-sale
-	+margin-bottom(10px)
+		.genre-select
+			.comic-image
+				height: 200px
 
-.jumbotron
-	padding: 0
-	margin: 0
-	background-color: transparent
-	+border-radius(0)
-	+margin-bottom(15px)
+	/*# MAIN CONTENT #*/
+	.main-content
+		+padding-left(0)
+		+padding-right(0)
 
-	img
-		width: 100%
-		height: 175px
+		.col-lg-9
+			+border-radius(0)
+			+padding-left(0)
+			+padding-right(0)
 
-@media screen and (min-width: 768px)
-.container .jumbotron, .container-fluid .jumbotron
-	padding: 0
+			.col-lg-12
+				+padding-left(0)
+				+padding-right(0)
 
-/* FOR ADMIN PANEL BACK END*/
-.form-horizontal
-	.box-footer
-		+padding-right(30px)
-		+padding-left(30px)
+				.media
+					+padding-left(0)
+					+padding-right(5px)
 
-.add
-	+padding-right(0)
-	+padding-left(0)
+					.comic-image
+						object-fit: cover
+						width: 100%
 
-.modal-title
-	text-align: center
+				.contents
+					+padding-left(5px)
+					+padding-right(0)
 
-.form-horizontal .control-label
-	text-align: left !important
+				.np
+					height: 265px
 
-.btn-block + .btn-block
-	+margin-bottom(5px)
+		.col-lg-3
+			+padding-right(0)
+			
+			.panel-heading
+				display: flow-root
 
-.box-header
+			.col-md-12
+				+padding-left(0)
+				+padding-right(0)
+				
+				.media
+					+padding-left(0)
+					+padding-right(0)
+
+					.media-object
+						height: 85px
+						width: 100%
+
+				.teks
+					+padding-left(10px)
+					+padding-right(0)
+
+					.comic-title
+						font-weight: bold
+						+margin-bottom(10px)
+
+		.search
+			.comic-image
+				width: 100%
+				height: 170px
+
+			.search-content
+				+padding-top(0)
+
+	/*# FOOTER #*/
+	.navbar-static-bottom
+		
+		.footer-about-us ,.footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-left(0)
+
+		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-right(0)
+			border: 1px solid #ddd
+
+			.footer-titles
+				padding: 10px 15px
+
+			ul.list-group
+				+margin-top(0)
+				+padding-left(10px)
+				+padding-right(10px)
+
+				li
+					list-style-type: none
+
+		.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
+			height: 145px
+			+margin-bottom(0)
+
+		.footer-about-us, .footer-ways-to-read
+			border-right-style: hidden
+
+		.footer-subscribe
+			p
+				+padding-left(15px)
+				+padding-right(15px)
+				+padding-bottom(5px)
+
+			.subscribe
+				+padding-right(15px)
+				+padding-left(15px)
+				+padding-bottom(5px)
+
+				.col-md-8
+					+padding-left(0)
+					+padding-right(0)
+
+	.navbar-static-bottom-2, .col-md-6
+		display: inline-block
+		+padding-right(0)
+		+padding-left(0)
+		+margin-bottom(0)
+
+		.pull-left , .social-media
+			display: inline-block
+
+	/*# END FROM CONTAINER MASTER-HOME#*/
+
+	/*# NEW COMICS #*/
+	.new-comics
+		display: block
+
+		.panel-default
+			+margin-top(10px)
+
+			.panel-heading
+				+padding-left(15px)
+				+padding-right(15px)
+				background-color: transparent
+
+				#add-all-to-cart
+					+padding-right(15px)
+
+				a
+					color: black
+
+					&:hover
+						color: $a-hover-color
+						text-decoration: none
+						
+
+			.panel-body
+				.col-md-2
+					+padding-left(3px)
+					+padding-right(3px)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						height: 410px
+						+margin-bottom(0)
+						border-style: hidden
+
+						img
+							height: 285px
+							width: 100%
+
+					.caption
+						+padding-left(0)
+						+padding-right(0)
+
+						.text-center
+							font-weight: bold
+
+						p
+							+padding-top(5px)
+							+padding-bottom(0)
+
+						.btn-add-to-cart
+							width: 80%
+
+						.btn, .dropdown-menu
+							+border-radius(0)
+
+						.dropdown-menu
+							padding: 0
+							border-style: hidden
+
+							a
+								+border-radius(0)
+								color: black
+
+								&:hover
+									background-color: $list-hover-blue
+									color: white
+
+	.panel-language
+		border-style: hidden
+
+		.panel-body
+			padding: 0
+	/*# END NEW COMICS #*/
+
+	/* FOR ADMIN PANEL BACK END*/
+	.form-horizontal
+		.box-footer
+			+padding-right(30px)
+			+padding-left(30px)
+
 	.add
 		+padding-right(0)
 		+padding-left(0)
 
-a.btn
-	+margin-bottom(5px)
+	.modal-title
+		text-align: center
 
-.content-header
-	display: list-item
+	.form-horizontal .control-label
+		text-align: left !important
 
-.col-sm-8
-	+padding-left(0)
+	.btn-block + .btn-block
+		+margin-bottom(5px)
 
-/*pagination*/
-.pager
-	margin: 0
-	position: initial
+	.box-header
+		.add
+			+padding-right(0)
+			+padding-left(0)
 
-.pager li>a, .pager li>span
-	border-radius: 0
-	border-top-left-radius: 5px
-	border-bottom-right-radius: 5px
+	a.btn
+		+margin-bottom(5px)
 
-.my-active span
-	background-color: #cdc9c9 !important
-	color: white !important
-	border-color: #7d7d7d !important
+	.content-header
+		display: list-item
+
+	.col-md-8
+		+padding-left(0)
+
+	/* END FOR ADMIN PANEL BACK END*/
+
+	/*FOR USER PANEL*/
+	.login-dropdown
+		box-shadow: none
+
+		.user-login-dropdown
+			.dropdown-toggle 
+				padding: 5px
+				border-style: hidden
+				top: -5px
+				font-weight: bold
+				right: 0
+				text-align: left
+
+				&:hover
+					background-color: #ddd
+			li
+				+padding-right(5px)
+				+padding-left(5px)
+
+			.btn-default, a
+				padding: 5px
+				border-style: hidden
+				text-align: left
+				+margin-bottom(0)
+	/*END FOR USER PANEL*/
+
+//FOR NORMAL DEKSTOP / DEKSTOP
+@media (min-width: 992px)
+	/*# START FROM CONTAINER MASTER-HOME#*/
+	.container
+		.navbar-default
+			+border-radius(0)
+			+margin-bottom(0)
+
+		//for top navbar
+		.top-navbar
+			height: 70px
+			background-color: transparent
+			border-style: hidden
+
+			.container-fluid
+				+padding-left(0)
+				+padding-right(0)
+
+				.navbar-brand
+					+padding-top(30px)
+
+				.navbar-collapse
+					+padding-top(15px)
+
+					.navbar-right
+						+padding-top(15px)
+
+					.navbar-nav > li > a
+						+padding-bottom(0)
+						+padding-top(0)
+
+		//for main navbar
+		.main-navbar
+			background-color: $navbar-color
+			+margin-bottom(10px)
+
+			.container-fluid
+				+padding-left(0)
+				+padding-right(0)
+				
+				#navbar-menu
+					+padding-left(0)
+					+padding-right(0)
+
+					.col-md-7
+						+padding-left(0)
+						font-weight: bold
+
+						.actived
+							background-color: $navbar-color-hover
+							color: white
+							height: 40px
+
+						.dropdown
+							.dropdown-menu
+								background-color: $navbar-color-hover
+								+border-radius(0)
+								
+								li
+									a
+										&:hover
+											background-color: $list-hover-blue
+
+						a
+							color: white
+							height: 40px
+							+padding-top(10px)
+
+							&:hover
+								color: white !important
+								background-color: $navbar-color-hover 
+
+					.col-md-5
+						.navbar-form
+							+margin-top(5px)
+							+margin-bottom(5px)
+
+						.navbar-right, #searchinput
+							width: 100%
+							
+							.col-md-12
+								+padding-right(0)
+								+padding-left(0)
+
+		.genre-select
+			.panel-body
+				+padding-top(0)
+				+padding-bottom(0)
+
+				.col-md-2
+					height: 240px
+					
+					.comic-image
+						height: 175px
+
+			.pager
+				padding-bottom: 15px
+
+	/*# MAIN CONTENT #*/
+	.main-content
+		+padding-left(0)
+		+padding-right(0)
+
+		.col-lg-9
+			+border-radius(0)
+			+padding-left(0)
+			+padding-right(0)
+
+			.col-md-12
+				+padding-left(0)
+				+padding-right(0)
+
+				.media
+					+padding-left(0)
+					+padding-right(5px)
+
+					.comic-image
+						object-fit: cover
+						width: 100%
+
+				.contents
+					+padding-left(5px)
+					+padding-right(0)
+
+		.col-lg-3
+			+padding-right(0)
+			
+			.panel-heading
+				display: flow-root
+
+			.panel-body
+				ul.col-sm-6, ul.col-sm-12
+					+padding-left(0)
+
+			.col-md-12
+				+padding-left(0)
+				+padding-right(0)
+				
+				.media
+					+padding-left(0)
+					+padding-right(0)
+
+					.media-object
+						height: 85px
+						width: 100%
+
+				.teks
+					+padding-left(10px)
+					+padding-right(0)
+
+					.comic-title
+						font-weight: bold
+						+margin-bottom(10px)
+
+	/*# FOOTER #*/
+	.navbar-static-bottom
+		
+		.footer-about-us ,.footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-left(0)
+
+		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-right(0)
+			border: 1px solid #ddd
+
+			.footer-titles
+				padding: 10px 15px
+
+			ul.list-group
+				+margin-top(0)
+				+padding-left(10px)
+				+padding-right(10px)
+
+				li
+					list-style-type: none
+
+		.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
+			height: 145px
+			+margin-bottom(0)
+
+		.footer-about-us, .footer-ways-to-read
+			border-right-style: hidden
+
+		.footer-subscribe
+			p
+				+padding-left(15px)
+				+padding-right(15px)
+				+padding-bottom(5px)
+
+			.subscribe
+				+padding-right(15px)
+				+padding-left(15px)
+				+padding-bottom(5px)
+
+				.col-md-8
+					+padding-left(0)
+					+padding-right(0)
+
+	.navbar-static-bottom-2, .col-md-6
+		display: inline-block
+		+padding-right(0)
+		+padding-left(0)
+		+margin-bottom(0)
+
+		.pull-left , .social-media
+			display: inline-block
+
+	/*# END FROM CONTAINER MASTER-HOME#*/
+
+	/*# NEW COMICS #*/
+	.new-comics
+		display: block
+
+		.panel-default
+			+margin-top(10px)
+
+			.panel-heading
+				+padding-left(15px)
+				+padding-right(15px)
+				background-color: transparent
+
+				#add-all-to-cart
+					+padding-right(15px)
+
+				a
+					color: black
+
+					&:hover
+						color: $a-hover-color
+						text-decoration: none
+						
+
+			.panel-body
+				.col-md-2
+					+padding-left(3px)
+					+padding-right(3px)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						height: 410px
+						+margin-bottom(0)
+						border-style: hidden
+
+						img
+							height: 285px
+							width: 100%
+
+					.caption
+						+padding-left(0)
+						+padding-right(0)
+
+						.text-center
+							font-weight: bold
+
+						p
+							+padding-top(5px)
+							+padding-bottom(0)
+
+						.btn-add-to-cart
+							width: 80%
+
+						.btn, .dropdown-menu
+							+border-radius(0)
+
+						.dropdown-menu
+							padding: 0
+							border-style: hidden
+
+							a
+								+border-radius(0)
+								color: black
+
+								&:hover
+									background-color: $list-hover-blue
+									color: white
+
+	.panel-language
+		border-style: hidden
+
+		.panel-body
+			padding: 0
+	/*# END NEW COMICS #*/
+
+	/* FOR ADMIN PANEL BACK END*/
+	.form-horizontal
+		.box-footer
+			+padding-right(30px)
+			+padding-left(30px)
+
+	.add
+		+padding-right(0)
+		+padding-left(0)
+
+	.modal-title
+		text-align: center
+
+	.form-horizontal .control-label
+		text-align: left !important
+
+	.btn-block + .btn-block
+		+margin-bottom(5px)
+
+	.box-header
+		.add
+			+padding-right(0)
+			+padding-left(0)
+
+	a.btn
+		+margin-bottom(5px)
+
+	.content-header
+		display: list-item
+
+	.col-md-8
+		+padding-left(0)
+
+	/* END FOR ADMIN PANEL BACK END*/
+
+	/*FOR USER PANEL*/
+	.login-dropdown
+		box-shadow: none
+
+		.user-login-dropdown
+			.dropdown-toggle 
+				padding: 5px
+				border-style: hidden
+				top: -5px
+				font-weight: bold
+				right: 0
+				text-align: left
+
+				&:hover
+					background-color: #ddd
+			li
+				+padding-right(5px)
+				+padding-left(5px)
+
+			.btn-default, a
+				padding: 5px
+				border-style: hidden
+				text-align: left
+				+margin-bottom(0)
+	/*END FOR USER PANEL*/

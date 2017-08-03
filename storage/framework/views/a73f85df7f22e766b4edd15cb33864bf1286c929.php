@@ -215,7 +215,7 @@
                     <th>Comic Genre</th>
                     <th>Created at</th>
                     <th>Updated at</th>
-                    <!-- <th>Action</th> -->
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <?php $no = 1 ?>
@@ -223,10 +223,10 @@
                   <?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                   <tr>
                     <td><?php echo e($no++); ?></td>
-                    <td><?php echo e($genre->comic_genre); ?></td>
+                    <td><?php echo e(str_replace('-', ' ', $genre->comic_genre)); ?></td>
                     <td><?php echo e($genre->created_at); ?></td>
                     <td><?php echo e($genre->updated_at); ?></td>
-                    <!-- <td>
+                    <td>
                       <form action="<?php echo e(url('/admin/comic-genre/delete/' .$genre->id)); ?>" class="form-horizontal" method="post">
                         <?php echo e(method_field('delete')); ?>
 
@@ -234,7 +234,7 @@
 
                         <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('Are you sure want to delete this data?')">Delete</button>
                       </form>     
-                    </td> -->
+                    </td>
                   </tr>
                   <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>

@@ -1,0 +1,210 @@
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+/* Author	: Arief Budi Prasetyo			*/
+/* Version	: 1.0							*/
+/* Email	: Arief.Prasetyo911@gmail.com	*/
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+
+@import mixins
+
+/* 		G E N E R A L  S E T T I N G S  	*/
+/*==========================================*/
+
+body
+	font-size: 14px
+	font-weight: normal
+
+nav, header, main, article, section, aside, footer
+	display: block
+
+h1, h2, h3, h4, h5, h6, p
+	padding: 0
+	margin: 0
+
+// COLOR 
+$a-hover-color		: #20b2aa
+$navbar-color 		: #404040
+$navbar-color-hover	: #252525
+$divider-color		: #212121
+$list-hover			: #636363
+$list-hover-blue	: #008b8b
+
+//PADDING, MARGIN, BORDER-RADIUS
+//no padding
+.no-padding-left
+	+padding-left(0)
+
+.no-padding-right
+	+padding-right(0)
+
+.no-padding-top
+	+padding-top(0)
+
+.no-padding-bottom
+	+padding-bottom(0)
+
+//no margin
+.no-margin-left
+	+margin-left(0)
+
+.no-margin-right
+	+margin-right(0)
+
+.no-margin-top
+	+margin-top(0)
+
+.no-margin-bottom
+	+margin-bottom(0)
+
+//no border radius
+.no-border-radius
+	+border-radius(0)
+
+//padding 15px
+.padding-left-15
+	+padding-left(15px)
+
+.padding-right-15
+	+padding-right(15px)
+
+.padding-top-15
+	+padding-top(15px)
+
+.padding-bottom-15
+	+padding-bottom(15px)
+
+//margin 15px
+.margin-left-15
+	+margin-left(15px)
+
+.margin-right-15
+	+margin-right(15px)
+
+.margin-top-15
+	+margin-top(15px)
+
+.margin-bottom-15
+	+margin-bottom(15px)
+
+//padding 5px
+.padding-left-5
+	+padding-left(5px)
+
+.padding-right-5
+	+padding-right(5px)
+
+.padding-top-5
+	+padding-top(5px)
+
+.padding-bottom-5
+	+padding-bottom(5px)
+
+//margin 5px
+.margin-left-5
+	+margin-left(5px)
+
+.margin-right-5
+	+margin-right(5px)
+
+.margin-top-5
+	+margin-top(5px)
+
+.margin-bottom-5
+	+margin-bottom(5px)
+
+//for active element
+#active
+	font-weight: bold
+
+.actived
+	background-color: $navbar-color-hover
+
+//divider each menu
+li.need-divider~li.need-divider
+	border-left: 1px solid $divider-color
+
+li.need-divider:last-child
+	border-right: 1px solid $divider-color
+
+//dropdown color
+.dropdown-hover-color
+	background-color: $navbar-color-hover
+
+//list group
+.list-group
+	+margin-top(5px)
+	+margin-bottom(0)
+
+	a
+		color: black
+		
+		li
+			+border-radius(0)
+			border-style: hidden
+			padding: 5px
+
+			&:hover
+				color: $a-hover-color
+
+//a
+a
+	color: black
+	
+	&:hover
+		text-decoration: none
+		color: #23527c
+		transition: all 0.5s
+		-webkit-transition: all 0.5s
+		-moz-transition: all 0.5s
+
+.img-comic-standard
+	width: 100%
+	height: 170px
+
+.posting-center
+	text-align: center
+
+input , .input-group
+	+border-radius(0) 
+
+//breadcrumb
+.breadcrumb
+	+border-radius(0)
+	background-color: transparent
+	+padding-left(0)
+	+padding-right(0)
+
+.top-image
+	padding: 0
+	margin: 0
+	background-color: transparent
+	+border-radius(0)
+	+margin-bottom(15px)
+
+	img
+		width: 100%
+		height: 250px
+		object-fit: cover
+
+//panel
+.panel-default
+	+border-radius(0)
+	+margin-bottom(10px)
+
+/*pagination*/
+.pager
+	margin: 0
+	position: initial
+
+.pager li>a, .pager li>span
+	border-radius: 0
+	border-top-left-radius: 5px
+	border-bottom-right-radius: 5px
+
+.my-active span
+	background-color: #cdc9c9 !important
+	color: white !important
+	border-color: #7d7d7d !important

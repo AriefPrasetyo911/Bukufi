@@ -17,7 +17,7 @@ class ComicGenreController extends Controller
      */
     public function index()
     {
-        $title  = "Comic Genre";
+        $title  = "Bukufi : Comic Genre";
         $genres = Comic_genre::all();
 
         return view ('Back-end.Comic.comic-genre', compact('title', 'genres'));

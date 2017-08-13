@@ -75,7 +75,7 @@ class SingleAuthorController extends Controller
 
         //------------------------------//
 
-        $title      = "Comic Author";
+        $title      = "Bukufi : Comic Author";
         /*$authors    = DB::table('comics')->distinct()->get(['comic_author'])->orderBy('comic_author', 'asc')->paginate(8);*/
         $authors    = Comic::select('comic_author')->distinct(['comic_author'])->orderBy('comic_author', 'asc')->paginate(10);
 
@@ -209,7 +209,7 @@ class SingleAuthorController extends Controller
 
         //------------------------------//
         
-        $title      = "Comic by Author";
+        $title      = "Bukufi : Comic by Author";
         $authors    = DB::table('comics')->where('comic_author', $comic_author)->get();
         $s_auth     = DB::table('comics')->where('comic_author', $comic_author)->distinct()->get(['comic_author']);
 

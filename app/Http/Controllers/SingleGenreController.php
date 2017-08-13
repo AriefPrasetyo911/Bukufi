@@ -74,7 +74,7 @@ class SingleGenreController extends Controller
 
         //------------------------------//
 
-        $title  = 'Comic Genre';
+        $title  = 'Bukufi : Comic Genre';
         $genres = DB::table('comic_genres')->orderBy('comic_genre', 'asc')->get();
 
         return view('Front-end.Single.single-genre', compact('title','genres'));
@@ -167,9 +167,10 @@ class SingleGenreController extends Controller
 
         //------------------------------//
         
+        $title      = "Bukufi : Comic Genre List";
         $selected   = DB::table('comics')->select('*')->where('comic_genre', 'LIKE', '%' .$comic_genre. '%')->paginate(12);
         
-        return view('Front-end/Single/genre-select', compact('selected'));
+        return view('Front-end/Single/genre-select', compact('selected', 'title'));
     }
 
     /**

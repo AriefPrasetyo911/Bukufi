@@ -16,7 +16,7 @@ class AdminListController extends Controller
      */
     public function index()
     {
-        $title  = "Admin List";
+        $title  = "Bukufi : Admin List";
         $admin  = Admin::all();
 
         return view('Back-end.Administrator.Administrator-Data', compact('title', 'admin'));

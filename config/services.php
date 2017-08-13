@@ -38,7 +38,7 @@ return [
     'facebook' => [
         'client_id'     => '1995949823975076',
         'client_secret' => 'ef7fcea25dbd5a9ce6af797a92175794',
-        'redirect'      => 'http://localhost:8000/login/facebook/callback',
+        'redirect'      => 'http://bukufi.appspot.com/login/facebook/callback',
     ],
 
     'google' => [

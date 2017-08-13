@@ -1,0 +1,361 @@
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+/* Author	: Arief Budi Prasetyo			*/
+/* Version	: 1.0							*/
+/* Email	: Arief.Prasetyo911@gmail.com	*/
+/* ======================================== */
+/* 			STYLE FOR BUKUFI				*/
+/* ======================================== */
+
+@import general-setting
+
+//FOR LARGE DEKSTOP
+@media (min-width: 1200px)
+	/*# START FROM CONTAINER MASTER-HOME#*/
+	.container
+		.navbar-default
+			+border-radius(0)
+			+margin-bottom(0)
+
+		//for top navbar
+		.navbar-fixed-top
+			background-color: transparent
+			border-style: hidden
+			transition: 0.5s
+
+			.container
+				.navbar-brand
+					+padding-top(15px)
+
+				.navbar-collapse
+					+padding-top(0)
+
+					.navbar-right
+						+padding-top(10px)
+						+margin-right(0)
+
+						li:nth-child(1)
+							a
+								+padding-right(0)
+
+						li:nth-child(2)
+							a
+								+padding-right(0)
+								+padding-left(15px)
+
+					.navbar-nav > li > a
+						+padding-bottom(0)
+						+padding-top(0)
+
+		//for main navbar
+		.main-navbar
+			background-color: $navbar-color
+			+margin-bottom(10px)
+
+			.container-fluid
+				+padding-left(0)
+				+padding-right(0)
+				
+				#navbar-menu
+					+padding-left(0)
+					+padding-right(0)
+
+					.col-md-7
+						+padding-left(0)
+						font-weight: bold
+
+						.actived
+							background-color: $navbar-color-hover
+							color: white
+							height: 40px
+
+						.dropdown
+							.dropdown-menu
+								background-color: $navbar-color-hover
+								+border-radius(0)
+								
+								li
+									a
+										&:hover
+											background-color: $list-hover-blue
+
+						a
+							color: white
+							height: 40px
+							+padding-top(10px)
+
+							&:hover
+								color: white !important
+								background-color: $navbar-color-hover 
+
+					.col-md-5
+						.navbar-form
+							+margin-top(5px)
+							+margin-bottom(5px)
+
+						.navbar-right, #searchinput
+							width: 100%
+							
+							.col-md-12
+								+padding-right(0)
+								+padding-left(0)
+
+		.genre-select
+			.panel-body
+				+padding-top(0)
+				+padding-bottom(0)
+
+				.col-md-2
+					height: 240px
+					
+					.comic-image
+						height: 175px
+
+			.pager
+				padding-bottom: 15px
+
+	/*# MAIN CONTENT #*/
+	.main-content
+		+padding-left(0)
+		+padding-right(0)
+
+		//carousel
+		#myCarousel
+			+margin-bottom(15px)
+
+			.carousel-inner
+
+			.nav-justified
+				li 
+					+border-radius(0)
+
+		.col-lg-9
+			+border-radius(0)
+			+padding-left(0)
+			+padding-right(0)
+
+			.col-md-12
+				+padding-left(0)
+				+padding-right(0)
+
+				.media
+					+padding-left(0)
+					+padding-right(5px)
+
+					.comic-image
+						object-fit: cover
+						width: 100%
+
+				.contents
+					+padding-left(5px)
+					+padding-right(0)
+
+		.col-lg-3
+			+padding-right(0)
+			
+			.panel-heading
+				display: flow-root
+
+			.panel-body
+				ul.col-sm-6, ul.col-sm-12
+					+padding-left(0)
+
+			.col-md-12
+				+padding-left(0)
+				+padding-right(0)
+				
+				.media
+					+padding-left(0)
+					+padding-right(0)
+
+					.media-object
+						height: 85px
+						width: 100%
+
+				.teks
+					+padding-left(10px)
+					+padding-right(0)
+
+					.comic-title
+						font-weight: bold
+						+margin-bottom(10px)
+
+	/*# FOOTER #*/
+	.navbar-static-bottom
+		.footer-about-us ,.footer-more, .footer-subscribe
+			+padding-left(0)
+
+		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-right(0)
+			border: 1px solid #ddd
+
+			.footer-titles
+				padding: 10px 15px
+
+			ul.list-group
+				+margin-top(0)
+				+padding-left(10px)
+				+padding-right(10px)
+
+				li
+					list-style-type: none
+
+		.footer-ways-to-read, .footer-subscribe, .footer-more, .footer-about-us
+			height: 145px
+			+margin-bottom(0)
+
+		.footer-about-us, .footer-ways-to-read, .footer-more
+			border-right-style: hidden
+
+		.footer-about-us
+			+margin-bottom(10px)
+
+		.footer-more
+			+margin-bottom(10px)
+
+		.footer-subscribe
+			padding: 15px
+			+margin-bottom(10px)
+			
+	/*# END FROM CONTAINER MASTER-HOME#*/
+
+	/*# NEW COMICS #*/
+	.new-comics
+		display: block
+
+		.panel-default
+			+margin-top(10px)
+
+			.panel-heading
+				+padding-left(15px)
+				+padding-right(15px)
+				background-color: transparent
+
+				#add-all-to-cart
+					+padding-right(15px)
+
+				a
+					color: black
+
+					&:hover
+						color: $a-hover-color
+						text-decoration: none
+						
+
+			.panel-body
+				.col-md-2
+					+padding-left(3px)
+					+padding-right(3px)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						height: 410px
+						+margin-bottom(0)
+						border-style: hidden
+
+						img
+							height: 285px
+							width: 100%
+
+					.caption
+						+padding-left(0)
+						+padding-right(0)
+
+						.text-center
+							font-weight: bold
+
+						p
+							+padding-top(5px)
+							+padding-bottom(0)
+
+						.btn-add-to-cart
+							width: 80%
+
+						.btn, .dropdown-menu
+							+border-radius(0)
+
+						.dropdown-menu
+							padding: 0
+							border-style: hidden
+
+							a
+								+border-radius(0)
+								color: black
+
+								&:hover
+									background-color: $list-hover-blue
+									color: white
+
+	.panel-language
+		border-style: hidden
+
+		.panel-body
+			padding: 0
+	/*# END NEW COMICS #*/
+
+	/* FOR ADMIN PANEL BACK END*/
+	.form-horizontal
+		.box-footer
+			+padding-right(30px)
+			+padding-left(30px)
+
+	.add
+		+padding-right(0)
+		+padding-left(0)
+
+	.modal-title
+		text-align: center
+
+	.form-horizontal .control-label
+		text-align: left !important
+
+	.btn-block + .btn-block
+		+margin-bottom(5px)
+
+	.box-header
+		.add
+			+padding-right(0)
+			+padding-left(0)
+
+	a.btn
+		+margin-bottom(5px)
+
+	.content-header
+		display: list-item
+
+	.col-md-8
+		+padding-left(0)
+
+	/* END FOR ADMIN PANEL BACK END*/
+
+	/*FOR USER PANEL*/
+	.login-dropdown
+		box-shadow: none
+		+border-radius(0)
+
+		.user-login-dropdown
+			.dropdown-toggle 
+				padding: 5px
+				border-style: hidden
+				top: -5px
+				font-weight: bold
+				right: 0
+				text-align: left
+
+				&:hover
+					background-color: #ddd
+			li
+				+padding-right(5px)
+				+padding-left(5px)
+
+			.btn-default, a
+				padding: 5px
+				border-style: hidden
+				text-align: left
+				+margin-bottom(0)
+
+		.collapse
+			+padding-top(0)
+	/*END FOR USER PANEL*/

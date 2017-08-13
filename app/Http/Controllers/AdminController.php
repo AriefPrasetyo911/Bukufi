@@ -14,7 +14,7 @@ class AdminController extends Controller
     public function dashboard(){
         $user 	= auth()->guard('admin')->user();
         
-        $title 	= "Admin Dashboard";
+        $title 	= "Bukufi : Admin Dashboard";
 
         $bulan 				= date("Y-m-d",mktime(0,0,0,date('m')-1,date('d'),date('Y')));
         $minggu_lalu  		= date("Y-m-d",mktime(0,0,0,date('m'),date('d')-7,date('Y')));

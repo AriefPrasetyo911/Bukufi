@@ -6,10 +6,15 @@ use Illuminate\Http\Request;
 use App\Comic;
 use App\Comic_chapter;
 use App\Comic_genre;
+use App\Book;
+use App\Visitor;
+use App\Slider_carousel;
+use App\Popular_comic;
+use App\Popular_book;
 use DB;
 use Auth;
 use Input;
-use App\Visitor;
+
 
 class IndexController extends Controller
 {
@@ -21,211 +26,202 @@ class IndexController extends Controller
     public function index()
     {   
         //detect Browser
-        $browsers   = $_SERVER['HTTP_USER_AGENT'];
+            $browsers   = $_SERVER['HTTP_USER_AGENT'];
 
-        $chrome     = '/Chrome/';
-        $safari     = '/Safari/';
-        $opera      = '/OPR/';
-        $firefox    = '/Firefox/';
-        $ie         = '/MSIE/';
+            $chrome     = '/Chrome/';
+            $safari     = '/Safari/';
+            $opera      = '/OPR/';
+            $firefox    = '/Firefox/';
+            $ie         = '/MSIE/';
 
-        if (preg_match($chrome, $browsers)) {
-            $data = 'Chrome';
-        }
+            if (preg_match($chrome, $browsers)) {
+                $data = 'Chrome';
+            }
 
-        if (preg_match($safari, $browsers)) {
-            $data = 'Safari';
-        }
+            if (preg_match($safari, $browsers)) {
+                $data = 'Safari';
+            }
 
-        if (preg_match($opera, $browsers)) {
-            $data = 'Opera';
-        }
+            if (preg_match($opera, $browsers)) {
+                $data = 'Opera';
+            }
 
-        if (preg_match($firefox, $browsers)) {
-            $data = 'Firefox';
-        }
+            if (preg_match($firefox, $browsers)) {
+                $data = 'Firefox';
+            }
 
-        if (preg_match($ie, $browsers)) {
-            $data = 'IE';
-        }
+            if (preg_match($ie, $browsers)) {
+                $data = 'IE';
+            }
 
-        //grab information
-        $ip_addr    = $_SERVER['REMOTE_ADDR'];
-        $brows      = $data;
-        $visit      = 1;
+            //grab information
+            $ip_addr    = $_SERVER['REMOTE_ADDR'];
+            $brows      = $data;
+            $visit      = 1;
 
-        $hari_ini   = date('Y-m-d');        
+            $hari_ini   = date('Y-m-d');        
 
-        $range      = DB::table('visitors')
-                            ->where('ip_address', $ip_addr)
-                            ->where('dates', '>=' ,$hari_ini )->get();
-                      
-        if (count($range)) {
-            
-           //jika ditemukan ip yang sama dari hari yang lalu, data dilarang masuk 
-            
-        }
-        else{
-            
-            //jika tidak ditemukan berarti ip client sudah ada di database untuk hari ini, data bisa masuk
-            $insert = new Visitor();
-            $insert->ip_address = $ip_addr;
-            $insert->browser    = $brows;
-            $insert->counter    = $visit;
-            $insert->dates    = $hari_ini;
-            $insert->save();
-        }
+            $range      = DB::table('visitors')
+                                ->where('ip_address', $ip_addr)
+                                ->where('dates', '>=' ,$hari_ini )->get();
+                          
+            if (count($range)) {
+                
+               //jika ditemukan ip yang sama dari hari yang lalu, data dilarang masuk 
+                
+            }
+            else{
+                
+                //jika tidak ditemukan berarti ip client sudah ada di database untuk hari ini, data bisa masuk
+                $insert = new Visitor();
+                $insert->ip_address = $ip_addr;
+                $insert->browser    = $brows;
+                $insert->counter    = $visit;
+                $insert->dates    = $hari_ini;
+                $insert->save();
+            }
 
         //------------------------------//
 
-        $title      = 'Latest Comic';
+        $title      = 'Bukufi : Home';
 
-        $today          = date("Y-m-d",mktime(0,0,0,date('m'),date('d'),date('Y')));
-        $days_3_ago        = date("Y-m-d",mktime(0,0,0,date('m'),date('d')-3,date('Y')));
+        $books      = Book::take(4)->get();
+        $books2     = DB::table('books')->skip(4)->take(4)->get();
+
+        $carousel   = Slider_carousel::orderBy('created_at', 'desc')->limit(1)->get();
+        $carousel2  = Slider_carousel::orderBy('created_at', 'desc')->take(2)->get();
         
-        /*$filter     = DB::table('comics')->whereBetween('created_at', [$date_3d, $date_now])->get();*/
+        $popular_book_1         = Popular_book::orderBy('counter', 'desc')->take(4)->get();
+        $popular_book_2         = Popular_book::orderBy('counter', 'desc')->skip(4)->take(4)->get();
 
-        $filter     = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(12);
+        $popular_comics_1       = Popular_comic::orderBy('counter', 'desc')->take(4)->get();
+        $popular_comics_2       = Popular_comic::orderBy('counter', 'desc')->skip(4)->take(4)->get();
+        
+        return view('Front-end.Home.home', compact('title', 'books', 'books2', 'carousel', 'carousel2', 'popular_book_1', 'popular_book_2', 'popular_comics_1', 'popular_comics_2'));
+    }   
 
-        $filter_med = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(8);
-
-        $filter_sm = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(6);
-
-        $genres     = DB::table('comic_genres')->limit(12)->orderBy('comic_genre', 'asc')->get();
-        $status     = DB::table('comic_status')->get();  
-
-        return view('Front-end.Home.home', compact('title', 'filter', 'genres', 'status', 'filter_med', 'filter_sm'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function comic($comic_title)
+    public function comic(Request $request, $comic_title)
     {
 
         //detect Browser
-        $browsers   = $_SERVER['HTTP_USER_AGENT'];
+            $browsers   = $_SERVER['HTTP_USER_AGENT'];
 
-        $chrome     = '/Chrome/';
-        $safari     = '/Safari/';
-        $opera      = '/OPR/';
-        $firefox    = '/Firefox/';
-        $ie         = '/MSIE/';
+            $chrome     = '/Chrome/';
+            $safari     = '/Safari/';
+            $opera      = '/OPR/';
+            $firefox    = '/Firefox/';
+            $ie         = '/MSIE/';
 
-        if (preg_match($chrome, $browsers)) {
-            $data = 'Chrome';
-        }
+            if (preg_match($chrome, $browsers)) {
+                $data = 'Google Chrome';
+            }
 
-        if (preg_match($safari, $browsers)) {
-            $data = 'Safari';
-        }
+            if (preg_match($safari, $browsers)) {
+                $data = 'Safari';
+            }
 
-        if (preg_match($opera, $browsers)) {
-            $data = 'Opera';
-        }
+            if (preg_match($opera, $browsers)) {
+                $data = 'Opera';
+            }
 
-        if (preg_match($firefox, $browsers)) {
-            $data = 'Firefox';
-        }
+            if (preg_match($firefox, $browsers)) {
+                $data = 'Firefox';
+            }
 
-        if (preg_match($ie, $browsers)) {
-            $data = 'IE';
-        }
+            if (preg_match($ie, $browsers)) {
+                $data = 'IE';
+            }
 
-        //grab information
-        $ip_addr    = $_SERVER['REMOTE_ADDR'];
-        $brows      = $data;
-        $visit      = 1;
+            //grab information
+            $ip_addr    = $_SERVER['REMOTE_ADDR'];
+            $brows      = $data;
+            $visit      = 1;
 
-        $hari_ini   = date('Y-m-d');        
+            $hari_ini   = date('Y-m-d');        
 
-        $range      = DB::table('visitors')
-                            ->where('ip_address', $ip_addr)
-                            ->where('dates', '>=' ,$hari_ini )->get();
-                      
-        if (count($range)) {
+            $range      = DB::table('visitors')
+                                ->where('ip_address', $ip_addr)
+                                ->where('dates', '>=' ,$hari_ini )->get();
+                          
+            if (count($range)) {
+                
+               //jika ditemukan ip yang sama dari hari yang lalu, data dilarang masuk 
+                
+            }
+            else{
+                
+                //jika tidak ditemukan berarti ip client sudah ada di database untuk hari ini, data bisa masuk
+                $insert = new Visitor();
+                $insert->ip_address = $ip_addr;
+                $insert->browser    = $brows;
+                $insert->counter    = $visit;
+                $insert->dates      = $hari_ini;
+                $insert->save();
+            }
+
+        //------------------------------//
+
+        //insert data for popular comic
+
+            $comic_name     = $request->segment(2);
+            $visit          = 1;
+           
+            //first, check comic_title already exist or not
+            $check_data_comic     = Popular_comic::where('comic_title', $comic_name)->get();
             
-           //jika ditemukan ip yang sama dari hari yang lalu, data dilarang masuk 
-            
-        }
-        else{
-            
-            //jika tidak ditemukan berarti ip client sudah ada di database untuk hari ini, data bisa masuk
-            $insert = new Visitor();
-            $insert->ip_address = $ip_addr;
-            $insert->browser    = $brows;
-            $insert->counter    = $visit;
-            $insert->dates      = $hari_ini;
-            $insert->save();
-        }
+
+
+            //select image for coresponding comic
+            $select_comic_image   = Comic::where('comic_title', $comic_name)->first();
+            $select_image         = $select_comic_image->comic_image;
+
+            if (count($check_data_comic)) {
+                //if data found, don't do anything
+            }
+            else{
+
+                //if data not found, add comic to database
+                $insert = new Popular_comic();
+                $insert->comic_title    = $comic_name;
+                $insert->comic_image    = $select_image;
+                $insert->counter        = $visit;
+                $insert->save();
+            }
+        //-------------------------//
+        
+        //update counter
+            $check_comic    = Popular_comic::where('comic_title', $comic_name)->first();
+
+            $check_counter  = Popular_comic::where('comic_title', $comic_name)->first();
+                            
+            if (count($check_comic)) {
+                
+                $fiveten_minutes   = date("Y-m-d H:i:s",time()- 15*60);
+
+                $checks        = Popular_comic::where('comic_title', $comic_name)
+                                    ->where('updated_at', '>', $fiveten_minutes)->get();
+
+                if (count($checks)) {
+                    
+                    //if found ip , dont do anyhting 
+                   
+                }
+                else
+                {
+                    //if not found , then do update
+                    $check_comic->counter = $check_counter->counter + 1;
+                    $check_comic->update();
+                }
+            }
+            else
+            {
+                //do nothing
+            }
 
         //------------------------------//
 
         $single_comic   = DB::table('comics')->where('comic_title',$comic_title)->get();
-        $title          = "Comic".' '.$comic_title;
+        $title          = "Bukufi : Detail Comic".' '.str_replace('-', ' ', $comic_title);
         $genres         = DB::table('comic_genres')->limit(10)->orderBy('comic_genre', 'asc')->get();
         
         /*$get_id         = Comic::select('id')->where('id', '=', $id)->get();        
@@ -244,64 +240,65 @@ class IndexController extends Controller
     {
 
         //detect Browser
-        $browsers   = $_SERVER['HTTP_USER_AGENT'];
+            $browsers   = $_SERVER['HTTP_USER_AGENT'];
 
-        $chrome     = '/Chrome/';
-        $safari     = '/Safari/';
-        $opera      = '/OPR/';
-        $firefox    = '/Firefox/';
-        $ie         = '/MSIE/';
+            $chrome     = '/Chrome/';
+            $safari     = '/Safari/';
+            $opera      = '/OPR/';
+            $firefox    = '/Firefox/';
+            $ie         = '/MSIE/';
 
-        if (preg_match($chrome, $browsers)) {
-            $data = 'Chrome';
-        }
+            if (preg_match($chrome, $browsers)) {
+                $data = 'Google Chrome';
+            }
 
-        if (preg_match($safari, $browsers)) {
-            $data = 'Safari';
-        }
+            if (preg_match($safari, $browsers)) {
+                $data = 'Safari';
+            }
 
-        if (preg_match($opera, $browsers)) {
-            $data = 'Opera';
-        }
+            if (preg_match($opera, $browsers)) {
+                $data = 'Opera';
+            }
 
-        if (preg_match($firefox, $browsers)) {
-            $data = 'Firefox';
-        }
+            if (preg_match($firefox, $browsers)) {
+                $data = 'Firefox';
+            }
 
-        if (preg_match($ie, $browsers)) {
-            $data = 'IE';
-        }
+            if (preg_match($ie, $browsers)) {
+                $data = 'IE';
+            }
 
-        //grab information
-        $ip_addr    = $_SERVER['REMOTE_ADDR'];
-        $brows      = $data;
-        $visit      = 1;
+            //grab information
+            $ip_addr    = $_SERVER['REMOTE_ADDR'];
+            $brows      = $data;
+            $visit      = 1;
 
-        $hari_ini   = date('Y-m-d');        
+            $hari_ini   = date('Y-m-d');        
 
-        $range      = DB::table('visitors')
-                            ->where('ip_address', $ip_addr)
-                            ->where('dates', '>=' ,$hari_ini )->get();
-                      
-        if (count($range)) {
-            
-           //jika ditemukan ip yang sama dari hari yang lalu, data dilarang masuk 
-            
-        }
-        else{
-            
-            //jika tidak ditemukan berarti ip client sudah ada di database untuk hari ini, data bisa masuk
-            $insert = new Visitor();
-            $insert->ip_address = $ip_addr;
-            $insert->browser    = $brows;
-            $insert->counter    = $visit;
-            $insert->dates      = $hari_ini;
-            $insert->save();
-        }
+            $range      = DB::table('visitors')
+                                ->where('ip_address', $ip_addr)
+                                ->where('dates', '>=' ,$hari_ini )->get();
+                          
+            if (count($range)) {
+                
+               //jika ditemukan ip yang sama dari hari yang lalu, data dilarang masuk 
+                
+            }
+            else{
+                
+                //jika tidak ditemukan berarti ip client sudah ada di database untuk hari ini, data bisa masuk
+                $insert = new Visitor();
+                $insert->ip_address = $ip_addr;
+                $insert->browser    = $brows;
+                $insert->counter    = $visit;
+                $insert->dates      = $hari_ini;
+                $insert->save();
+            }
 
         //------------------------------//
+
         
-        $title      = "Read Comic " .$comic_title;
+        $title      = "Bukufi : Read Comic " .$comic_title;
         $shows2     = Comic_chapter::where('comic_title' ,$comic_title)->where('comic_chapter' ,$comic_chapter)->paginate(1);
 
         $shows      = Comic_chapter::where('comic_title', '=' ,$comic_title)->distinct()->get(['comic_title', 'chapter_title', 'comic_chapter']);
@@ -374,11 +371,12 @@ class IndexController extends Controller
 
         //------------------------------//
         
+        $title          = "Bukufi : Comic Status";
         $status         = Comic::where('comic_status', $status)->paginate(15);
         $genres         = DB::table('comic_genres')->limit(10)->orderBy('comic_genre', 'asc')->get();
 
         $comic_statuses = DB::table('comic_status')->get();
 
-        return view('Front-end/Single/comic_by_status', compact('status', 'genres', 'comic_statuses'));
+        return view('Front-end/Single/comic_by_status', compact('status', 'genres', 'comic_statuses', 'title'));
     }
 }

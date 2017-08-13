@@ -8,46 +8,49 @@
 /* 			STYLE FOR BUKUFI				*/
 /* ======================================== */
 
+@import general-setting
 /* MEDIA QUERY */
-/* MEDIA QUERY */
-
 /* Small devices (tablets, 768px and up) */
 @media (min-width: 768px)
 	.container 
 		//for top navbar
-		.top-navbar
-			height: 55px
+		.navbar-fixed-top
 			background-color: transparent
 			border-style: hidden
+			transition: 0.5s
 
-			.container-fluid
-				+padding-left(0)
-				+padding-right(0)
-
+			.container
 				.navbar-brand
-					+padding-top(30px)
-
-				.navbar-collapse
 					+padding-top(15px)
 
+					img
+						height: 50px
+						position: absolute
+						top: 0
+						width: initial
+
+				.navbar-collapse
+					+padding-top(0)
+
 					.navbar-right
-						+padding-top(15px)
+						+padding-top(10px)
+						+margin-right(0)
+
+						li:nth-child(1)
+							a
+								+padding-right(0)
+
+						li:nth-child(2)
+							a
+								+padding-right(0)
+								+padding-left(15px)
 
 					.navbar-nav > li > a
 						+padding-bottom(0)
 						+padding-top(0)
 
 				.login-dropdown
-					box-shadow: none
-
-					.btn
-						border-style: hidden
-
-				li
-					+padding-top(0)
-
-					a
-						+padding-right(0)
+					+border-radius(0)
 
 		//for main navbar
 		.main-navbar
@@ -111,6 +114,7 @@
 			+border-radius(0)
 			+padding-left(0)
 			+padding-right(0)
+			+margin-top(15px)
 
 			.col-md-12
 				+padding-left(0)
@@ -133,6 +137,7 @@
 
 		.col-lg-3
 			+padding-right(0)
+			+margin-top(15px)
 			
 			.panel-heading
 				display: flow-root
@@ -237,42 +242,116 @@
 	.panel-alphabet
 		height: 35px
 
+	/* FOR BOOK DETAIL */
+	.book_detail
+		.left
+			#description, #author, #publisher, #release
+				#book_desc, #book_author, #book_publisher, #book_release
+					+margin-bottom(5px)
+					font-weight: bold
+					color: #ae2b26
+
+			#author, #publisher, #release
+				+margin-top(10px)
+
+		a
+			background: #ddd
+			&:hover
+				background: #ddd
+
+			.right
+				border-left: 1px solid #ddd
+
+				.col-md-4
+					+padding-left(15px !important)
+
+					.thumbnail
+						padding: 0
+						+margin-bottom(0)
+						+border-radius(0)
+
+						img
+							width: 100%
+
+				#outer-content
+					#title
+						#book_title
+							+margin-bottom(5px)
+							font-weight: bold
+							color: #ae2b26
+
+					.btn
+						+border-radius(0)
+						border: 2px solid #ddd
+						font-weight: bold
+
+	/* END FOR BOOK DETAIL */
+
 @media (min-width: 768px) and (orientation : portrait)
 	.container
 		//for top navbar
-		.top-navbar
-			height: 55px
-			background-color: transparent
-			border-style: hidden
+		.navbar-fixed-top
+			.container
+				.navbar-brand
+					img
+						height: 50px
+						position: absolute
+						top: 2px
+						width: initial
+
+		//for main navbar
+		.main-navbar
+			background-color: $navbar-color
+			+margin-bottom(10px)
+			+margin-top(55px)
 
 			.container-fluid
 				+padding-left(0)
 				+padding-right(0)
+				
+				#navbar-menu
+					+padding-left(0)
+					+padding-right(0)
 
-				.navbar-brand
-					+padding-top(30px)
+					.col-md-7
+						+padding-left(0)
+						font-weight: bold
 
-				.navbar-collapse
-					+padding-top(15px)
+						.actived
+							background-color: $navbar-color-hover
+							color: white
+							height: 40px
 
-					.navbar-right
-						+padding-top(15px)
+						.dropdown
+							.dropdown-menu
+								background-color: $navbar-color-hover
+								+border-radius(0)
+								
+								li
+									a
+										&:hover
+											background-color: $list-hover-blue
 
-					.navbar-nav > li > a
-						+padding-bottom(0)
-						+padding-top(0)
+						a
+							color: white
+							height: 40px
+							+padding-top(10px)
 
-				.login-dropdown
-					box-shadow: none
+							&:hover
+								color: white !important
+								background-color: $navbar-color-hover 
 
-					.btn
-						border-style: hidden
+					.col-md-5
+						.navbar-form
+							+margin-top(5px)
+							+margin-bottom(5px)
 
-				li
-					+padding-top(5px)
-
-					a
-						+padding-right(0)
+						.navbar-right, #searchinput
+							width: 100%
+							
+							.col-md-12
+								+padding-right(0)
+								+padding-left(0)
 
 	.main-content
 		//search
@@ -295,29 +374,313 @@
 						+padding-right(0)
 						+padding-left(15px)
 
+		//carousel
+		#myCarousel, .item, img
+			height: 300px
+
+			img
+				object-fit: cover
+
+		#myCarousel
+			.carousel-indicators
+				bottom: -5px
+
+			.carousel-control
+				width: 7%
+
+		.col-md-9
+
+			//carousel item
+			#carouselItems, #carouselItems2, #carouselItems3
+				img
+					max-width: 100%
+					width: 100%
+				
+				a 
+					-webkit-transition: all 150ms ease
+					-moz-transition: all 150ms ease
+					-ms-transition: all 150ms ease
+					-o-transition: all 150ms ease
+					transition: all 150ms ease
+                    
+					&:hover
+						-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)" /* IE 8 */
+						filter: alpha(opacity=50) /* IE7 */
+						opacity: 0.6
+						text-decoration: none
+
+				.active, .carousel-inner
+					height: 100%
+
+				/* Container */
+				.container-fluid 
+					background: #FFFFFF
+					margin: 40px auto 10px
+					padding: 20px 40px 0
+					max-width: 960px
+					box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+
+				.page-header
+					background: #f9f9f9
+					margin: -30px -40px 40px
+					padding: 20px 40px
+					border-top: 4px solid #ccc
+					color: #999
+					text-transform: uppercase
+                    
+					h3
+						line-height: 0.88rem
+						color: #000
+
+				.caption h4
+					font-size: 1rem
+					color: #444
+
+					p
+						font-size: 0.75rem
+						color: #999
+                        
+						.btn.btn-mini
+							font-size: 0.63rem
+
+				/* Carousel Control */
+				.control-box
+					text-align: right
+					width: 100%
+					+padding-right(15px)
+					+padding-left(15px)
+
+					.carousel-control
+						background: #666
+						border: 0px
+						border-radius: 0px
+						display: inline-block
+						font-size: 34px
+						font-weight: 200
+						line-height: 18px
+						opacity: 0.5
+						padding: 4px 10px
+						position: static
+						height: 30px
+						width: 35px
+			//new books
+			.new-books
+				.thumbnail
+					padding: 0
+					+border-radius(0)
+
+					img
+						height: 140px
+						object-fit: initial
+
+			//trending-books
+			.trending-books
+				#carouselItems
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+
+						img
+							height: 140px
+							object-fit: initial
+
+			//trending-comics
+			.trending-comics
+				#carouselItems2
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+
+						img
+							height: 140px
+							object-fit: initial
+
+			//sales
+			.sales
+				#carouselItems3
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+
+						img
+							height: 140px
+							object-fit: initial
+
+	/*# FOOTER #*/
+	.navbar-static-bottom
+		.footer-about-us ,.footer-more, .footer-subscribe
+			+padding-left(0)
+
+		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-right(0)
+			border: 1px solid #ddd
+
+			.footer-titles
+				padding: 10px 15px
+
+			ul.list-group
+				+margin-top(0)
+				+padding-left(10px)
+				+padding-right(10px)
+
+				li
+					list-style-type: none
+
+		.footer-ways-to-read, .footer-subscribe, .footer-more, .footer-about-us
+			height: 145px
+			+margin-bottom(0)
+
+		.footer-about-us, .footer-ways-to-read, .footer-more
+			border-right-style: hidden
+
+		.footer-about-us
+			+margin-bottom(10px)
+			background-color: $navbar-color
+
+			.footer-titles
+				color: white
+
+			.list-group
+				.list-group-item
+					background-color: $navbar-color
+					color: white
+
+				a
+					li
+						&:hover
+							transition: all 0.5s
+							-webkit-transition: all 0.5s
+							color: blue
+
+		.footer-more
+			+margin-bottom(10px)
+			background-color: $navbar-color
+
+			.footer-titles
+				color: white
+
+			.list-group
+				.list-group-item
+					background-color: $navbar-color
+					color: white
+
+				a
+					li
+						&:hover
+							transition: all 0.5s
+							-webkit-transition: all 0.5s
+							color: blue
+
+		.footer-subscribe
+			padding: 10px 15px
+			+margin-bottom(10px)
+			background-color: $navbar-color
+
+			h4, h5, a
+				color: white
+
+			a
+				&:hover
+					color: blue
+
 	.genre-select
 		.panel-body
 			+padding-top(0)
-			
-/* @media (min-width: 768px) and (orientation : portrait)
-	.navbar-static-bottom 
-		.footer-ways-to-read
-			border-right-style: solid !important
 
-		.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
-			height: 175px !important
-			+margin-bottom(0)
 
-	.panel-heading			
-		height: 45px
-		
+	/* FOR BOOK DETAIL */
+	.book_detail
+		.left
+			#description, #author, #publisher, #release
+				#book_desc, #book_author, #book_publisher, #book_release
+					+margin-bottom(5px)
+					font-weight: bold
+					color: #ae2b26
 
-		.visible-sm
-			+padding-top(5px)
-			+padding-bottom(5px)
-			+padding-left(0)
-			+padding-right(0)
+			#author, #publisher, #release
+				+margin-top(10px)
 
-			.col-sm-6
-				+padding-left(0)
-				+padding-right(0) */
+		a
+			background: #ddd
+			&:hover
+				background: #ddd
+
+			.right
+				border-left: 1px solid #ddd
+
+				.col-md-4
+					+padding-left(15px !important)
+
+					.thumbnail
+						padding: 0
+						+margin-bottom(0)
+						+border-radius(0)
+
+						img
+							width: 100%
+							height: 100%
+
+				#outer-content
+					#title
+						#book_title
+							+margin-bottom(5px)
+							font-weight: bold
+							color: #ae2b26
+
+					.btn
+						+border-radius(0)
+						border: 2px solid #ddd
+						font-weight: bold
+	/* END FOR BOOK DETAIL */
+
+	/* READ BOOK / EPUB */
+	.readbook
+		#main
+			width: 100%
+			height: 100%
+
+			#area
+				width: 100%
+				height: 685px
+				margin: 10px auto
+
+			.calibre_8, .calibre_7
+				width: 100%
+				height: 100%
+
+			#area iframe
+				border: none
+
+			#prev
+				left: 40px
+
+			#next
+				right: 40px
+
+			#loader
+				position: absolute
+				top: 33%
+				left: 30%
+
+			#toc
+				float: right
+
+			.arrow
+				position: absolute
+				top: 50%
+				+margin-top(-32px)
+				font-size: 64px
+				color: #E2E2E2
+				font-family: arial, sans-serif
+				font-weight: bold
+				cursor: pointer
+				-webkit-user-select: none
+				-moz-user-select: none
+				user-select: none
+
+				&:hover
+					color: #777
+
+				&:active
+					color: #000
+	/* READ BOOK / EPUB */

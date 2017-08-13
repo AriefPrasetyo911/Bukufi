@@ -21,7 +21,7 @@ class ComicChapterController extends Controller
      */
     public function index()
     {
-        $title      = "Comic Chapter";
+        $title      = "Bukufi : Comic Chapter";
         $chapter   = Comic_chapter::distinct()->get(['comic_title', 'comic_chapter', 'chapter_title']);
 
         return view('Back-end.Comic-chapter.comic-chapter', compact('title', 'chapter'));
@@ -30,7 +30,7 @@ class ComicChapterController extends Controller
     public function addChapter($id)
     {
         $comics    = Comic::find($id);
-        $title     = "Add Comic Chapter";
+        $title     = "Bukufi : Add Comic Chapter";
 
         return view('Back-end.Comic-chapter.comic-chapter-add', compact('comics', 'title'));
     }

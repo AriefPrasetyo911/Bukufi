@@ -22,7 +22,7 @@ class ComicController extends Controller
      */
     public function index()
     {
-        $title      = "Comic List";
+        $title      = "Bukufi : Comic List";
         $comics     = Comic::all();
 
         return view('Back-end.Comic.comic-list', compact('title', 'comics'));
@@ -35,7 +35,7 @@ class ComicController extends Controller
      */
     public function create()
     {
-        $title      = "Add New Comic";
+        $title      = "Bukufi : Add New Comic";
         $genres     = Comic_genre::all();
         $status     = DB::table('comic_status')->get();
 
@@ -104,7 +104,7 @@ class ComicController extends Controller
      */
     public function edit($id)
     {
-        $title  = "Edit Comic";
+        $title  = "Bukufi : Edit Comic";
         $item   = Comic::find($id);
 
         return view('Back-end.Comic.comic-edit', compact('title', 'item'));

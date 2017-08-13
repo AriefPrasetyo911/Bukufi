@@ -93,8 +93,10 @@ class UserBookmarkComic extends Controller
      */
     public function show($id)
     {
+        $title      = "Bukufi : User Bookmark";
         $bookmarks  = Comic_bookmark::where('user_id', $id)->get();
-        return view('Back-end/User/bookmark/user-bookmark-comic', compact('bookmarks'));
+
+        return view('Back-end/User/bookmark/user-bookmark-comic', compact('bookmarks', 'title'));
     }
 
     /**
@@ -192,10 +194,11 @@ class UserBookmarkComic extends Controller
 
         //------------------------------//
         
+        $title          = "Bukufi : User Bookmark List";
         $user_bookmarks = Comic_bookmark::select('comic_title', 'comic_chapter', 'chapter_title', 'created_at')->where('user_id', $id)->distinct()->paginate(10);
 
         $genres = DB::table('comic_genres')->limit(20)->orderBy('comic_genre', 'asc')->get();
 
-        return view('Back-end/User/bookmark/show-user-bookmark', compact('user_bookmarks', 'genres'));
+        return view('Back-end/User/bookmark/show-user-bookmark', compact('user_bookmarks', 'genres', 'title'));
     }
 }

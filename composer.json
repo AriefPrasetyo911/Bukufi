@@ -11,7 +11,8 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "nesbot/carbon": "^1.22",
-        "yajra/laravel-datatables-oracle": "^7.5"
+        "yajra/laravel-datatables-oracle": "^7.5",
+        "justinrainbow/epub": "master-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

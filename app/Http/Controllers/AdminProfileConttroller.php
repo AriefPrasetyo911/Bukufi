@@ -17,7 +17,7 @@ class AdminProfileConttroller extends Controller
      */
     public function index($id)
     {
-        $title  = "Admin Profile";
+        $title  = "Bukufi : Administrator Profile";
         $admins = DB::table('admins')->where('id', $id)->get();
 
         return view('Back-end.Administrator.admin-profile', compact('title', 'admins'));
@@ -63,7 +63,7 @@ class AdminProfileConttroller extends Controller
      */
     public function edit($id)
     {
-        $title      = "Edit Administrator Profile";
+        $title      = "Bukufi : Edit Administrator Profile";
         $item       = Admin::find($id);
 
         return view('Back-end.Administrator.edit-admin-profile', compact('title', 'item'));

@@ -9,40 +9,47 @@
 /* ======================================== */
 
 @import general-setting
-/* MEDIA QUERY */
+
+/* ANIMATED X */
+.navbar-toggle.x .icon-bar:nth-of-type(2) 
+	-webkit-transform: rotate(45deg)
+	-ms-transform: rotate(45deg)
+	transform: rotate(45deg)
+	-webkit-transform-origin: 10% 10%
+	-ms-transform-origin: 10% 10%
+	transform-origin: 10% 10%
+
+.navbar-toggle.x .icon-bar:nth-of-type(3)
+	opacity: 0
+	filter: alpha(opacity=0)
+
+.navbar-toggle.x .icon-bar:nth-of-type(4) 
+	-webkit-transform: rotate(-45deg)
+	-ms-transform: rotate(-45deg)
+	transform: rotate(-45deg)
+	-webkit-transform-origin: 10% 90%
+	-ms-transform-origin: 10% 90%
+	transform-origin: 10% 90%
+
+/* ANIMATED X COLLAPSED */
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(2)
+	-webkit-transform: rotate(0)
+	-ms-transform: rotate(0)
+	transform: rotate(0)
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(3)
+	opacity: 1
+	filter: alpha(opacity=100)
+
+.navbar-toggle.x.collapsed .icon-bar:nth-of-type(4)
+	-webkit-transform: rotate(0)
+	-ms-transform: rotate(0)
+	transform: rotate(0)
+
+/* END ANIMATED X */
+
 /*general smartphone*/
 @media (max-device-width : 767px)
-	.main-content
-		+margin-top(5px)
-		+padding-left(5px)
-		+padding-right(5px)
-
-		//search
-		.search
-			.visible-xs
-				.col-xs-6:nth-child(1)
-					+padding-left(0)
-
-				.col-xs-6:nth-child(2)
-					+padding-right(0)
-
-				.media
-					+padding-left(0)
-					+padding-right(0)
-
-				.comic-image
-					width: 100%
-					height: 100%
-
-				.search-content
-					+padding-top(15px)
-					+padding-right(0)
-					+padding-left(0 !important)
-
-		.col-sm-3
-			.col-xs-6
-				+padding-left(0)
-
 	.container
 		+padding-right(0)
 		+padding-left(0)
@@ -57,6 +64,14 @@
 			.navbar-brand
 				+margin-left(15px)
 				font-weight: bold
+				color: white
+
+			.navbar-toggle
+				background-color: transparent
+				border-style: none
+
+				.icon-bar
+					background-color: white
 
 		.nav
 			margin: 0
@@ -68,6 +83,7 @@
 					+padding-right(12px)
 					+padding-left(12px)
 					+padding-bottom(5px)
+					color: white
 
 				.logined
 					+padding-top(0)
@@ -97,7 +113,7 @@
 
 		.main-navbar
 			+margin-bottom(0 !important)
-			background-color: #404040
+			background-color: #0cbda4
 
 			.container-fluid, .navbar-collapse
 				+padding-left(0)
@@ -166,6 +182,344 @@
 					+padding-right(0)
 					+padding-left(0)
 
+	.main-content
+		+margin-top(5px)
+		+padding-left(5px)
+		+padding-right(5px)
+
+		//search
+		.search
+			.visible-xs
+				.col-xs-6:nth-child(1)
+					+padding-left(0)
+
+				.col-xs-6:nth-child(2)
+					+padding-right(0)
+
+				.media
+					+padding-left(0)
+					+padding-right(0)
+
+				.comic-image
+					width: 100%
+					height: 100%
+
+				.search-content
+					+padding-top(15px)
+					+padding-right(0)
+					+padding-left(0 !important)
+
+		//carousel
+		#myCarousel, .carousel-inner, .item, img
+			height: 200px
+
+			img
+				object-fit: cover
+
+		#myCarousel
+			.carousel-indicators
+				bottom: -5px
+
+			.carousel-control
+				width: 7%
+
+		.col-sm-9
+			//carousel item
+			#carouselItems, #carouselItems2, #carouselItems3
+				img
+					max-width: 100%
+				
+				a 
+					-webkit-transition: all 150ms ease
+					-moz-transition: all 150ms ease
+					-ms-transition: all 150ms ease
+					-o-transition: all 150ms ease
+					transition: all 150ms ease
+                    
+					&:hover
+						-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)" /* IE 8 */
+						filter: alpha(opacity=50) /* IE7 */
+						opacity: 0.6
+						text-decoration: none
+
+				.active, .carousel-inner
+					height: 100%
+
+				/* Container */
+				.container-fluid 
+					background: #FFFFFF
+					margin: 40px auto 10px
+					padding: 20px 40px 0
+					max-width: 960px
+					box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+
+				.page-header
+					background: #f9f9f9
+					margin: -30px -40px 40px
+					padding: 20px 40px
+					border-top: 4px solid #ccc
+					color: #999
+					text-transform: uppercase
+                    
+					h3
+						line-height: 0.88rem
+						color: #000
+
+				.caption h4
+					font-size: 1rem
+					color: #444
+
+					p
+						font-size: 0.75rem
+						color: #999
+                        
+						.btn.btn-mini
+							font-size: 0.63rem
+
+				/* Carousel Control */
+				.control-box
+					text-align: right
+					width: 100%
+					+padding-right(0)
+					+padding-left(0)
+
+					.carousel-control
+						background: #666
+						border: 0px
+						border-radius: 0px
+						display: inline-block
+						font-size: 34px
+						font-weight: 200
+						line-height: 18px
+						opacity: 0.5
+						padding: 0
+						position: static
+						height: 25px
+						width: 30px
+
+			//new books
+			.new-books
+				.col-xs-3:nth-child(1)
+					+padding-left(0)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(2)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(3)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(4)
+					+padding-left(5px)
+					+padding-right(0)
+
+				.col-xs-3:nth-child(5)
+					+padding-left(0)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(6)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(7)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(8)
+					+padding-left(5px)
+					+padding-right(0)
+
+				.thumbnail
+					padding: 0
+					+border-radius(0)
+					+margin-bottom(10px)
+
+					img
+						height: 120px
+						object-fit: initial
+
+			//trending-books
+			.trending-books
+				+margin-top(10px)
+
+				.left 
+					+padding-left(0)
+					+padding-right(0)
+
+				#carouselItems, .trending-comics, .sales
+					.col-xs-3:nth-child(1)
+						+padding-left(0)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(2)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(3)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(4)
+						+padding-left(5px)
+						+padding-right(0)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						+margin-bottom(10px)
+
+						img
+							height: 120px
+							object-fit: initial
+
+			//trending-comics
+			.trending-comics
+
+				.left 
+					+padding-left(0)
+					+padding-right(0)
+
+				#carouselItems2
+					.col-xs-3:nth-child(1)
+						+padding-left(0)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(2)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(3)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(4)
+						+padding-left(5px)
+						+padding-right(0)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						+margin-bottom(10px)
+
+						img
+							height: 120px
+							object-fit: initial
+
+			//sales
+			.sales
+				.left 
+					+padding-left(0)
+					+padding-right(0)
+
+				#carouselItems3
+					.col-xs-3:nth-child(1)
+						+padding-left(0)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(2)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(3)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(4)
+						+padding-left(5px)
+						+padding-right(0)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						+margin-bottom(10px)
+
+						img
+							height: 120px
+							object-fit: initial
+
+		.col-sm-3
+			.col-xs-6
+				+padding-left(0)
+
+
+	/*# FOOTER #*/
+	.navbar-static-bottom
+		.footer-about-us ,.footer-more, .footer-subscribe
+			+padding-left(0)
+
+		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
+			+padding-right(0)
+			border: 1px solid #ddd
+
+			.footer-titles
+				padding: 10px 15px
+
+			ul.list-group
+				+margin-top(0)
+				+padding-left(10px)
+				+padding-right(10px)
+
+				li
+					list-style-type: none
+
+		.footer-ways-to-read, .footer-subscribe, .footer-more, .footer-about-us
+			height: 145px
+			+margin-bottom(0)
+
+		.footer-about-us, .footer-ways-to-read, .footer-more
+			border-right-style: hidden
+
+		.footer-about-us
+			+margin-bottom(10px)
+			background-color: $navbar-color
+
+			.footer-titles
+				color: white
+
+			.list-group
+				.list-group-item
+					background-color: $navbar-color
+					color: white
+
+				a
+					li
+						&:hover
+							transition: all 0.5s
+							-webkit-transition: all 0.5s
+							color: blue
+
+		.footer-more
+			+margin-bottom(5px)
+			background-color: $navbar-color
+
+			.footer-titles
+				color: white
+
+			.list-group
+				.list-group-item
+					background-color: $navbar-color
+					color: white
+
+				a
+					li
+						&:hover
+							transition: all 0.5s
+							-webkit-transition: all 0.5s
+							color: blue
+
+		.footer-subscribe
+			padding: 10px 15px
+			+margin-bottom(10px)
+			background-color: $navbar-color
+
+			h4, h5, a
+				color: white
+
+			a
+				&:hover
+					color: blue
 
 	/*pagination*/
 	.pager
@@ -193,6 +547,104 @@
 	.list-filter
 		+padding-top(5px)
 
+	/* FOR BOOK DETAIL */
+	.book_detail
+		.left
+			+margin-top(15px)
+
+			#description, #author, #publisher, #release
+				#book_desc, #book_author, #book_publisher, #book_release
+					+margin-bottom(5px)
+					font-weight: bold
+					color: #ae2b26
+
+			#author, #publisher, #release
+				+margin-top(10px)
+
+		a
+			background: #ddd
+			&:hover
+				background: #ddd
+
+			.right
+				#outer-thumb
+					+padding-left(0)
+
+					.thumbnail
+						padding: 0
+						+margin-bottom(0)
+						+border-radius(0)
+
+						img
+							width: 100%
+
+				#outer-content
+					#title
+						#book_title
+							+margin-bottom(5px)
+							font-weight: bold
+							color: #ae2b26
+
+					.btn
+						+border-radius(0)
+						border: 2px solid #ddd
+						font-weight: bold
+						+padding-right(15px)
+
+	/* END FOR BOOK DETAIL */
+
+	/* READ BOOK / EPUB */
+	.readbook
+		#main
+			width: 100%
+			height: 100%
+
+			#area
+				width: 100%
+				height: 400px
+				margin: 5px auto
+
+			.calibre_8, .calibre_7
+				width: 100%
+				height: 100%
+
+			#area iframe
+				border: none
+
+			#prev
+				left: 40px
+
+			#next
+				right: 40px
+
+			#loader
+				position: absolute
+				top: 33%
+				left: 30%
+
+			#toc
+				float: right
+
+			.arrow
+				position: absolute
+				top: 50%
+				+margin-top(-32px)
+				font-size: 50px
+				color: #E2E2E2
+				font-family: arial, sans-serif
+				font-weight: bold
+				cursor: pointer
+				-webkit-user-select: none
+				-moz-user-select: none
+				user-select: none
+
+				&:hover
+					color: #777
+
+				&:active
+					color: #000
+	/* READ BOOK / EPUB */
+
 @media (max-device-width : 767px) and (orientation : portrait)
 	/*# MAIN CONTENT #*/
 	.img-comic-standard
@@ -200,7 +652,164 @@
 
 
 	.main-content
-		.col-lg-3
+		//carousel
+		#myCarousel, .carousel-inner, .item, img
+			height: 140px
+
+			img
+				object-fit: cover
+
+		#myCarousel
+			.carousel-indicators
+				bottom: -5px
+
+			.carousel-control
+				width: 7%
+
+		.col-sm-9
+			//trending-books
+			.trending-books
+				+margin-top(10px)
+
+				.left 
+					+padding-left(0)
+					+padding-right(0)
+
+				#carouselItems, .trending-comics, .sales
+					.col-xs-3:nth-child(1)
+						+padding-left(0)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(2)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(3)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(4)
+						+padding-left(5px)
+						+padding-right(0)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						+margin-bottom(10px)
+
+						img
+							height: 85px
+							object-fit: initial
+			//new books
+			.new-books
+				.col-xs-3:nth-child(1)
+					+padding-left(0)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(2)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(3)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(4)
+					+padding-left(5px)
+					+padding-right(0)
+
+				.col-xs-3:nth-child(5)
+					+padding-left(0)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(6)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(7)
+					+padding-left(5px)
+					+padding-right(5px)
+
+				.col-xs-3:nth-child(8)
+					+padding-left(5px)
+					+padding-right(0)
+
+				.thumbnail
+					padding: 0
+					+border-radius(0)
+					+margin-bottom(10px)
+
+					img
+						height: 85px
+						object-fit: initial
+
+			//trending-comics
+			.trending-comics
+
+				.left 
+					+padding-left(0)
+					+padding-right(0)
+
+				#carouselItems2
+					.col-xs-3:nth-child(1)
+						+padding-left(0)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(2)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(3)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(4)
+						+padding-left(5px)
+						+padding-right(0)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						+margin-bottom(10px)
+
+						img
+							height: 85px
+							object-fit: initial
+
+			//sales
+			.sales
+				.left 
+					+padding-left(0)
+					+padding-right(0)
+
+				#carouselItems3
+					.col-xs-3:nth-child(1)
+						+padding-left(0)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(2)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(3)
+						+padding-left(5px)
+						+padding-right(5px)
+
+					.col-xs-3:nth-child(4)
+						+padding-left(5px)
+						+padding-right(0)
+
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+						+margin-bottom(10px)
+
+						img
+							height: 85px
+							object-fit: initial
+
+
+		.col-sm-3
 			.panel-body
 				ul.col-sm-6, ul.col-sm-12
 					+padding-left(0)
@@ -235,30 +844,101 @@
 		.sub-1
 			+margin-bottom(5px)
 
-/* @media only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : portrait)
-	
-	.img-comic-standard
-		height: 130px
+	/* FOR BOOK DETAIL */
+	.book_detail
+		.left
+			+margin-top(15px)
 
-	.navbar-static-bottom
-		.footer-subscribe
-			height: 100% !important
+			#description, #author, #publisher, #release
+				#book_desc, #book_author, #book_publisher, #book_release
+					+margin-bottom(5px)
+					font-weight: bold
+					color: #ae2b26
 
-	.navbar-static-bottom-2
-		+margin-top(0) */
+			#author, #publisher, #release
+				+margin-top(10px)
 
-	/*pagination*/
-	/* .pager
-		margin: 0
-		position: initial
+		a
+			background: #ddd
+			&:hover
+				background: #ddd
 
-	.pager li>a, .pager li>span
-		border-radius: 0
-		border-top-left-radius: 5px
-		border-bottom-right-radius: 5px
-		padding: 3px 7px
+			.right
+				#outer-thumb
+					+padding-left(0)
 
-	.my-active span
-		background-color: #cdc9c9 !important
-		color: white !important
-		border-color: #7d7d7d !important */
+					.thumbnail
+						padding: 0
+						+margin-bottom(0)
+						+border-radius(0)
+
+						img
+							width: 100%
+
+				#outer-content
+					+padding-left(0)
+
+					#title
+						#book_title
+							+margin-bottom(5px)
+							font-weight: bold
+							color: #ae2b26
+
+					.btn
+						+border-radius(0)
+						border: 2px solid #ddd
+						font-weight: bold
+						+padding-right(15px)
+	/* END FOR BOOK DETAIL */
+
+	/* READ BOOK / EPUB */
+	.readbook
+		#main
+			width: 100%
+			height: 100%
+
+			#area
+				width: 100%
+				height: 350px
+				margin: 5px auto
+
+			.calibre_8, .calibre_7
+				width: 100%
+				height: 100%
+
+			#area iframe
+				border: none
+
+			#prev
+				left: 40px
+
+			#next
+				right: 40px
+
+			#loader
+				position: absolute
+				top: 33%
+				left: 30%
+
+			#toc
+				float: right
+
+			.arrow
+				position: absolute
+				top: 50%
+				+margin-top(-32px)
+				font-size: 50px
+				color: #E2E2E2
+				font-family: arial, sans-serif
+				font-weight: bold
+				cursor: pointer
+				-webkit-user-select: none
+				-moz-user-select: none
+				user-select: none
+
+				&:hover
+					color: #777
+
+				&:active
+					color: #000
+	/* READ BOOK / EPUB */

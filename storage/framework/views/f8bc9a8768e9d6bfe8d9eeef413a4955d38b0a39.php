@@ -1,4 +1,5 @@
 <?php $__env->startSection('push-style'); ?>
+<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/css/Custom/css/item-carousel.css')); ?>">
 <style>
 	.panel-heading{
 		display: flex;
@@ -110,13 +111,54 @@
 
 <?php $__env->startSection('main-content'); ?>
 <main class="main-content">
-	<!--for large-->
+
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<!-- Carousel
+		================================================== -->
+    	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+	      	<div class="carousel-inner" role="listbox">
+	      		<?php $__currentLoopData = $carousel; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slide): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+				<div class="item active">
+					<img class="first-slide" src="<?php echo e(asset('theme/Slider_carousel/'.$slide->slider_image)); ?>" alt="<?php echo e($slide->slider_image); ?>">
+				</div>
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				<?php $__currentLoopData = $carousel2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $slide): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+				<div class="item">
+					<img class="first-slide" src="<?php echo e(asset('theme/Slider_carousel/'.$slide->slider_image)); ?>" alt="<?php echo e($slide->slider_image); ?>">
+				</div>
+				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+	      	</div>
+	      	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	        	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	        	<span class="sr-only">Previous</span>
+	      	</a>
+	      	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	        	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	        	<span class="sr-only">Next</span>
+	      	</a>
+    	</div><!-- /.carousel -->
+	</div>
+
 	<div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-		<!--started-->
-		<div class="panel panel-default">
+		<!--trenidng books-->
+		<div class="panel panel-default trending-books">
 			<div class="panel-heading latest-update">
-				<div class="col-lg-12 margin-top-5 margin-bottom-5">
-					<h4>Latest Update</h4>
+				<div class="col-lg-12 col-sm-12 hidden-xs">
+					<div class="col-md-6 col-sm-6 col-xs-6 left margin-top-5 margin-bottom-5">
+						<h4>TRENDING BOOKS</h4>
+					</div>
+				</div>
+
+				<div class="col-xs-12 visible-xs">
+					<div class="col-xs-6 left margin-top-5 margin-bottom-5">
+						<h5>TRENDING BOOKS</h5>
+					</div>
 				</div>
 			</div>
 
@@ -124,146 +166,645 @@
 			<div class="panel-body visible-lg hidden-xs">
 				<div class="col-lg-12 no-padding-right visible-lg">
 					
-					<?php $__currentLoopData = $filter; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<div class="col-lg-2 col-md-3 np">
-							<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
-							<div class="col-lg-12">
-								<div>
-									<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="img-comic-standard" alt="comic cover image">
-								</div>
-								<div class="posting-center">
-									<h4>
-									<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-									<?php if(strlen($count) < 17): ?>
-										<?php echo e(str_replace('-', ' ', $comic->comic_title)); ?>
+					<div class="carousel slide" id="carouselItems">
+						<ol class="carousel-indicators">
+							<li data-target="#carouselItems" data-slide-to="0" class="active"></li>
+							<li data-target="#carouselItems" data-slide-to="1"></li>
+							<li data-target="#carouselItems" data-slide-to="2"></li>
+							<li data-target="#carouselItems" data-slide-to="3"></li>
+						</ol>
+				        <div class="carousel-inner">
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_book_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
 
-									<?php else: ?>
-										<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-										<?php echo e(substr($count, 0, 17)."..."); ?>
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_book_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems -->
 
-									<?php endif; ?>
-									</h4>
-								</div>
-							</div>
-							</a>
-							<p class="posting-center"><?php echo e($comic->created_at->diffForHumans()); ?></p>
-						</div>
-					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					
 				</div>
-				<?php echo e($filter->links('pagination.custom')); ?>
-
 			</div>
 			<!--/only for large-->
 
-			<!--only for med-->
+			<!--only for medium-->
 			<div class="panel-body visible-md hidden-xs">
 				<div class="col-md-12 no-padding-right visible-md">
 					
-					<?php $__currentLoopData = $filter_med; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<div class="col-md-3 mp">
-							<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
-							<div class="col-md-12">
-								<figure>
-									<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="img-comic-standard" alt="comic cover image">
-								</figure>
-								<figcaption class="posting-center">
-									<h4>
-									<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-									<?php if(strlen($count) < 17): ?>
-										<?php echo e(str_replace('-', ' ', $comic->comic_title)); ?>
+					<div class="carousel slide" id="carouselItems">
+				        <div class="carousel-inner">
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_book_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
 
-									<?php else: ?>
-										<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-										<?php echo e(substr($count, 0, 17)."..."); ?>
-
-									<?php endif; ?>
-									</h4>
-								</figcaption>
-							</div>
-							</a>
-							<p class="posting-center"><?php echo e($comic->created_at->diffForHumans()); ?></p>
-						</div>
-					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-					
-				</div>
-				<?php echo e($filter_med->links('pagination.custom')); ?>
-
-			</div>
-			<!--/only for med-->
-
-			<!--only for sm-->
-			<div class="panel-body visible-sm">
-				<div class="col-sm-12 visible-sm">
-					
-					<?php $__currentLoopData = $filter_sm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<div class="col-sm-4 padding-bottom-15">
-							<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
-							<div class="col-sm-12">
-								<figure>
-									<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="img-comic-standard" alt="comic cover image">
-								</figure>
-								<figcaption class="posting-center">
-									<h4>
-									<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-									<?php if(strlen($count) < 17): ?>
-										<?php echo e(str_replace('-', ' ', $comic->comic_title)); ?>
-
-									<?php else: ?>
-										<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-										<?php echo e(substr($count, 0, 17)."..."); ?>
-
-									<?php endif; ?>
-									</h4>
-								</figcaption>
-							</div>
-							</a>
-							<p class="posting-center"><?php echo e($comic->created_at->diffForHumans()); ?></p>
-						</div>
-					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_book_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				    </div><!-- /#carouselItems -->
 
 				</div>
-				<?php echo e($filter_sm->links('pagination.custom')); ?>
-
 			</div>
-			<!--/only for sm-->
+			<!--/only for medium-->
+
+			<!--only for small-->
+			<div class="panel-body visible-sm hidden-xs">
+				<div class="col-sm-12 no-padding-right visible-sm">
+					
+					<div class="carousel slide" id="carouselItems">
+				        <div class="carousel-inner">
+
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_book_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_book_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 --> 
+
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				    </div><!-- /#carouselItems -->
+
+				</div>
+			</div>
+			<!--/only for small-->
+
+			<!--only for small-->
+			<div class="panel-body visible-xs">
+				<div class="col-xs-12 no-padding-right visible-xs">
+					
+					<div class="carousel slide" id="carouselItems">
+				        <div class="carousel-inner">
+
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_book_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_book_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $book): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('book').'/'.$book->book_title); ?>">
+			                            	<img src="<?php echo e(asset('/theme/book/book_cover').'/'.$book->book_image); ?>" alt="<?php echo e($book->book_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				    </div><!-- /#carouselItems -->
+
+				</div>
+			</div>
+			<!--/only for small-->
+		</div>
+
+		<!--trending comics-->
+		<div class="panel panel-default trending-comics">
+			<div class="panel-heading latest-update">
+				<div class="col-lg-12 col-sm-12 hidden-xs">
+					<div class="col-md-6 col-xs-6 left margin-top-5 margin-bottom-5">
+						<h4>TRENDING COMICS</h4>
+					</div>
+				</div>
+				<div class="col-xs-12 visible-xs">
+					<div class="col-xs-6 left margin-top-5 margin-bottom-5">
+						<h5>TRENDING COMICS</h5>
+					</div>
+				</div>
+			</div>
+
+			<!--only for large-->
+			<div class="panel-body visible-lg hidden-xs">
+				<div class="col-lg-12 no-padding-right visible-lg">
+					
+					<div class="carousel slide" id="carouselItems2">
+				        <div class="carousel-inner">
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_comics_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_comics_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems2" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems2" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems2 -->
+
+				</div>
+			</div>
+			<!--/only for large-->
+
+			<!--only for medium-->
+			<div class="panel-body visible-md hidden-xs">
+				<div class="col-md-12 no-padding-right visible-md">
+					
+					<div class="carousel slide" id="carouselItems2">
+				        <div class="carousel-inner">
+
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_comics_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_comics_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems2" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems2" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems2 -->
+
+				</div>
+			</div>
+			<!--/only for medium-->
+
+			<!--only for small-->
+			<div class="panel-body visible-sm hidden-xs">
+				<div class="col-lg-sm no-padding-right visible-sm">
+					
+					<div class="carousel slide" id="carouselItems2">
+				        <div class="carousel-inner">
+
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_comics_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_comics_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems2" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems2" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems2 -->
+
+				</div>
+			</div>
+			<!--/only for small-->
+
+			<!--only for xs-small-->
+			<div class="panel-body visible-xs">
+				<div class="col-xs-sm no-padding-right visible-xs">
+					
+					<div class="carousel slide" id="carouselItems2">
+				        <div class="carousel-inner">
+
+				        	<div class="item active">
+				        		<?php $__currentLoopData = $popular_comics_1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+				          		<?php $__currentLoopData = $popular_comics_2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $popular): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			                	<div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="<?php echo e(url('/comic'.'/'.$popular->comic_title)); ?>">
+			                            	<img src="<?php echo e(asset('theme/images_cover').'/'.$popular->comic_image); ?>" alt="<?php echo e($popular->comic_image); ?>">
+			                            </a>
+			                        </div>
+			                    </div>
+			                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	</div><!-- /Slide2 -->
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems2" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems2" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems2 -->
+
+				</div>
+			</div>
+			<!--/only for xs-small-->
+		</div>
+
+		<!--sales-->
+		<div class="panel panel-default sales">
+			<div class="panel-heading latest-update">
+				<div class="col-md-12 col-sm-12 hidden-xs">
+					<div class="col-md-6 col-sm-6 left margin-top-5 margin-bottom-5">
+						<h4>SALES</h4>
+					</div>
+				</div>
+				<div class="col-xs-12 visible-xs">
+					<div class="col-md-6 col-xs-6 left margin-top-5 margin-bottom-5">
+						<h5>SALES</h5>
+					</div>
+				</div>
+			</div>
+
+			<!--only for large-->
+			<div class="panel-body visible-lg hidden-xs">
+				<div class="col-lg-12 no-padding-right visible-lg">
+					
+					<div class="carousel slide" id="carouselItems3">
+				        <div class="carousel-inner">
+				        	<div class="item active">
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+			                	<div class="col-md-3">
+			                       <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems3" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems3" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems3 -->
+
+				</div>
+			</div>
+			<!--/only for large-->
+
+			<!--only for medium-->
+			<div class="panel-body visible-md hidden-xs">
+				<div class="col-md-12 no-padding-right visible-md">
+					
+					<div class="carousel slide" id="carouselItems3">
+				        <div class="carousel-inner">
+				        	<div class="item active">
+			                	<div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+			                	<div class="col-md-3">
+			                       <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-md-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems3" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems3" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems3 -->
+
+				</div>
+			</div>
+			<!--/only for medium-->
+
+			<!--only for small-->
+			<div class="panel-body visible-sm hidden-xs">
+				<div class="col-sm-12 no-padding-right visible-sm">
+					
+					<div class="carousel slide" id="carouselItems3">
+				        <div class="carousel-inner">
+				        	<div class="item active">
+			                	<div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide1 --> 
+
+				          	<div class="item">
+			                	<div class="col-sm-3">
+			                       <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-sm-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems3" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems3" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems3 -->
+
+				</div>
+			</div>
+			<!--/only for small-->
 
 			<!--only for xs-->
-			<div class="panel-body visible-xs home-xs">
-				<div class="col-xs-12 visible-xs">
+			<div class="panel-body visible-xs">
+				<div class="col-xs-12 no-padding-right visible-xs">
 					
-					<?php $__currentLoopData = $filter_sm; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $comic): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-						<div class="col-xs-4 padding-bottom-15">
-							<a href="<?php echo e(url('/comic').'/'.$comic->comic_title); ?>" class="link">
-							<div class="col-xs-12 inside">
-								<figure>
-									<img src="/theme/images_cover/<?php echo e($comic->comic_image); ?>" class="img-comic-standard" alt="comic cover image">
-								</figure>
-								<figcaption class="posting-center">
-									<h5 style="font-weight: bold;">
-									<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-									<?php if(strlen($count) < 8): ?>
-										<?php echo e(str_replace('-', ' ', $comic->comic_title)); ?>
+					<div class="carousel slide" id="carouselItems3">
+				        <div class="carousel-inner">
+				        	<div class="item active">
+			                	<div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide1 --> 
 
-									<?php else: ?>
-										<?php $count = str_replace('-', ' ', $comic->comic_title)?>
-										<?php echo e(substr($count, 0, 8)."..."); ?>
-
-									<?php endif; ?>
-									</h5>
-								</figcaption>
-							</div>
-							</a>
-							<p class="posting-center"><?php echo e($comic->created_at->diffForHumans()); ?></p>
-						</div>
-					<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+				          	<div class="item">
+			                	<div class="col-xs-3">
+			                       <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                   	</div>
+			                    <div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+			                    <div class="col-xs-3">
+			                        <div class="thumbnail">
+			                            <a href="#"><img src="theme/sales/sales.png" alt=""></a>
+			                        </div>
+			                    </div>
+				          	</div><!-- /Slide2 --> 
+				        	
+				        </div>
+				        
+				        <div class="control-box">                            
+				            <a data-slide="prev" href="#carouselItems3" class="carousel-control left">‹</a>
+				            <a data-slide="next" href="#carouselItems3" class="carousel-control right">›</a>
+				        </div><!-- /.control-box -->   
+				                              
+				    </div><!-- /#carouselItems3 -->
 
 				</div>
-				<?php echo e($filter_sm->links('pagination.custom')); ?>
-
 			</div>
 			<!--/only for xs-->
-				
 		</div>
 	</div>
 
@@ -272,22 +813,19 @@
 		<div class="panel panel-default hidden-xs">
 			<div class="panel-heading">
 				<div class="col-md-12 margin-top-5 margin-bottom-5">
-					<div class="pull-left">
-						<h4>Genre</h4>
-					</div>
-					<div class="pull-right">
-						<a href="<?php echo e(route('single.genre')); ?>">More...</a>
-					</div>
+					<h4>QUICK LINKS</h4>
 				</div>
 			</div>
 			<div class="panel-body">
-				<?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				<ul class="col-md-6 col-xs-12 margin-top-5 margin-bottom-5 no-pl">
-					<a href="<?php echo e(url('/comic-genre/'.$genre->comic_genre)); ?>">
-					<p class="no-pl"><?php echo e($genre->comic_genre); ?></p>
-					</a>
+				<ul class="list-group">
+					<a href="#"><li class="list-group-item">Welcome to Bukufi</li></a>
+					<a href="#"><li class="list-group-item">New Releases</li></a>
+					<a href="#"><li class="list-group-item">Top Rated</li></a>
+					<a href="#"><li class="list-group-item">Free Books</li></a>
+					<a href="#"><li class="list-group-item">Free Comics</li></a>
+					<a href="#"><li class="list-group-item">Follow us on Facebook</li></a>
+					<a href="#"><li class="list-group-item">Follow us on Twitter</li></a>
 				</ul>
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</div>
 		</div>
 
@@ -295,66 +833,28 @@
 		<div class="panel panel-default hidden-xs">
 			<div class="panel-heading">
 				<div class="col-md-12 margin-top-5 margin-bottom-5">
-					<h4>Comic Status</h4>
+					<h4>Best Sellers</h4>
 				</div>
 			</div>
 			<div class="panel-body">
-				<?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				<ul class="col-md-12 margin-top-5 margin-bottom-5 no-pl">
-					<a href="<?php echo e(url('/comic/status/'.$stat->comic_status)); ?>">
-					<p class="no-pl"><?php echo e($stat->comic_status); ?></p>
-					</a>
+				<ul class="list-group">
+					<li class="list-group-item">1. Saga #223</li>
+					<li class="list-group-item">2. Secret Empire</li>
+					<li class="list-group-item">3. Detective Comics</li>
+					<li class="list-group-item">4. The Flash</li>
+					<li class="list-group-item">5. Action Comics</li>
+					<li class="list-group-item">6. Injustice 2</li>
+					<li class="list-group-item">7. All Star Batman</li>
+					<li class="list-group-item">8. Wonder Women</li>
+					<li class="list-group-item">9. X-Men</li>
+					<li class="list-group-item">10. Teen Titan</li>
 				</ul>
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			</div>
 		</div>
 
 		<!--====================================-->
-
-		<!--for xs -->
-		<div class="panel panel-default visible-xs">
-			<div class="panel-heading">
-				<div class="col-xs-12 margin-top-5 margin-bottom-5" style="padding-right: 0 !important; padding-left: 0 !important;">
-					<div class="pull-left">
-						<h4>Genre</h4>
-					</div>
-					<div class="pull-right margin-top-5">
-						<a href="<?php echo e(route('single.genre')); ?>">More...</a>
-					</div>
-				</div>
-			</div>
-			<div class="panel-body">
-				<?php $__currentLoopData = $genres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $genre): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				<ul class="col-xs-6 col-xs-12 margin-top-5 margin-bottom-5 sidebar">
-					<a href="<?php echo e(url('/comic-genre/'.$genre->comic_genre)); ?>">
-					<p class="no-pl"><?php echo e($genre->comic_genre); ?></p>
-					</a>
-				</ul>
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-			</div>
-		</div>
-
-		<!--for xs -->
-		<div class="panel panel-default visible-xs">
-			<div class="panel-heading">
-				<div class="col-xs-12 margin-top-5 margin-bottom-5" style="padding-right: 0 !important; padding-left: 0 !important;">
-					<h4>Comic Status</h4>
-				</div>
-			</div>
-			<div class="panel-body">
-				<?php $__currentLoopData = $status; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $stat): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-				<ul class="col-xs-6 col-xs-12 margin-top-5 margin-bottom-5 sidebar">
-					<a href="<?php echo e(url('/comic/status/'.$stat->comic_status)); ?>">
-					<p class="no-pl"><?php echo e($stat->comic_status); ?></p>
-					</a>
-				</ul>
-				<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-			</div>
-		</div>
 	</div>
 
-	
-	
 </main>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('Front-end/Master-layout/master-home', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

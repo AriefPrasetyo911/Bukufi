@@ -11,9 +11,9 @@
 //import 
 @import mixins
 @import general-setting
+@import large-dekstop 
 @import tab-responsive
 @import smartphone-responsive
-
 
 .nav, .list-group, .col-md-2, .social-media
 	a
@@ -41,350 +41,9 @@
 	+padding-right(0)
 	+padding-left(0)
 
-.fb
-	+padding-left(10px !important)
-	+padding-right(10px !important)
-
-//FOR LARGE DEKSTOP
-@media (min-width: 1200px)
-	/*# START FROM CONTAINER MASTER-HOME#*/
-	.container
-		.navbar-default
-			+border-radius(0)
-			+margin-bottom(0)
-
-		//for top navbar
-		.top-navbar
-			height: 70px
-			background-color: transparent
-			border-style: hidden
-
-			.container-fluid
-				+padding-left(0)
-				+padding-right(0)
-
-				.navbar-brand
-					+padding-top(30px)
-
-				.navbar-collapse
-					+padding-top(15px)
-
-					.navbar-right
-						+padding-top(15px)
-
-					.navbar-nav > li > a
-						+padding-bottom(0)
-						+padding-top(0)
-
-		//for main navbar
-		.main-navbar
-			background-color: $navbar-color
-			+margin-bottom(10px)
-
-			.container-fluid
-				+padding-left(0)
-				+padding-right(0)
-				
-				#navbar-menu
-					+padding-left(0)
-					+padding-right(0)
-
-					.col-md-7
-						+padding-left(0)
-						font-weight: bold
-
-						.actived
-							background-color: $navbar-color-hover
-							color: white
-							height: 40px
-
-						.dropdown
-							.dropdown-menu
-								background-color: $navbar-color-hover
-								+border-radius(0)
-								
-								li
-									a
-										&:hover
-											background-color: $list-hover-blue
-
-						a
-							color: white
-							height: 40px
-							+padding-top(10px)
-
-							&:hover
-								color: white !important
-								background-color: $navbar-color-hover 
-
-					.col-md-5
-						.navbar-form
-							+margin-top(5px)
-							+margin-bottom(5px)
-
-						.navbar-right, #searchinput
-							width: 100%
-							
-							.col-md-12
-								+padding-right(0)
-								+padding-left(0)
-
-		.genre-select
-			.comic-image
-				height: 200px
-
-	/*# MAIN CONTENT #*/
-	.main-content
-		+padding-left(0)
-		+padding-right(0)
-
-		.col-lg-9
-			+border-radius(0)
-			+padding-left(0)
-			+padding-right(0)
-
-			.col-lg-12
-				+padding-left(0)
-				+padding-right(0)
-
-				.media
-					+padding-left(0)
-					+padding-right(5px)
-
-					.comic-image
-						object-fit: cover
-						width: 100%
-
-				.contents
-					+padding-left(5px)
-					+padding-right(0)
-
-				.np
-					height: 265px
-
-		.col-lg-3
-			+padding-right(0)
-			
-			.panel-heading
-				display: flow-root
-
-			.col-md-12
-				+padding-left(0)
-				+padding-right(0)
-				
-				.media
-					+padding-left(0)
-					+padding-right(0)
-
-					.media-object
-						height: 85px
-						width: 100%
-
-				.teks
-					+padding-left(10px)
-					+padding-right(0)
-
-					.comic-title
-						font-weight: bold
-						+margin-bottom(10px)
-
-		.search
-			.comic-image
-				width: 100%
-				height: 170px
-
-			.search-content
-				+padding-top(0)
-
-	/*# FOOTER #*/
-	.navbar-static-bottom
-		
-		.footer-about-us ,.footer-more, .footer-ways-to-read, .footer-subscribe
-			+padding-left(0)
-
-		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
-			+padding-right(0)
-			border: 1px solid #ddd
-
-			.footer-titles
-				padding: 10px 15px
-
-			ul.list-group
-				+margin-top(0)
-				+padding-left(10px)
-				+padding-right(10px)
-
-				li
-					list-style-type: none
-
-		.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
-			height: 145px
-			+margin-bottom(0)
-
-		.footer-about-us, .footer-ways-to-read
-			border-right-style: hidden
-
-		.footer-subscribe
-			p
-				+padding-left(15px)
-				+padding-right(15px)
-				+padding-bottom(5px)
-
-			.subscribe
-				+padding-right(15px)
-				+padding-left(15px)
-				+padding-bottom(5px)
-
-				.col-md-8
-					+padding-left(0)
-					+padding-right(0)
-
-	.navbar-static-bottom-2, .col-md-6
-		display: inline-block
-		+padding-right(0)
-		+padding-left(0)
-		+margin-bottom(0)
-
-		.pull-left , .social-media
-			display: inline-block
-
-	/*# END FROM CONTAINER MASTER-HOME#*/
-
-	/*# NEW COMICS #*/
-	.new-comics
-		display: block
-
-		.panel-default
-			+margin-top(10px)
-
-			.panel-heading
-				+padding-left(15px)
-				+padding-right(15px)
-				background-color: transparent
-
-				#add-all-to-cart
-					+padding-right(15px)
-
-				a
-					color: black
-
-					&:hover
-						color: $a-hover-color
-						text-decoration: none
-						
-
-			.panel-body
-				.col-md-2
-					+padding-left(3px)
-					+padding-right(3px)
-
-					.thumbnail
-						padding: 0
-						+border-radius(0)
-						height: 410px
-						+margin-bottom(0)
-						border-style: hidden
-
-						img
-							height: 285px
-							width: 100%
-
-					.caption
-						+padding-left(0)
-						+padding-right(0)
-
-						.text-center
-							font-weight: bold
-
-						p
-							+padding-top(5px)
-							+padding-bottom(0)
-
-						.btn-add-to-cart
-							width: 80%
-
-						.btn, .dropdown-menu
-							+border-radius(0)
-
-						.dropdown-menu
-							padding: 0
-							border-style: hidden
-
-							a
-								+border-radius(0)
-								color: black
-
-								&:hover
-									background-color: $list-hover-blue
-									color: white
-
-	.panel-language
-		border-style: hidden
-
-		.panel-body
-			padding: 0
-	/*# END NEW COMICS #*/
-
-	/* FOR ADMIN PANEL BACK END*/
-	.form-horizontal
-		.box-footer
-			+padding-right(30px)
-			+padding-left(30px)
-
-	.add
-		+padding-right(0)
-		+padding-left(0)
-
-	.modal-title
-		text-align: center
-
-	.form-horizontal .control-label
-		text-align: left !important
-
-	.btn-block + .btn-block
-		+margin-bottom(5px)
-
-	.box-header
-		.add
-			+padding-right(0)
-			+padding-left(0)
-
-	a.btn
-		+margin-bottom(5px)
-
-	.content-header
-		display: list-item
-
-	.col-md-8
-		+padding-left(0)
-
-	/* END FOR ADMIN PANEL BACK END*/
-
-	/*FOR USER PANEL*/
-	.login-dropdown
-		box-shadow: none
-
-		.user-login-dropdown
-			.dropdown-toggle 
-				padding: 5px
-				border-style: hidden
-				top: -5px
-				font-weight: bold
-				right: 0
-				text-align: left
-
-				&:hover
-					background-color: #ddd
-			li
-				+padding-right(5px)
-				+padding-left(5px)
-
-			.btn-default, a
-				padding: 5px
-				border-style: hidden
-				text-align: left
-				+margin-bottom(0)
-	/*END FOR USER PANEL*/
+//panel heading
+.latest-update
+	display: flex
 
 //FOR NORMAL DEKSTOP / DEKSTOP
 @media (min-width: 992px)
@@ -395,23 +54,36 @@
 			+margin-bottom(0)
 
 		//for top navbar
-		.top-navbar
-			height: 70px
+		.navbar-fixed-top
 			background-color: transparent
 			border-style: hidden
+			transition: 0.5s
 
-			.container-fluid
-				+padding-left(0)
-				+padding-right(0)
-
+			.container
 				.navbar-brand
-					+padding-top(30px)
-
-				.navbar-collapse
 					+padding-top(15px)
 
+					img
+						height: 50px
+						position: absolute
+						top: 2px
+						width: initial
+
+				.navbar-collapse
+					+padding-top(0)
+
 					.navbar-right
-						+padding-top(15px)
+						+padding-top(10px)
+						+margin-right(0)
+
+						li:nth-child(1)
+							a
+								+padding-right(0)
+
+						li:nth-child(2)
+							a
+								+padding-right(0)
+								+padding-left(15px)
 
 					.navbar-nav > li > a
 						+padding-bottom(0)
@@ -421,6 +93,7 @@
 		.main-navbar
 			background-color: $navbar-color
 			+margin-bottom(10px)
+			+margin-top(55px)
 
 			.container-fluid
 				+padding-left(0)
@@ -489,6 +162,20 @@
 		+padding-left(0)
 		+padding-right(0)
 
+		//carousel
+		#myCarousel, .carousel-inner, .item
+			height: 300px
+
+			img
+				object-fit: cover
+
+		#myCarousel
+			.carousel-indicators
+				bottom: -5px
+
+			.carousel-control
+				width: 7%
+
 		.col-lg-9
 			+border-radius(0)
 			+padding-left(0)
@@ -510,6 +197,120 @@
 					+padding-left(5px)
 					+padding-right(0)
 
+			//carousel item
+			#carouselItems, #carouselItems2, #carouselItems3
+				img
+					max-width: 100%
+				
+				a 
+					-webkit-transition: all 150ms ease
+					-moz-transition: all 150ms ease
+					-ms-transition: all 150ms ease
+					-o-transition: all 150ms ease
+					transition: all 150ms ease
+                    
+					&:hover
+						-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)" /* IE 8 */
+						filter: alpha(opacity=50) /* IE7 */
+						opacity: 0.6
+						text-decoration: none
+
+				.active, .carousel-inner
+					height: 100%
+
+				/* Container */
+				.container-fluid 
+					background: #FFFFFF
+					margin: 40px auto 10px
+					padding: 20px 40px 0
+					max-width: 960px
+					box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+
+				.page-header
+					background: #f9f9f9
+					margin: -30px -40px 40px
+					padding: 20px 40px
+					border-top: 4px solid #ccc
+					color: #999
+					text-transform: uppercase
+                    
+					h3
+						line-height: 0.88rem
+						color: #000
+
+				.caption h4
+					color: #444
+
+					p
+						font-size: 0.75rem
+						color: #999
+                        
+						.btn.btn-mini
+							font-size: 0.63rem
+
+				/* Carousel Control */
+				.control-box
+					text-align: right
+					width: 100%
+					+padding-right(15px)
+					+padding-left(15px)
+
+					.carousel-control
+						background: #666
+						border: 0px
+						border-radius: 0px
+						display: inline-block
+						font-size: 34px
+						font-weight: 200
+						line-height: 18px
+						opacity: 0.5
+						padding: 4px 10px
+						position: static
+						height: 30px
+						width: 35px
+
+
+			//trending-books
+			.trending-books
+				#carouselItems
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+
+						img
+							height: 215px
+							object-fit: initial
+			.new-books
+				.thumbnail
+					padding: 0
+					+border-radius(0)
+
+					img
+						height: 215px
+						object-fit: initial
+
+			//trending-comics
+			.trending-comics
+				#carouselItems2
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+
+						img
+							height: 215px
+							object-fit: initial
+
+			//sales
+			.sales
+				#carouselItems3
+					.thumbnail
+						padding: 0
+						+border-radius(0)
+
+						img
+							height: 215px
+							object-fit: initial
+				
 		.col-lg-3
 			+padding-right(0)
 			
@@ -542,8 +343,7 @@
 
 	/*# FOOTER #*/
 	.navbar-static-bottom
-		
-		.footer-about-us ,.footer-more, .footer-ways-to-read, .footer-subscribe
+		.footer-about-us ,.footer-more, .footer-subscribe
 			+padding-left(0)
 
 		.footer-about-us, .footer-more, .footer-ways-to-read, .footer-subscribe
@@ -561,36 +361,62 @@
 				li
 					list-style-type: none
 
-		.footer-ways-to-read, .footer-subscribe, .footer-ways-to-read, .footer-about-us
+		.footer-ways-to-read, .footer-subscribe, .footer-more, .footer-about-us
 			height: 145px
 			+margin-bottom(0)
 
-		.footer-about-us, .footer-ways-to-read
+		.footer-about-us, .footer-ways-to-read, .footer-more
 			border-right-style: hidden
 
+		.footer-about-us
+			+margin-bottom(10px)
+			background-color: $navbar-color
+
+			.footer-titles
+				color: white
+
+			.list-group
+				.list-group-item
+					background-color: $navbar-color
+					color: white
+
+				a
+					li
+						&:hover
+							transition: all 0.5s
+							-webkit-transition: all 0.5s
+							color: blue
+
+		.footer-more
+			+margin-bottom(10px)
+			background-color: $navbar-color
+
+			.footer-titles
+				color: white
+
+			.list-group
+				.list-group-item
+					background-color: $navbar-color
+					color: white
+
+				a
+					li
+						&:hover
+							transition: all 0.5s
+							-webkit-transition: all 0.5s
+							color: blue
+
 		.footer-subscribe
-			p
-				+padding-left(15px)
-				+padding-right(15px)
-				+padding-bottom(5px)
+			padding: 10px 15px
+			+margin-bottom(10px)
+			background-color: $navbar-color
 
-			.subscribe
-				+padding-right(15px)
-				+padding-left(15px)
-				+padding-bottom(5px)
+			h4, h5, a
+				color: white
 
-				.col-md-8
-					+padding-left(0)
-					+padding-right(0)
-
-	.navbar-static-bottom-2, .col-md-6
-		display: inline-block
-		+padding-right(0)
-		+padding-left(0)
-		+margin-bottom(0)
-
-		.pull-left , .social-media
-			display: inline-block
+			a
+				&:hover
+					color: blue
 
 	/*# END FROM CONTAINER MASTER-HOME#*/
 
@@ -729,3 +555,108 @@
 				text-align: left
 				+margin-bottom(0)
 	/*END FOR USER PANEL*/
+
+
+
+	/* FOR BOOK DETAIL */
+	.book_detail
+		.left
+			#description, #author, #publisher, #release
+				#book_desc, #book_author, #book_publisher, #book_release
+					+margin-bottom(5px)
+					font-weight: bold
+					color: #ae2b26
+
+			#author, #publisher, #release
+				+margin-top(10px)
+
+		a
+			background: #ddd
+			&:hover
+				background: #ddd
+
+			.right
+				border-left: 1px solid #ddd
+
+				#outer-thumb
+					+padding-left(0)
+
+					.thumbnail
+						padding: 0
+						+margin-bottom(0)
+						+border-radius(0)
+
+						img
+							width: 100%
+
+				#outer-content
+					#title
+						#book_title
+							+margin-bottom(5px)
+							font-weight: bold
+							color: #ae2b26
+
+					.btn
+						+border-radius(0)
+						border: 2px solid #ddd
+						font-weight: bold
+	/* END FOR BOOK DETAIL */
+
+	/* READ BOOK / EPUB */
+	.readbook
+		#main
+			width: 100%
+			height: 100%
+
+			#area
+				width: 100%
+				height: 520px
+				margin: 10px auto
+
+			#area iframe
+				border: none
+
+				html
+					body
+						.calibre1
+							.calibre_8, .calibre_7
+								width: 100%
+								height: 100%
+
+								img
+									width: 100%
+									height: 514px
+
+			#prev
+				left: 40px
+
+			#next
+				right: 40px
+
+			#loader
+				position: absolute
+				top: 45%
+				left: 45%
+
+			#toc
+				float: right
+
+			.arrow
+				position: absolute
+				top: 50%
+				+margin-top(-32px)
+				font-size: 64px
+				color: #E2E2E2
+				font-family: arial, sans-serif
+				font-weight: bold
+				cursor: pointer
+				-webkit-user-select: none
+				-moz-user-select: none
+				user-select: none
+
+				&:hover
+					color: #777
+
+				&:active
+					color: #000
+	/* READ BOOK / EPUB */

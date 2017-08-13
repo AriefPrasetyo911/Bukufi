@@ -124,6 +124,7 @@
                 <li class="<?php echo e(Request::segment(2) == 'dashboard' ? 'active' : ''); ?>"><a href="<?php echo e(route('admin.dashboard')); ?>"><i class="fa fa-angle-double-right"></i> Dashboard</a></li>
               </ul>
             </li>
+            <!--=============================-->
             <li class="treeview <?php echo e(Request::segment(2) == 'list' ? 'active' : ''); ?>">
               <a href="#">
                 <i class="fa fa-users"></i>
@@ -136,6 +137,20 @@
                 <li class="<?php echo e(Request::segment(2) == 'list' ? 'active' : ''); ?>"><a href="<?php echo e(route('admin.list')); ?>"><i class="fa fa-angle-double-right"></i> Administrator List</a></li>
               </ul>
             </li>
+            <!--=============================-->
+            <li class="treeview <?php echo e(Request::segment(2) == 'book' ? 'active' : ''); ?>">
+              <a href="#">
+                <i class="fa fa-book" aria-hidden="true"></i>
+                <span>Book</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php echo e(Request::segment(2) == 'book' ? 'active' : ''); ?>"><a href="<?php echo e(route('list.book')); ?>"><i class="fa fa-angle-double-right"></i> Books List</a></li>
+              </ul>
+            </li>
+            <!--=============================-->
             <li class="treeview <?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>">
               <a href="#">
                 <i class="fa fa-newspaper-o" aria-hidden="true"></i>
@@ -148,6 +163,7 @@
                 <li class="<?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>"><a href="<?php echo e(route('comic.list')); ?>"><i class="fa fa-angle-double-right"></i> Comic List</a></li>
               </ul>
             </li>
+            <!--=============================-->
             <li class="treeview <?php echo e(Request::segment(2) == 'comic-chapter' ? 'active' : ''); ?>">
               <a href="#">
                 <i class="fa fa-file-image-o" aria-hidden="true"></i>
@@ -160,6 +176,7 @@
                 <li class="<?php echo e(Request::segment(2) == 'comic-chapter' ? 'active' : ''); ?>"><a href="<?php echo e(route('comic.chapter')); ?>"><i class="fa fa-angle-double-right"></i> Comic Chapter</a></li>
               </ul>
             </li>
+            <!--=============================-->
             <li class="treeview <?php echo e(Request::segment(2) == 'comic-genre' ? 'active' : ''); ?>">
               <a href="#">
                <i class="fa fa-tags" aria-hidden="true"></i>
@@ -170,6 +187,19 @@
               </a>
               <ul class="treeview-menu">
                 <li class="<?php echo e(Request::segment(2) == 'comic-genre' ? 'active' : ''); ?>"><a href="<?php echo e(route('comic.genre')); ?>"><i class="fa fa-angle-double-right"></i> Comic Genre</a></li>
+              </ul>
+            </li>
+            <!--=============================-->
+            <li class="treeview <?php echo e(Request::segment(2) == 'slider' ? 'active' : ''); ?>">
+              <a href="#">
+               <i class="fa fa-slideshare" aria-hidden="true"></i>
+                <span>Slider Carousel</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="<?php echo e(Request::segment(2) == 'slider' ? 'active' : ''); ?>"><a href="<?php echo e(route('slider')); ?>"><i class="fa fa-angle-double-right"></i> Slider Carousel</a></li>
               </ul>
             </li>
           </ul>
@@ -297,7 +327,7 @@
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0
       </div>
-      <strong>Copyright &copy; 2017 <a href="#">Kaigangames.com</a>.</strong> All rights
+      <strong>Copyright &copy; 2017 <a href="#">Bukufi</a>.</strong> All rights
       reserved.
     </footer>
 

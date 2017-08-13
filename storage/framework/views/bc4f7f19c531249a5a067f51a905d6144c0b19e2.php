@@ -29,7 +29,7 @@
 		border-radius: 0;
 	}
 
-	.col-md-2, .col-md-10, .col-md-12{
+	.col-md-2, .col-md-10{
 		padding-left: 0;
 		padding-right: 0;
 	}
@@ -107,7 +107,7 @@
 									<h4 id="comic_title"><?php echo e(str_replace('-', ' ', $comic->comic_title)); ?></h4>
 								</figcaption>
 
-								<div class="col-md-12 col-xs-12">
+								<div class="col-md-12 col-xs-12 panel-body">
 									<div class="col-md-2 col-xs-4">
 										<ul class="list-group">
 											<li class="list-group-item">Author</li>

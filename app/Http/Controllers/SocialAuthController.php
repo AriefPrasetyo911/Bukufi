@@ -26,18 +26,7 @@ class SocialAuthController extends Controller
     //google
     public function getSocialRedirect()
     {
-
-        /*$providerKey = Config::get('services.' . 'google');
-
-        if (empty($providerKey)) {
-
-            return view('pages.status')
-                ->with('error','No such provider');
-
-        }*/
-
         return Socialite::driver('google')->redirect();
-
     }
 
     public function getSocialHandle(SocialAccountService $service)

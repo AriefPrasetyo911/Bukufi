@@ -15,6 +15,7 @@ class CreateComicTable extends Migration
     {
         Schema::create('comics', function(Blueprint $table){
             $table->increments('id');
+            $table->integer('counter')->nullable();
             $table->string('comic_title');
             $table->text('comic_image');
             $table->text('comic_description');
@@ -22,8 +23,8 @@ class CreateComicTable extends Migration
             $table->string('comic_genre');
             $table->integer('comic_release');
             $table->string('comic_status');
-            $table->string('last_chapter')->nullable();    
-            $table->text('last_chapter_title')->nullable();
+            $table->string('last_chapter');
+            $table->string('last_chapter_title');
             $table->date('dates');
             $table->timestamps();
         });

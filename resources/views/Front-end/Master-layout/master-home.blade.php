@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Bukufi</title>
+	<title>{{$title}}</title>
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Bootstrap/bootstrap.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Font-awesome/css/font-awesome.min.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/style.css')}}">
@@ -13,8 +13,12 @@
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/js/Plugins/slick/slick-theme.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/carousel.css')}}">
 	<link rel="stylesheet" type="text/css" href="{{asset('theme/js/Plugins/sweetalert/sweetalert.css')}}">
-	<script src="{{asset('theme/js/Plugins/sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+
 	@yield('push-style')
+	
+	<script src="{{asset('theme/js/Plugins/sweetalert/sweetalert.min.js')}}" type="text/javascript"></script>
+	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/jquery-3.2.1.min.js')}}"></script>
+	
 </head>
 <body>
 	<script>
@@ -39,8 +43,8 @@
 
 	<div class="container">
 		<!-- for top navbar -->
-		<nav class="navbar navbar-default top-navbar hidden-xs">
-			<div class="container-fluid">
+		<nav class="navbar navbar-default navbar-fixed-top top-navbar hidden-xs">
+			<div class="container">
 			    <!-- Brand and toggle get grouped for better mobile display -->
 			    <div class="navbar-header">
 			      <button type="button" class="navbar-toggle collapsed navbar-collapse-top" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -49,82 +53,61 @@
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			      </button>
-			      <a class="navbar-brand" class="navbar-brand" href="{{route('home.index')}}">Bukufi</a>
+		      
+			      <a class="navbar-brand" class="navbar-brand" href="{{route('home.index')}}">
+			      	<img src="{{asset('theme/icons/bukufi.png')}}" alt="Bukufi icon">
+			      </a>
+			      
 			    </div>
 
 			    <!-- Collect the nav links and other content for toggling -->
 			    <div class="panel login-dropdown">
-			    <div class="collapse navbar-collapse panel-body" id="bs-example-navbar-collapse-1">
-			      	<ul class="nav navbar-nav navbar-right">
-				        @if (auth()->guard('user')->user()) 
-				        	<div class="btn-group pull-left user-login-dropdown">
-								<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								{{ auth()->guard('user')->user()->name }} <span class="caret"></span>
-								</button>
-								<ul class="dropdown-menu">
-								<li><a href="{{route('user.dashboard')}}">Go to User Panel</a></li>
-								<li>
-									<a href="{{route('user.logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat"> Sign out</a>
-				                    <form id="logout-form" action="{{route('user.logout')}}" method="POST" style="display: none;">
-				                          {{ csrf_field() }}
-				                    </form>
-								</li>
-								</ul>
-							</div>
-				        @else
-				        	<li>
-				        		<a href="{{url('login/facebook')}}" class="fb">
-				        			<button type="button" class="btn btn-sm btn-primary">
-				        				<i class="fa fa-facebook-official" aria-hidden="true"></i> Login with Facebook
-				        			</button>
-				        		</a>
-				        	</li>
-				        @endif
+				    <div class="collapse navbar-collapse panel-body" id="bs-example-navbar-collapse-1">
+				      	<ul class="nav navbar-nav navbar-right">
+					        @if (auth()->guard('user')->user()) 
+					        	<div class="btn-group pull-left user-login-dropdown">
+									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									{{ auth()->guard('user')->user()->name }} <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu">
+									<li><a href="{{route('user.dashboard')}}">Go to User Panel</a></li>
+									<li>
+										<a href="{{route('user.logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat"> Sign out</a>
+					                    <form id="logout-form" action="{{route('user.logout')}}" method="POST" style="display: none;">
+					                          {{ csrf_field() }}
+					                    </form>
+									</li>
+									</ul>
+								</div>
+					        @else
+					        	<li>
+					        		<a href="{{url('login/facebook')}}" class="fb">
+					        			<button type="button" class="btn btn-sm btn-primary">
+					        				<i class="fa fa-facebook-official" aria-hidden="true"></i> Login with Facebook
+					        			</button>
+					        		</a>
+					        	</li>
 
-				        <li>
-			        		<a href="{{url('/social/redirect/google')}}" class="fb">
-			        			<button type="button" class="btn btn-sm btn-danger">
-			        				<i class="fa fa-google-plus-square" aria-hidden="true"></i> Login with Google +
-			        			</button>
-			        		</a>
-			        	</li>
-
-				        @if(auth()->guard('user')->user())
-				        	<li>
-				        		<a href="{{url('bookmark/user').'/'.auth()->guard('user')->user()->id }}"> 
-				        			<i class="fa fa-bookmark" aria-hidden="true"></i> Bookmark 
-				        		</a>
-				        	</li>
-				        @else
-				        	<li>
-				        		<a href="javascript:void(0)" class="nologin">
-				        			<button type="button" class="btn-default btn btn-sm">
-				        				<i class="fa fa-bookmark" aria-hidden="true"></i> Bookmark
-				        			</button>
-				        		</a>
-				        	</li>
-				        @endif
-						<!-- <li><a href="#"><i class="fa fa-history" aria-hidden="true"></i> Reading History</a></li>  -->
-			      	</ul>
-			      	<!-- <ul class="nav navbar-nav navbar-right">
-			      		<li>
-			      			<a href="{{url('/login/facebook')}}">
-			      				<button type="button" class="btn btn-primary btn-sm"><i class="fa fa-facebook-official" aria-hidden="true"></i> Login with Facebook</button>
-			      			</a>
-			      		</li>
-			      		<li><a href="{{url('bookmark/user')}}">Bookmark <i class="fa fa-bookmark" aria-hidden="true"></i></a></li>
-			      	</ul> -->
-			    </div><!-- /.navbar-collapse -->
+					        	<li>
+					        		<a href="{{url('/social/redirect/google')}}">
+					        			<button type="button" class="btn btn-sm btn-danger">
+					        				<i class="fa fa-google-plus-square" aria-hidden="true"></i> Login with Google +
+					        			</button>
+					        		</a>
+					        	</li>
+					        @endif
+				      	</ul>
+				    </div><!-- /.navbar-collapse -->
 			    </div>
 		  	</div><!-- /.container-fluid -->
 		</nav>
 		<!-- /for top navbar -->
 
 		<!-- for main navbar -->
-		<nav class="nav navbar-default main-navbar">
+		<nav class="nav navbar-default main-navbar" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false" data-target="#navbar-menu">
+					<button type="button" class="navbar-toggle x collapsed" data-toggle="collapse" aria-expanded="false" data-target="#navbar-menu">
 						<span class="sr-only">Toggle Navigation</span>
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
@@ -136,10 +119,10 @@
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<div class="col-xs-12 hidden-md hidden-lg hidden-sm">
 						<ul class="nav navbar-nav">
-	        				<li class="need-divider {{Request::segment(2) == '' ? 'actived':''}}" id="home"><a id="home" class="{{Request::segment(2) == '' ? 'actived':''}}" href="{{route('home.index')}}">HOME <span class="sr-only">(current)</span></a></li>
-	        				<li class="need-divider {{Request::segment(2) == 'list' ? 'actived':''}} " id="comiclist"><a id="comiclist" class="{{Request::segment(2) == 'list' ? 'actived':''}}" href="{{route('latest.comic')}}">COMIC LIST</a></li>
-	        				<!-- <li class="need-divider"><a href="{{route('single.genre')}}">COMIC GENRE</a></li> -->
-	        				<li class="need-divider {{Request::segment(2) == 'comic-author' ? 'actived':''}}" id="comicauthor"><a id="comicauthor" class="{{Request::segment(2) == 'comic-author' ? 'actived':''}}" href="{{route('single.author')}}">COMIC AUTHOR</a></li>
+	        				<li class="{{Request::segment(2) == '' ? 'actived':''}}" id="home"><a id="home" class="{{Request::segment(2) == '' ? 'actived':''}}" href="{{route('home.index')}}">HOME <span class="sr-only">(current)</span></a></li>
+	        				<li class="{{Request::segment(1) == 'books' ? 'actived':''}} " id="books"><a id="books" class="{{Request::segment(1) == 'books' ? 'actived':''}}" href="{{route('books')}}">BOOKS</a></li>
+	        				<li class="{{Request::segment(1) == 'comics' ? 'actived':''}} " id="comiclist"><a id="comiclist" class="{{Request::segment(1) == 'comics' ? 'actived':''}}" href="{{route('latest.comic')}}">COMICS</a></li>
+	        				<li class="{{Request::segment(1) == 'sales' ? 'actived':''}} " id="books"><a id="books" class="{{Request::segment(1) == 'sales' ? 'actived':''}}" href="#">SALES</a></li>
 	        			</ul>
 	        			<form class="navbar-form navbar-right form-horizontal" action="{{route('search.form')}}" method="get">
 							<div class="form-group">
@@ -155,7 +138,10 @@
 
 									<ul class="dropdown-menu">
 										<li>
-											<a href="{{route('user.dashboard')}}" class="btn btn-sm btn-primary btn-block"> Go to User Panel</a>
+											<a href="{{route('user.dashboard')}}" class="btn btn-sm btn-primary btn-block"> User Panel</a>
+										</li>
+										<li>
+											<a href="{{url('bookmark/user').'/'.auth()->guard('user')->user()->id }}" class="btn btn-sm btn-success btn-block"> Bookmark</a>
 										</li>
 										<li>
 											<a href="{{route('user.logout')}}"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-warning btn-flat"> Sign out</a>
@@ -185,23 +171,25 @@
 					        	</li>
 					        @else
 					        	<li>
-					        		<a href="javascript:void(0)" class="nologin logined">
-					        			<button type="button" class="btn-default btn btn-sm btn-block">
-					        				<i class="fa fa-bookmark" aria-hidden="true"></i> Bookmark
+					        		<a href="{{url('/social/redirect/google')}}" class="nologin logined">
+					        			<button type="button" class="btn btn-sm btn-danger btn-block">
+					        				<i class="fa fa-google-plus-square" aria-hidden="true"></i> Login with Google +
 					        			</button>
 					        		</a>
 					        	</li>
 					        @endif
-							<!-- <li><a href="#"><i class="fa fa-history" aria-hidden="true"></i> Reading History</a></li>  -->
 				      	</ul>
-	        			
 					</div>
+
 					<div class="col-md-7 col-sm-7 hidden-xs">
 						<ul class="nav navbar-nav">
-	        				<li class="need-divider {{Request::segment(2) == '' ? 'actived':''}}" id="home"><a id="home" class="{{Request::segment(2) == '' ? 'actived':''}}" href="{{route('home.index')}}"><i class="fa fa-home" aria-hidden="true"></i> <span class="sr-only">(current)</span></a></li>
-	        				<li class="need-divider {{Request::segment(2) == 'list' ? 'actived':''}} " id="comiclist"><a id="comiclist" class="{{Request::segment(2) == 'list' ? 'actived':''}}" href="{{route('latest.comic')}}">COMIC LIST</a></li>
-	        				<!-- <li class="need-divider"><a href="{{route('single.genre')}}">COMIC GENRE</a></li> -->
-	        				<li class="need-divider {{Request::segment(2) == 'comic-author' ? 'actived':''}}" id="comicauthor"><a id="comicauthor" class="{{Request::segment(2) == 'comic-author' ? 'actived':''}}" href="{{route('single.author')}}">COMIC AUTHOR</a></li>
+	        				<li class="{{Request::segment(1) == '' ? 'actived':''}}" id="home"><a id="home" class="{{Request::segment(1) == '' ? 'actived':''}}" href="{{route('home.index')}}"><i class="fa fa-home" aria-hidden="true"></i> <span class="sr-only">(current)</span></a></li>
+	        				<li class="{{Request::segment(1) == 'books' ? 'actived':''}} " id="books"><a id="books" class="{{Request::segment(1) == 'books' ? 'actived':''}}" href="{{route('books')}}">BOOKS</a></li>
+	        				<li class="{{Request::segment(1) == 'comics' ? 'actived':''}} " id="comiclist"><a id="comiclist" class="{{Request::segment(1) == 'comics' ? 'actived':''}}" href="{{route('comics')}}">COMICS</a></li>
+	        				<li class="{{Request::segment(1) == 'sales' ? 'actived':''}} " id="books"><a id="books" class="{{Request::segment(1) == 'sales' ? 'actived':''}}" href="#">SALES</a></li>
+	        				<!-- 
+	        				<li class="need-divider"><a href="{{route('single.genre')}}">COMIC GENRE</a></li>
+	        				<li class="{{Request::segment(2) == 'comic-author' ? 'actived':''}}" id="comicauthor"><a id="comicauthor" class="{{Request::segment(2) == 'comic-author' ? 'actived':''}}" href="{{route('single.author')}}">COMIC AUTHOR</a></li> -->
 	        			</ul>
         			</div>
         			<div class="col-md-5 col-sm-5 hidden-xs">
@@ -222,87 +210,90 @@
 
 		<!-- Static bottom navbar -->
 		<nav class="navbar-static-bottom">
-			<div class="col-md-5 col-sm-6 col-xs-12 footer-about-us">
-				<h4 class="footer-titles">About Us</h4>
+			<div class="col-md-4 col-sm-4 col-xs-12 footer-about-us">
+				<h4 class="footer-titles">ABOUT US</h4>
 				<ul class="list-group">
 					<a href="#">
-						<li class="list-group-item"> OUR STORY </li>
+						<li class="list-group-item"> Contact Us </li>
 					</a>
 					<a href="#">
-						<li class="list-group-item"> CONTACS US </li>
+						<li class="list-group-item"> Careers </li>
 					</a>
 					<a href="#">
-						<li class="list-group-item"> FAQS </li>
+						<li class="list-group-item"> FAQs </li>
 					</a>
 				</ul>
 			</div>
-			<div class="col-md-7 col-sm-6 col-xs-12 footer-subscribe">
-				<h4 class="footer-titles">Subscribe</h4>
-				<p>Stay informed to receive updates on sales and new releases.</p>
-				<form class="form-horizontal" action="#" method="post">
-					<div class="col-md-12 col-xs-12 subscribe">
-						<div class="col-md-8 col-xs-12">
-							<div class="input-group">
-								<input type="email" class="form-control" placeholder="Email Address">
-								<span class="input-group-btn">
-									<button class="btn btn-primary" type="button"><i class="fa fa-caret-right" aria-hidden="true"></i></button>
-								</span>
-							</div><!-- /input-group -->
-						</div>
-						<div class="col-md-4 col-xs-12"></div>
-					</div>
-				</form>
-				<p>By submitting your email address, you are agreeing to our <a href="#"> Privacy Policy</a> and <a href="#"> Terms of Use </a>.</p>
-			</div>
-		</nav>
-		
-		<nav class="navbar navbar-static-bottom-2 col-md-12 col-xs-12">
-			<div class="col-md-6 col-xs-6 pull-left">
-				<p>© 2017 Bukufi. All rights reserved</p>
-			</div>
-			<div class="col-md-6 col-xs-6 pull-right">
-				<div class="social-media pull-right">
+
+			<div class="col-md-4 col-sm-4 col-xs-12 footer-more">
+				<h4 class="footer-titles">MORE</h4>
+				<ul class="list-group">
 					<a href="#">
-						<i class="fa fa-2x fa-twitter-square" aria-hidden="true"></i>
+						<li class="list-group-item"> Submit </li>
 					</a>
 					<a href="#">
-						<i class="fa fa-2x fa-facebook-official" aria-hidden="true"></i>
+						<li class="list-group-item"> Content Owners </li>
 					</a>
 					<a href="#">
-						<i class="fa fa-2x fa-google-plus-square" aria-hidden="true"></i>
-					</a>				
-				</div>
+						<li class="list-group-item"> Advertisers </li>
+					</a>
+				</ul>
 			</div>
-		</nav>
+
+			<div class="col-md-4 col-sm-4 col-xs-12 footer-subscribe">
+				<h4>{{date('Y')}} BUKUFI SDN BHD</h4>
+				<h5>
+					<a href="#">Privacy Policy</a> |
+					<a href="#">Term of Use</a>
+				</h5>
+			</div>
+		</nav>	
+
+		<div id='ScrollToTop'><img alt='Back to top' src='http://2.bp.blogspot.com/-MFhU3vLp5ho/UiaBZeA1McI/AAAAAAAAAQs/MrzW2ljP5mA/s1600/arrow-up_basic_blue.png' title="Back to Top" /></div>	
 	</div>
-
-	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/jquery-3.2.1.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('theme/js/Bootstrap/bootstrap.min.js')}}"></script>
-	<script type="text/javascript" src="{{asset('theme/js/Plugins/jq-sticky-anything.min.js')}}"></script>
-	<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
-	@yield('push-script')
-	<script type="text/javascript">
-		$(document).ready(function() {
-			$('ul.nav li.dropdown').hover(function() {
-			  $(this).find('.dropdown-menu').stop(true, true).delay(500).fadeIn(500);
-			}, function() {
-			  $(this).find('.dropdown-menu').stop(true, true).delay(500).fadeOut(500);
-			}, function(){
-				$(this).addClass('dropdown-hover-color');
-			});
-
-			$('.nologin').on('click', function() {
-				swal("Error!", "You must login first to use this menu", "error");
-			});
-
-			if ($('#comiclist').hasClass('actived')) {
-				$('#home').removeClass('actived');
-			}
-
-			if ($('#comicauthor').hasClass('actived')) {
-				$('#home').removeClass('actived');
-			}
-		})
-	</script>
 </body>
+
+<script type="text/javascript" src="{{asset('theme/js/Bootstrap/bootstrap.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('theme/js/Plugins/jq-sticky-anything.min.js')}}"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.min.js"></script>
+
+@yield('push-script')
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('ul.nav li.dropdown').hover(function() {
+		  $(this).find('.dropdown-menu').stop(true, true).delay(500).fadeIn(500);
+		}, function() {
+		  $(this).find('.dropdown-menu').stop(true, true).delay(500).fadeOut(500);
+		}, function(){
+			$(this).addClass('dropdown-hover-color');
+		});
+
+		$('.nologin').on('click', function() {
+			swal("Error!", "You must login first to use this menu", "error");
+		});
+
+		if ($('#books').hasClass('actived')) {
+			$('#home').removeClass('actived');
+		}
+
+		if ($('#comicauthor').hasClass('actived')) {
+			$('#home').removeClass('actived');
+		}
+
+		$("body").on("contextmenu",function(){
+	       return false;
+	    });
+
+	    //scroll on top function
+		$(function() { $(window).scroll(function() { 
+			if($(this).scrollTop()>100) { 
+				$('#ScrollToTop').fadeIn()
+			} else { 
+				$('#ScrollToTop').fadeOut();}
+			});
+
+		$('#ScrollToTop').click(function(){$('html,body').animate({scrollTop:0},1000);return false})});
+	})
+</script>
 	

@@ -74,6 +74,7 @@ class SearchController extends Controller
 
         //------------------------------//
         
+        $title          = "Bukufi : Search";
         $search_now     = $request->get('search');
         $query          = Comic::where('comic_title', 'LIKE', '%'.$search_now.'%')
                              ->orWhere('comic_author', 'LIKE', '%'.$search_now.'%')

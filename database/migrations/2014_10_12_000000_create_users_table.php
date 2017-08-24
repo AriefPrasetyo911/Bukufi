@@ -17,11 +17,14 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique()->nullable();
-            $table->string('password')->nullable();
+            $table->string('password');
+            $table->enum('membership', ['Paid', 'Free'])->default('Free');  
+            $table->dateTime('subscribe_start')->nullable();
+            $table->dateTime('subscribe_end')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
-    }
+    }    
 
     /**
      * Reverse the migrations.

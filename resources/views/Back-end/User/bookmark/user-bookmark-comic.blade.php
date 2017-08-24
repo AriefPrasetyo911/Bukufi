@@ -152,7 +152,7 @@
                 <li class="{{ Request::segment(2) == 'comic-bookmark' ? 'active' : '' }}"><a href="{{route('user.bookmark.list', auth()->guard('user')->user()->id)}}"><i class="fa fa-angle-double-right"></i> Bookmark List</a></li>
               </ul>
             </li>
-            <li class="treeview {{Request::segment(2) == 'comic' ? 'active' : ''}}">
+            <!-- <li class="treeview {{Request::segment(2) == 'comic' ? 'active' : ''}}">
               <a href="#">
                 <i class="fa fa-history" aria-hidden="true"></i>
                 <span>Reading History</span>
@@ -163,7 +163,7 @@
               <ul class="treeview-menu">
                 <li class="{{ Request::segment(2) == 'comic' ? 'active' : '' }}"><a href="{{route('comic.list')}}"><i class="fa fa-angle-double-right"></i> History List</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </section>
         <!-- /.sidebar -->

@@ -25,24 +25,28 @@ Route::get('/social/redirect/google',
 Route::get('/social/handle/google',     
 	['as' => $s . 'handle',     'uses' => 'SocialAuthController@getSocialHandle']);
 
-//books
-Route::get('book/all', 'BooksController@bookAll')->name('book.all');
-Route::get('books', 'BooksController@index')->name('books');
-Route::get('book/{bookname}', 'BooksController@bookDetail')->name('book.detail');
-Route::get('book/read/{bookname}', 'BooksController@bookRead');
+//error reporting
+Route::post('error-reporting/send-error', 'ErrorReportingController@sendError')->name('send.error');
+Route::post('error-reporting/send-error-book', 'ErrorReportingController@sendErrorBook')->name('send.error.book');
+Route::post('error-reporting/send-error-comic', 'ErrorReportingController@sendErrorComic')->name('send.error.comic');
 
+//books
+Route::get('books/all', 'BooksController@bookAll')->name('book.all');
+Route::get('books', 'BooksController@index')->name('books');
+Route::get('books/{bookname}', 'BooksController@bookDetail')->name('book.detail');
+Route::get('books/read/{bookname}', 'BooksController@bookRead');
 
 //comic status
 Route::get('/comic/status/{status}', 'IndexController@comicstatus');
 
 //comic list
 Route::get('/comics', 'LatestComicController@front_comic')->name('comics');
-Route::get('/comic/list/', 'LatestComicController@index')->name('latest.comic');
+Route::get('/comics/list/', 'LatestComicController@index')->name('latest.comic');
 Route::post('/comic/list/{alph}', 'LatestComicController@search_alph')->name('sort.comic');
 Route::get('/mobile/comic/list/{alph}', 'LatestComicController@search_alph')->name('sort.comic');
 
 //single comic
-Route::get('/comic/{comic_title}', 'IndexController@comic')->name('single.comic');
+Route::get('/comics/{comic_title}', 'IndexController@comic')->name('single.comic');
 Route::get('/show/comic/{comic_title}/{comic_chapter}/', 'IndexController@showComic')->name('shows');
 
 //single genre
@@ -87,7 +91,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin/'], function(){
 	Route::post('book/insert', 'BooksController@insertBook')->name('add.to.db.book');
 	Route::get('book/edit/{id}', 'BooksController@editBook')->name('edit.book');
 	Route::patch('book/{id}', 'BooksController@updateBook')->name('update.book');
-	Route::delete('book/delete/{id}', 'BooksController@deleteBook')->name('delete.book');
+	Route::delete('book/{name}', 'BooksController@deleteBook')->name('delete.book');
 
 	//administrator profile
 	Route::get('profile/id/{id}', 'AdminProfileConttroller@index')->name('admin.profile');
@@ -100,7 +104,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin/'], function(){
 	Route::post('comic/add', 'ComicController@store')->name('comic.submit');	//submit comic add form
 	Route::get('comic/{id}/edit', 'ComicController@edit')->name('comic.edit');	//edit comic
 	Route::patch('comic/{id}', 'ComicController@update')->name('comic.update');	//update comic
-	Route::delete('comic/{id}', 'ComicController@destroy')->name('comic.delete');	//delete comic
+	Route::delete('comic/{id}/{name}', 'ComicController@destroy')->name('comic.delete');	//delete comic
 
 	//comic genre
 	Route::get('comic-genre', 'ComicGenreController@index')->name('comic.genre');
@@ -111,7 +115,7 @@ Route::group(['middleware' => ['admin'], 'prefix' => 'admin/'], function(){
 	Route::get('comic-chapter', 'ComicChapterController@index')->name('comic.chapter');
 	Route::get('comic-chapter/{id}', 'ComicChapterController@addChapter')->name('comic.chapter.form');
 	Route::post('comic/{id}/chapter', 'ComicChapterController@store')->name('add.comic.chapter');
-	Route::delete('comic-chapter/delete/{id}', 'ComicChapterController@destroy');
+	Route::delete('comic-chapter/delete/{comic_nm}/{title}', 'ComicChapterController@destroy');
 
 	//slider carousel
 	Route::get('slider', 'SliderController@index')->name('slider');
@@ -126,6 +130,15 @@ Route::group(['middleware' => ['user']], function(){
 
 	//bookmark
 	Route::get('user/comic-bookmark/{id}', 'UserBookmarkComic@show')->name('user.bookmark.list');
+
+	//paypal
+	Route::get('checkout', 
+				array('as' => 'paypal.paywithpaypal','uses' => 'UserController@payWithPaypal',)); 
+	Route::post('paypal', 
+				array('as' => 'paypal.paypal','uses' => 'UserController@postPaymentWithpaypal',));
+	Route::get('paypal/getstatus', 
+				array('as' => 'payment.status','uses' => 'UserController@getPaymentStatus',));
+
 });
 
 /*Auth::routes();*/

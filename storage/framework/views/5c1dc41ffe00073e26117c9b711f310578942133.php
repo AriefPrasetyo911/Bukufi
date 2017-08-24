@@ -11,7 +11,7 @@
 	<!--plugin-->
 	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/jquery.slick/1.6.0/slick.css"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/js/Plugins/slick/slick-theme.css')); ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/css/Custom/css/carousel.css')); ?>">
+	
 	<link rel="stylesheet" type="text/css" href="<?php echo e(asset('theme/js/Plugins/sweetalert/sweetalert.css')); ?>">
 
 	<?php echo $__env->yieldContent('push-style'); ?>
@@ -63,7 +63,24 @@
 			    <!-- Collect the nav links and other content for toggling -->
 			    <div class="panel login-dropdown">
 				    <div class="collapse navbar-collapse panel-body" id="bs-example-navbar-collapse-1">
-				      	<ul class="nav navbar-nav navbar-right">
+				    	<ul class="nav navbar-nav navbar-right membership">
+				    		<?php if(auth()->guard('user')->user()): ?> 
+					    		<?php if( auth()->guard('user')->user()->membership == 'Paid'): ?>
+					    			<figure id="member">
+										<span class="badge badge-paid">
+											Paid Member
+										</span>
+									</figure>
+					    		<?php else: ?>
+					    			<figure id="member">
+										<span class="badge badge-free">
+											Free Member
+										</span>
+									</figure>
+					    		<?php endif; ?>
+				    		<?php endif; ?>
+				    	</ul>
+				      	<ul class="nav navbar-nav navbar-right user users">
 					        <?php if(auth()->guard('user')->user()): ?> 
 					        	<div class="btn-group pull-left user-login-dropdown">
 									<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -71,6 +88,9 @@
 									</button>
 									<ul class="dropdown-menu">
 									<li><a href="<?php echo e(route('user.dashboard')); ?>">Go to User Panel</a></li>
+									<li>
+										<a href="<?php echo e(url('bookmark/user').'/'.auth()->guard('user')->user()->id); ?>"> Bookmark</a>
+									</li>
 									<li>
 										<a href="<?php echo e(route('user.logout')); ?>"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-default btn-flat"> Sign out</a>
 					                    <form id="logout-form" action="<?php echo e(route('user.logout')); ?>" method="POST" style="display: none;">
@@ -114,16 +134,17 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand hidden-lg hidden-md hidden-sm" class="navbar-brand" href="<?php echo e(route('home.index')); ?>">Bukufi</a>
+					<a class="navbar-brand hidden-lg hidden-md hidden-sm" class="navbar-brand" href="<?php echo e(route('home.index')); ?>">
+						<img src="<?php echo e(asset('theme/icons/bukufi.png')); ?>" alt="Bukufi icon">
+					</a>
 				</div>
 
 				<div class="collapse navbar-collapse" id="navbar-menu">
 					<div class="col-xs-12 hidden-md hidden-lg hidden-sm">
 						<ul class="nav navbar-nav">
-	        				<li class="<?php echo e(Request::segment(2) == '' ? 'actived':''); ?>" id="home"><a id="home" class="<?php echo e(Request::segment(2) == '' ? 'actived':''); ?>" href="<?php echo e(route('home.index')); ?>">HOME <span class="sr-only">(current)</span></a></li>
+	        				<li class="<?php echo e(Request::segment(1) == '' ? 'actived':''); ?>" id="home"><a id="home" class="<?php echo e(Request::segment(1) == '' ? 'actived':''); ?>" href="<?php echo e(route('home.index')); ?>">HOME <span class="sr-only">(current)</span></a></li>
 	        				<li class="<?php echo e(Request::segment(1) == 'books' ? 'actived':''); ?> " id="books"><a id="books" class="<?php echo e(Request::segment(1) == 'books' ? 'actived':''); ?>" href="<?php echo e(route('books')); ?>">BOOKS</a></li>
-	        				<li class="<?php echo e(Request::segment(1) == 'comics' ? 'actived':''); ?> " id="comiclist"><a id="comiclist" class="<?php echo e(Request::segment(1) == 'comics' ? 'actived':''); ?>" href="<?php echo e(route('latest.comic')); ?>">COMICS</a></li>
-	        				<li class="<?php echo e(Request::segment(1) == 'sales' ? 'actived':''); ?> " id="books"><a id="books" class="<?php echo e(Request::segment(1) == 'sales' ? 'actived':''); ?>" href="#">SALES</a></li>
+	        				<li class="<?php echo e(Request::segment(1) == 'comics' ? 'actived':''); ?> " id="comiclist"><a id="comiclist" class="<?php echo e(Request::segment(1) == 'comics' ? 'actived':''); ?>" href="<?php echo e(route('comics')); ?>">COMICS</a></li>
 	        			</ul>
 	        			<form class="navbar-form navbar-right form-horizontal" action="<?php echo e(route('search.form')); ?>" method="get">
 							<div class="form-group">
@@ -139,10 +160,10 @@
 
 									<ul class="dropdown-menu">
 										<li>
-											<a href="<?php echo e(route('user.dashboard')); ?>" class="btn btn-sm btn-primary btn-block"> User Panel</a>
+											<a href="<?php echo e(route('user.dashboard')); ?>" class="btn btn-sm btn-primary btn-block margin-top-5 margin-bottom-5"> User Panel</a>
 										</li>
 										<li>
-											<a href="<?php echo e(url('bookmark/user').'/'.auth()->guard('user')->user()->id); ?>" class="btn btn-sm btn-success btn-block"> Bookmark</a>
+											<a href="<?php echo e(url('bookmark/user').'/'.auth()->guard('user')->user()->id); ?>" class="btn btn-sm btn-success btn-block margin-bottom-5"> Bookmark</a>
 										</li>
 										<li>
 											<a href="<?php echo e(route('user.logout')); ?>"  onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-warning btn-flat"> Sign out</a>
@@ -162,6 +183,18 @@
 					        		</a>
 					        	</li>
 					        <?php endif; ?>
+
+					        <?php if(auth()->guard('user')->user()): ?>
+						        <?php if( auth()->guard('user')->user()->membership == 'Paid'): ?>
+						        	<li class="margin-right-13 margin-left-13" style="padding-bottom: 6px;">
+						        		<button type="button" class="btn btn-default badge-paids btn-block" disabled>Paid Member</button>
+						        	</li>
+					    		<?php else: ?>
+					    			<li class="margin-right-13 margin-left-13" style="padding-bottom: 6px;">
+					    				<button type="button" class="btn btn-default badge-frees btn-block" disabled>Free Member</button>
+					    			</li>
+					    		<?php endif; ?>
+				    		<?php endif; ?>
 
 					        <?php if(auth()->guard('user')->user()): ?>
 					        	<li>
@@ -188,7 +221,6 @@
 	        				<li class="<?php echo e(Request::segment(1) == '' ? 'actived':''); ?>" id="home"><a id="home" class="<?php echo e(Request::segment(1) == '' ? 'actived':''); ?>" href="<?php echo e(route('home.index')); ?>"><i class="fa fa-home" aria-hidden="true"></i> <span class="sr-only">(current)</span></a></li>
 	        				<li class="<?php echo e(Request::segment(1) == 'books' ? 'actived':''); ?> " id="books"><a id="books" class="<?php echo e(Request::segment(1) == 'books' ? 'actived':''); ?>" href="<?php echo e(route('books')); ?>">BOOKS</a></li>
 	        				<li class="<?php echo e(Request::segment(1) == 'comics' ? 'actived':''); ?> " id="comiclist"><a id="comiclist" class="<?php echo e(Request::segment(1) == 'comics' ? 'actived':''); ?>" href="<?php echo e(route('comics')); ?>">COMICS</a></li>
-	        				<li class="<?php echo e(Request::segment(1) == 'sales' ? 'actived':''); ?> " id="books"><a id="books" class="<?php echo e(Request::segment(1) == 'sales' ? 'actived':''); ?>" href="#">SALES</a></li>
 	        				<!-- 
 	        				<li class="need-divider"><a href="<?php echo e(route('single.genre')); ?>">COMIC GENRE</a></li>
 	        				<li class="<?php echo e(Request::segment(2) == 'comic-author' ? 'actived':''); ?>" id="comicauthor"><a id="comicauthor" class="<?php echo e(Request::segment(2) == 'comic-author' ? 'actived':''); ?>" href="<?php echo e(route('single.author')); ?>">COMIC AUTHOR</a></li> -->

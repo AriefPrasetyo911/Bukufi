@@ -79,6 +79,39 @@
 @section('main-content')
 <main class="main-content col-md-12 col-sm-12 col-xs-12">
 	
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+		<!-- Carousel
+		================================================== -->
+    	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+			<!-- Indicators -->
+			<ol class="carousel-indicators">
+				<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				<li data-target="#myCarousel" data-slide-to="1"></li>
+				<li data-target="#myCarousel" data-slide-to="2"></li>
+			</ol>
+	      	<div class="carousel-inner" role="listbox">
+	      		@foreach($carousel as $slide)
+				<div class="item active">
+					<img class="first-slide" src="{{asset('storage/slider_carousel/'.$slide->slider_image)}}" alt="{{$slide->slider_image}}">
+				</div>
+				@endforeach
+				@foreach($carousel2 as $slide)
+				<div class="item">
+					<img class="first-slide" src="{{asset('storage/slider_carousel/'.$slide->slider_image)}}" alt="{{$slide->slider_image}}">
+				</div>
+				@endforeach
+	      	</div>
+	      	<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+	        	<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+	        	<span class="sr-only">Previous</span>
+	      	</a>
+	      	<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+	        	<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+	        	<span class="sr-only">Next</span>
+	      	</a>
+    	</div><!-- /.carousel -->
+	</div>
+
 	<div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
 		<!--  started-->
 		<div class="panel panel-default visible-lg visible-md visible-sm hidden-xs">
@@ -641,19 +674,27 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php $no = 1;?>
-						@foreach($comics as $comic)
-						<tr>
-							<td>{{$no++}}</td>
-							<td>
-								<a href="{{url('/comic').'/'.$comic->comic_title}}" title="{{str_replace('-', ' ', $comic->comic_title)}}">
-									{{str_replace('-', ' ', $comic->comic_title)}}
-								</a>
+						@if(count($comics))
+							<?php $no = 1;?>
+							@foreach($comics as $comic)
+							<tr>
+								<td>{{$no++}}</td>
+								<td>
+									<a href="{{url('/comic').'/'.$comic->comic_title}}" title="{{str_replace('-', ' ', $comic->comic_title)}}">
+										{{str_replace('-', ' ', $comic->comic_title)}}
+									</a>
+									</td>
+								<td>{{str_replace('-', ' ', $comic->comic_author)}}</td>
+								<td>{{$comic->comic_status}}</td>
+							</tr>
+							@endforeach
+						@else
+							<tr>
+								<td colspan="4">
+									<h4 class="text-center">Sorry, no data available to display</h4>
 								</td>
-							<td>{{str_replace('-', ' ', $comic->comic_author)}}</td>
-							<td>{{$comic->comic_status}}</td>
-						</tr>
-						@endforeach
+							</tr>
+						@endif
 					</tbody>
 				</table>
 				{{ $comics->links('pagination.custom') }}
@@ -714,17 +755,25 @@
 						</tr>
 					</thead>
 					<tbody>
-						@foreach($comics as $comic)
-						<tr>
-							<td>
-								<a href="{{url('/comic').'/'.$comic->comic_title}}" title="{{str_replace('-', ' ', $comic->comic_title)}}">
-									{{str_replace('-', ' ', $comic->comic_title)}}
-								</a>
+						@if(count($comics))
+							@foreach($comics as $comic)
+							<tr>
+								<td>
+									<a href="{{url('/comic').'/'.$comic->comic_title}}" title="{{str_replace('-', ' ', $comic->comic_title)}}">
+										{{str_replace('-', ' ', $comic->comic_title)}}
+									</a>
+									</td>
+								<td>{{str_replace('-', ' ', $comic->comic_author)}}</td>
+								<td>{{$comic->comic_status}}</td>
+							</tr>
+							@endforeach
+						@else
+							<tr>
+								<td colspan="4">
+									<h5 class="text-center">Sorry, no data available to display</h5>
 								</td>
-							<td>{{str_replace('-', ' ', $comic->comic_author)}}</td>
-							<td>{{$comic->comic_status}}</td>
-						</tr>
-						@endforeach
+							</tr>
+						@endif
 					</tbody>
 				</table>
 				</div>
@@ -745,11 +794,15 @@
 				</div>
 			</div>
 			<div class="panel-body-15 panel-body">
-				@foreach($genres as $genre)
-				<ul class="col-sm-6">
-					<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
-				</ul>
-				@endforeach
+				@if(count($genres))
+					@foreach($genres as $genre)
+					<ul class="col-sm-6">
+						<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
+					</ul>
+					@endforeach
+				@else
+					<h5 class="text-center text-info">Sorry there is no comic genre yet</h5>
+				@endif
 			</div>
 		</div>
 
@@ -763,11 +816,15 @@
 				</div>
 			</div>
 			<div class="panel-body-15 panel-body">
-				@foreach($genres as $genre)
-				<ul class="col-sm-6">
-					<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
-				</ul>
-				@endforeach
+				@if(count($genres))
+					@foreach($genres as $genre)
+					<ul class="col-sm-6">
+						<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
+					</ul>
+					@endforeach
+				@else
+					<h5 class="text-center text-info">Sorry there is no comic genre yet</h5>
+				@endif
 			</div>
 		</div>
 
@@ -779,13 +836,17 @@
 				</div>
 			</div>
 			<div class="panel-body-15 panel-body">
-				@foreach($comic_statuses as $stat)
-				<ul class="col-md-12 col-sm-12 col-xs-12 margin-bottom-5 no-pl">
-					<a href="{{url('/comic/status/'.$stat->comic_status)}}">
-					<p class="no-pl">{{$stat->comic_status}}</p>
-					</a>
-				</ul>
-				@endforeach
+				@if(count($comic_statuses))
+					@foreach($comic_statuses as $stat)
+					<ul class="col-md-12 col-sm-12 col-xs-12 margin-bottom-5 no-pl">
+						<a href="{{url('/comic/status/'.$stat->comic_status)}}">
+						<p class="no-pl">{{$stat->comic_status}}</p>
+						</a>
+					</ul>
+					@endforeach
+				@else
+					<h5 class="text-center text-info">Sorry there is no comic status yet</h5>
+				@endif
 			</div>
 		</div>
 	</div>

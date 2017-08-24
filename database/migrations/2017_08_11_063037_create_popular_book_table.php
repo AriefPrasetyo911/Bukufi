@@ -29,7 +29,6 @@ class CreatePopularBookTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('popular_books
-');
+        Schema::dropIfExists('popular_books');
     }
 }

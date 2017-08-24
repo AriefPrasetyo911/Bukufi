@@ -101,60 +101,153 @@
 				
 				<div class="col-lg-12 col-md-12 col-sm-12 hidden-xs">
 					@foreach($book_detail as $detail)
-					<div class="col-lg-6 col-md-6 col-sm-6 left">
-						<figure id="description">
-							<h4 id="book_desc">Book Description</h4>
-							<caption>
-								{{strip_tags($detail->book_description)}}
-							</caption>
-						</figure>
-						<figure id="author">
-							<h4 id="book_author">Author</h4>
-							<caption>
-								{{str_replace('-', ' ', $detail->book_author)}}
-							</caption>
-						</figure>
-						<figure id="publisher">
-							<h4 id="book_publisher">Publisher</h4>
-							<caption>
-								{{str_replace('-', ' ', $detail->book_publisher)}}
-							</caption>
-						</figure>
-						<figure id="release">
-							<h4 id="book_release">Year of Release</h4>
-							<caption>
-								{{$detail->book_release}}
-							</caption>
-						</figure>
-					</div>
+						<div class="col-lg-6 col-md-6 col-sm-6 left">
+							<figure id="description">
+								<h4 id="book_desc">Book Description</h4>
+								<caption>
+									{{strip_tags($detail->book_description)}}
+								</caption>
+							</figure>
+							<figure id="author">
+								<h4 id="book_author">Author</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->book_author)}}
+								</caption>
+							</figure>
+							<figure id="publisher">
+								<h4 id="book_publisher">Publisher</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->book_publisher)}}
+								</caption>
+							</figure>
+							<figure id="release">
+								<h4 id="book_release">Year of Release</h4>
+								<caption>
+									{{$detail->book_release}}
+								</caption>
+							</figure>
+							@if($detail->membership == "Paid")
+							<figure id="release">
+								<span class="badge badge-paid">
+									{{$detail->membership}} Member
+								</span>
+							</figure>
+							@else
+								<figure id="release">
+									<span class="badge badge-free">
+										{{$detail->membership}} Member
+									</span>
+								</figure>
+							@endif
+						</div>
 
-					<a href="{{url('book/read').'/'.$detail->book_title}}" id="link">
+						@if (auth()->guard('user')->user())
+
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Paid")
+							<a href="{{url('books/read').'/'.$detail->book_title}}" id="link">
+								<div class="col-lg-6 col-md-6 col-sm-6 right">
+									<div class="col-lg-4 col-md-4 col-sm-5" id="outer-thumb">
+										<div class="thumbnail">
+				                            <img src="{{asset('/storage/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
+				                        </div>
+									</div>
+									<div class="col-lg-8 col-md-8 col-sm-7" id="outer-content">
+										<figure id="title">
+											<h4 id="book_title">{{str_replace('-', ' ', $detail->book_title)}}</h4>
+										</figure>
+										<button class="btn btn-default pull-right" type="button">
+											Read
+										</button>
+									</div>
+								</div>
+							</a>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Free")
+							<a href="{{url('books/read').'/'.$detail->book_title}}" id="link">
+								<div class="col-lg-6 col-md-6 col-sm-6 right">
+									<div class="col-lg-4 col-md-4 col-sm-5" id="outer-thumb">
+										<div class="thumbnail">
+				                            <img src="{{asset('/storage/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
+				                        </div>
+									</div>
+									<div class="col-lg-8 col-md-8 col-sm-7" id="outer-content">
+										<figure id="title">
+											<h4 id="book_title">{{str_replace('-', ' ', $detail->book_title)}}</h4>
+										</figure>
+										<button class="btn btn-default pull-right" type="button">
+											Read
+										</button>
+									</div>
+								</div>
+							</a>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Paid")
+							<div class="col-lg-6 col-md-6 col-sm-6 right">
+								<div class="col-lg-4 col-md-4 col-sm-5" id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
+			                        </div>
+								</div>
+								<div class="col-lg-8 col-md-8 col-sm-7" id="outer-content">
+									<figure id="title">
+										<h4 id="book_title">{{str_replace('-', ' ', $detail->book_title)}}</h4>
+									</figure>
+									<button class="btn btn-default pull-right" type="button" disabled>
+										For Paid Member Only
+									</button>
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Free")
+							<a href="{{url('books/read').'/'.$detail->book_title}}" id="link">
+								<div class="col-lg-6 col-md-6 col-sm-6 right">
+									<div class="col-lg-4 col-md-4 col-sm-5" id="outer-thumb">
+										<div class="thumbnail">
+				                            <img src="{{asset('/storage/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
+				                        </div>
+									</div>
+									<div class="col-lg-8 col-md-8 col-sm-7" id="outer-content">
+										<figure id="title">
+											<h4 id="book_title">{{str_replace('-', ' ', $detail->book_title)}}</h4>
+										</figure>
+										<button class="btn btn-default pull-right" type="button">
+											Read
+										</button>
+									</div>
+								</div>
+							</a>
+							@endif
+
+						@else
 						<div class="col-lg-6 col-md-6 col-sm-6 right">
 							<div class="col-lg-4 col-md-4 col-sm-5" id="outer-thumb">
 								<div class="thumbnail">
-		                            <img src="{{asset('/theme/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
+		                            <img src="{{asset('/storage/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
 		                        </div>
 							</div>
 							<div class="col-lg-8 col-md-8 col-sm-7" id="outer-content">
 								<figure id="title">
 									<h4 id="book_title">{{str_replace('-', ' ', $detail->book_title)}}</h4>
 								</figure>
-								<button class="btn btn-default pull-right" type="button">
-									Read
+								<button class="btn btn-default pull-right margin-top-10" type="button" disabled>
+									You must login to read and have correct membership
 								</button>
 							</div>
 						</div>
-					</a>
+						@endif
 					@endforeach
 				</div>
 
 				<div class="col-xs-12 visible-xs">
 					@foreach($book_detail as $detail)
-					<a href="{{url('book/read').'/'.$detail->book_title}}" id="link">
+					<a href="{{url('books/read').'/'.$detail->book_title}}" id="link">
 						<div class="col-xs-12 right">
 							<div class="col-xs-5" id="outer-thumb">
 								<div class="thumbnail">
-		                            <img src="{{asset('/theme/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
+		                            <img src="{{asset('/storage/book/book_cover').'/'.$detail->book_image}}" alt="{{$detail->book_image}}">
 		                        </div>
 							</div>
 							<div class="col-xs-7" id="outer-content">

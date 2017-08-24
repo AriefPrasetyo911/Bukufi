@@ -124,6 +124,46 @@ h1, h2, h3, h4, h5, h6, p {
   margin-bottom: 15px;
   -webkit-margin-after: 15px; }
 
+.margin-left-13 {
+  margin-left: 13px;
+  -webkit-margin-start: 13px;
+  -moz-margin-start: 13px;
+  -o-margin-start: 13px; }
+
+.margin-right-13 {
+  margin-right: 13px;
+  -webkit-margin-end: 13px;
+  -moz-margin-end: 13px;
+  -o-margin-end: 13px; }
+
+.margin-top-13 {
+  margin-top: 13px;
+  -webkit-margin-before: 13px; }
+
+.margin-bottom-13 {
+  margin-bottom: 13px;
+  -webkit-margin-after: 13px; }
+
+.margin-left-10 {
+  margin-left: 10px;
+  -webkit-margin-start: 10px;
+  -moz-margin-start: 10px;
+  -o-margin-start: 10px; }
+
+.margin-right-10 {
+  margin-right: 10px;
+  -webkit-margin-end: 10px;
+  -moz-margin-end: 10px;
+  -o-margin-end: 10px; }
+
+.margin-top-10 {
+  margin-top: 10px;
+  -webkit-margin-before: 10px; }
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+  -webkit-margin-after: 10px; }
+
 .padding-left-5 {
   padding-left: 5px;
   -webkit-padding-start: 5px;
@@ -290,7 +330,8 @@ input, .input-group {
   bottom: 50px;
   right: 10px;
   cursor: pointer;
-  display: none; }
+  display: none;
+  z-index: 999; }
 
 .col-md-12, .col-lg-12 {
   padding-right: 0;
@@ -301,5 +342,32 @@ input, .input-group {
   -webkit-padding-start: 0;
   -moz-padding-start: 0;
   -o-padding-start: 0; }
+
+.bold {
+  font-weight: bold; }
+
+.badge-paid {
+  background-color: #cfb53b;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0; }
+
+.badge-free {
+  background-color: #3a87ad;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0; }
+
+.badge-paids {
+  background-color: #cfb53b;
+  color: black;
+  font-weight: bold; }
+
+.badge-frees {
+  background-color: #3a87ad;
+  color: black;
+  font-weight: bold; }
 
 /*# sourceMappingURL=general-setting.css.map */

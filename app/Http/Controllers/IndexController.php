@@ -89,7 +89,7 @@ class IndexController extends Controller
         $books2     = DB::table('books')->skip(4)->take(4)->get();
 
         $carousel   = Slider_carousel::orderBy('created_at', 'desc')->limit(1)->get();
-        $carousel2  = Slider_carousel::orderBy('created_at', 'desc')->take(2)->get();
+        $carousel2  = Slider_carousel::orderBy('created_at', 'desc')->skip(1)->take(2)->get();
         
         $popular_book_1         = Popular_book::orderBy('counter', 'desc')->take(4)->get();
         $popular_book_2         = Popular_book::orderBy('counter', 'desc')->skip(4)->take(4)->get();
@@ -168,24 +168,25 @@ class IndexController extends Controller
            
             //first, check comic_title already exist or not
             $check_data_comic     = Popular_comic::where('comic_title', $comic_name)->get();
-            
-
 
             //select image for coresponding comic
-            $select_comic_image   = Comic::where('comic_title', $comic_name)->first();
-            $select_image         = $select_comic_image->comic_image;
+            $select_comic_image   = Comic::where('comic_title', $comic_name)->get();
 
             if (count($check_data_comic)) {
                 //if data found, don't do anything
             }
             else{
 
-                //if data not found, add comic to database
-                $insert = new Popular_comic();
-                $insert->comic_title    = $comic_name;
-                $insert->comic_image    = $select_image;
-                $insert->counter        = $visit;
-                $insert->save();
+                foreach ($select_comic_image as $select) {
+                    $select_image         = $select->comic_image;
+
+                    //if data not found, add comic to database
+                    $insert = new Popular_comic();
+                    $insert->comic_title    = $comic_name;
+                    $insert->comic_image    = $select_image;
+                    $insert->counter        = $visit;
+                    $insert->save();
+                }
             }
         //-------------------------//
         

@@ -29,6 +29,18 @@
     }
   </style>
 
+  <script type="text/javascript">
+    window.setTimeout("waktu()",1000);
+
+    function waktu() {
+        var tanggal = new Date();
+        setTimeout("waktu()",1000);
+        document.getElementById("jam").innerHTML   = tanggal.getHours();
+        document.getElementById("menit").innerHTML = tanggal.getMinutes();
+        document.getElementById("detik").innerHTML = tanggal.getSeconds();
+    }
+  </script>
+
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
@@ -39,7 +51,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
-<body class="hold-transition skin-blue sidebar-mini">
+<body class="hold-transition skin-blue sidebar-mini" onload="waktu()">
   <div class="wrapper">
 
     <header class="main-header">
@@ -58,10 +70,39 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
           <span class="sr-only">Toggle navigation</span>
         </a>
+
         <!-- Navbar Right Menu -->
         <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <!-- User Account: style can be found in dropdown.less -->
+            <li id="jam-digital">
+              <a href="#">
+                <span>Current Time :</span>
+                <span><?php echo e($date_now); ?> : </span>
+                <span id="hours"><span id="jam"></span></span>
+                <span id="minute"><span id="menit"></span></span>
+                <span id="second"><span id="detik"></span></span>
+              </a>
+            </li> 
+            <?php if($membership_type == "Paid"): ?>
+            <li>
+              <a href="javascript:void(0)" title="<?php echo e($membership_type); ?>" target="_blank">
+                <span class="badge badge-paid"> <?php echo e($membership_type); ?> Membership</span>
+              </a>
+            </li>
+            <?php else: ?>
+            <li>
+              <a href="javascript:void(0)" title="<?php echo e($membership_type); ?>" target="_blank">
+                <span class="badge badge-paid"> <?php echo e($membership_type); ?> Membership</span>
+              </a>
+            </li>
+            <?php endif; ?>
+            <li>
+              <a href="<?php echo e(route('home.index')); ?>" title="Read Comic" target="_blank">
+                <i class="fa fa-book" aria-hidden="true"></i> 
+                <span class="hidden-xs"> Read Comic </span>
+              </a>
+            </li>
             <li class="dropdown user user-menu">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <img src="<?php echo e(asset('theme/icons/avatar04.png')); ?>" class="user-image" alt="User Image">
@@ -94,12 +135,6 @@
                 </li>
               </ul>
             </li>
-            <li>
-              <a href="<?php echo e(route('home.index')); ?>" title="Read Comic" target="_blank">
-                <i class="fa fa-book" aria-hidden="true"></i> 
-                <span class="hidden-xs"> Read Comic </span>
-              </a>
-            </li>
           </ul>
         </div>
 
@@ -117,8 +152,6 @@
             </div>
             <div class="pull-left info">
               <p><?php echo e(auth()->guard('user')->user()->name); ?></p>
-              <p>Created <?php echo e(auth()->guard('user')->user()->created_at->diffForHumans()); ?></p>
-              
             </div>
           </div>
 
@@ -148,7 +181,7 @@
                 <li class="<?php echo e(Request::segment(2) == 'comic-bookmark' ? 'active' : ''); ?>"><a href="<?php echo e(route('user.bookmark.list', auth()->guard('user')->user()->id)); ?>"><i class="fa fa-angle-double-right"></i> Bookmark List</a></li>
               </ul>
             </li>
-            <li class="treeview <?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>">
+            <!-- <li class="treeview <?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>">
               <a href="#">
                 <i class="fa fa-history" aria-hidden="true"></i>
                 <span>Reading History</span>
@@ -159,7 +192,7 @@
               <ul class="treeview-menu">
                 <li class="<?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>"><a href="<?php echo e(route('comic.list')); ?>"><i class="fa fa-angle-double-right"></i> History List</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -200,21 +233,240 @@
                     <!-- /.box-header -->
                     <div class="box-body no-padding">
                       <div class="row">
-                        <div class="col-md-9 col-sm-8">
+                        <div class="col-md-12 col-xs-12">
                           <div class="pad">
                             <h4>Welcome to User Dashboard</h4>
                           </div>
                         </div>
                       </div>
                       <!-- /.row -->
-                    </div>
-                    <!-- /.box-body -->
+                    </div><!-- /.box-body -->
+                  </div><!-- /.box -->
+                </div><!-- /.col -->
+
+                <div class="col-md-12 col-xs-12">
+
+                  <?php if($message = Session::get('success')): ?>
+                  <div class="custom-alerts alert alert-success fade in">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></button>
+                      <?php echo $message; ?>
+
                   </div>
-                  <!-- /.box -->
+                  <?php Session::forget('success');?>
+                  <?php endif; ?>
+
+                  <?php if($message = Session::get('error')): ?>
+                  <div class="custom-alerts alert alert-danger fade in">
+                      <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times"></i></button>
+                      <?php echo $message; ?>
+
+                  </div>
+                  <?php Session::forget('error');?>
+                  <?php endif; ?>
+
+                  <div class="box box-info">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Membership Plan</h3>
+
+                      <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                        </button>
+                        <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                      </div>
+                    </div>
+                    <div class="box-body">
+                      
+                      <?php $__currentLoopData = $check_membership; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $member): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php if($member->membership == 'Free'): ?>
+                          <div class="col-md-4 col-xs-12">
+                            <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                  <h3 class="panel-title">
+                                    FREE
+                                  </h3>
+                              </div>
+                              <div class="panel-body">
+                                  <div class="the-price">
+                                      <h1>$0</h1>
+                                  </div>
+                                  <table class="table">
+                                      <tr>
+                                          <td>
+                                              Have Advertisements
+                                          </td>
+                                      </tr>
+                                      <tr class="active">
+                                          <td>
+                                              Limited Access for Books and Comic
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div class="panel-footer">
+                                  Now you are in this plan
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-xs-12">
+                            <div class="panel panel-success">
+                              <div class="cnrflash">
+                                <div class="cnrflash-inner">
+                                    <span class="cnrflash-label">MOST
+                                    <br>
+                                    POPULAR</span>
+                                </div>
+                              </div>
+                              <div class="panel-heading">
+                                  <h3 class="panel-title">
+                                    PAID
+                                  </h3>
+                              </div>
+                              <div class="panel-body">
+                                  <div class="the-price">
+                                      <h1>$10</h1>
+                                  </div>
+                                  <table class="table">
+                                      <tr>
+                                          <td>
+                                              No Advertisements
+                                          </td>
+                                      </tr>
+                                      <tr class="active">
+                                          <td>
+                                              Unlimited Access for Books and Comic
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div class="panel-footer" style="display: flex;">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                  
+                                  <form class="form-horizontal" method="POST" id="payment-form" role="form" action="<?php echo URL::route('paypal.paypal'); ?>" >
+                                    <?php echo e(csrf_field()); ?>
+
+                                    
+                                    <!--for user id-->
+                                    <input id="name" type="hidden" class="form-control" name="user_id" value="<?php echo e(auth()->guard('user')->user()->id); ?>">
+
+                                    <!--for name-->
+                                    <input id="name" type="hidden" class="form-control" name="name" value="Bukufi Paid Membership Subcription">
+
+                                    <!--for quantity-->
+                                    <input id="quantity" type="hidden" class="form-control" name="quantity" value="1">
+
+                                    <!--for amount-->
+                                    <input id="amount" type="hidden" class="form-control" name="amount" value="10">
+                                    
+                                    <div class="form-group" style="margin-bottom: 0;">
+                                        <button type="submit" class="btn btn-primary btn-block">
+                                            Pay with Paypal
+                                        </button>
+                                    </div>
+                                  </form>
+
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-xs-12">
+                            <div class="panel">
+                              <div class="panel-heading">
+                                <p class="text-center text-info bold">Information</p>
+                              </div>
+                              <div class="panel-body">
+                                <p class="text-justify">If you get "Http response code 500" after sending payment, dont worry and don't panic, your money still save in your account and not yet transferred to bukufi account. Please repeat the transaction again from start if you want.</p>
+                                <p class="text-justify">If you are in doubt, you can check to your paypal account.</p>
+                                <p class="text-right">Best regards Bukufi</p>
+                              </div>
+                            </div>
+                          </div>
+                        <?php else: ?>
+                          <div class="col-md-4 col-xs-12">
+                            <div class="panel panel-primary">
+                              <div class="panel-heading">
+                                  <h3 class="panel-title">
+                                    FREE
+                                  </h3>
+                              </div>
+                              <div class="panel-body">
+                                  <div class="the-price">
+                                      <h1>$0</h1>
+                                  </div>
+                                  <table class="table">
+                                      <tr>
+                                          <td>
+                                              Have Advertisements
+                                          </td>
+                                      </tr>
+                                      <tr class="active">
+                                          <td>
+                                              Limited Access for Books and Comic
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div class="panel-footer">
+                                  Free membership
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="col-md-4 col-xs-12">
+                            <div class="panel panel-success">
+                              <div class="cnrflash">
+                                <div class="cnrflash-inner">
+                                    <span class="cnrflash-label">MOST
+                                    <br>
+                                    POPULAR</span>
+                                </div>
+                              </div>
+                              <div class="panel-heading">
+                                  <h3 class="panel-title">
+                                    PAID
+                                  </h3>
+                              </div>
+                              <div class="panel-body">
+                                  <div class="the-price">
+                                      <h1>$10</h1>
+                                  </div>
+                                  <table class="table">
+                                      <tr>
+                                          <td>
+                                              No Advertisements
+                                          </td>
+                                      </tr>
+                                      <tr class="active">
+                                          <td>
+                                              Unlimited Access for Books and Comic
+                                          </td>
+                                      </tr>
+                                  </table>
+                              </div>
+                              <div class="panel-footer panel-success" style="display: flow-root;">
+                                <p class="no-padding-top no-padding-bottom no-margin-bottom">Now you are in this plan</p>
+                                <p class="no-padding-top no-padding-bottom no-margin-bottom">Subscription Left :</p>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0; padding-right: 0;">
+                                  <p class="no-padding-top no-padding-bottom no-margin-bottom">In Days :  <?php echo e($remaining_days); ?> Days</p>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="padding-left: 0; padding-right: 0;">
+                                  <p class="no-padding-top no-padding-bottom no-margin-bottom">In Hours :  <?php echo e($remaining_hours); ?> Hours </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <?php endif; ?>
+                      <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+                    </div>
+                  </div>
                 </div>
-                <!-- /.col -->
+                  
             </div>
             <!-- /.row -->
+
         </section>
         <!-- /.content -->
     </div>
@@ -224,7 +476,7 @@
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0
       </div>
-      <strong>Copyright &copy; 2017 <a href="#">Kaigangames.com</a>.</strong> All rights
+      <strong>Copyright &copy; 2017 <a href="#">Bukufi</a>.</strong> All rights
       reserved.
     </footer>
 

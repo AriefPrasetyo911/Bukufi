@@ -79,12 +79,12 @@
 	      	<div class="carousel-inner" role="listbox">
 				@foreach($carousel as $slide)
 				<div class="item active">
-					<img class="first-slide" src="{{asset('theme/Slider_carousel/'.$slide->slider_image)}}" alt="{{$slide->slider_image}}">
+					<img class="first-slide" src="{{asset('storage/slider_carousel/'.$slide->slider_image)}}" alt="{{$slide->slider_image}}">
 				</div>
 				@endforeach
 				@foreach($carousel2 as $slide)
 				<div class="item">
-					<img class="first-slide" src="{{asset('theme/Slider_carousel/'.$slide->slider_image)}}" alt="{{$slide->slider_image}}">
+					<img class="first-slide" src="{{asset('storage/slider_carousel/'.$slide->slider_image)}}" alt="{{$slide->slider_image}}">
 				</div>
 				@endforeach
 	      	</div>
@@ -241,7 +241,7 @@
 		</div>
 
 		<!--except xs -->
-		<div class="panel panel-default hidden-xs">
+		<!-- <div class="panel panel-default hidden-xs">
 			<div class="panel-heading">
 				<div class="col-md-12 margin-top-5 margin-bottom-5">
 					<h4>Best Sellers</h4>
@@ -261,7 +261,7 @@
 					<li class="list-group-item">10. Teen Titan</li>
 				</ul>
 			</div>
-		</div>
+		</div> -->
 
 		<!--====================================-->
 	</div>

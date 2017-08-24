@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Comic;
+use App\Slider_carousel;
+use App\Popular_comic;
 use DB;
 use Carbon\Carbon;
 use Auth;
+use App\Visitor;
 
 class LatestComicController extends Controller
 {
@@ -83,7 +86,10 @@ class LatestComicController extends Controller
         $id_comic  = DB::table('comic_chapters')->select('comic_id')->distinct()->get('comic_id'); 
         $comic_statuses = DB::table('comic_status')->get(); 
 
-        return view('Front-end.Single.single-latest-comic', compact('title','comics', 'genres', 'comic_statuses'));
+        $carousel   = Slider_carousel::orderBy('created_at', 'desc')->limit(1)->get();
+        $carousel2  = Slider_carousel::orderBy('created_at', 'desc')->take(2)->get();
+
+        return view('Front-end.Single.single-latest-comic', compact('title','comics', 'genres', 'comic_statuses', 'carousel', 'carousel2'));
     }
 
     public function front_comic()
@@ -154,16 +160,30 @@ class LatestComicController extends Controller
         
         /*$filter       = DB::table('comics')->whereBetween('created_at', [$date_3d, $date_now])->get();*/
 
-        $filter         = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(12);
+        $filter         = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(8);
 
-        $filter_med     = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(8);
+        $filter_sm      = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(4);
 
-        $filter_sm      = Comic::whereBetween('dates', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(6);
+        //carousel
+        $carousel   = Slider_carousel::orderBy('created_at', 'desc')->limit(1)->get();
+        $carousel2  = Slider_carousel::orderBy('created_at', 'desc')->take(2)->get();
 
+        //author
+        $authors    = Comic::select('comic_author')->distinct(['comic_author'])->orderBy('comic_author', 'asc')->paginate(5);
+
+        //genre
         $genres         = DB::table('comic_genres')->limit(12)->orderBy('comic_genre', 'asc')->get();
+
+        //status
         $status         = DB::table('comic_status')->get();  
 
-        return view('Front-end/Home/comic', compact('title','filter', 'filter_med', 'filter_sm', 'genres', 'status'));
+        //popular comic
+        $popular_comic_1         = Popular_comic::orderBy('counter', 'desc')->take(4)->get();
+        $popular_comic_2         = Popular_comic::orderBy('counter', 'desc')->skip(4)->take(4)->get();
+
+        $count_pop1              = count($popular_comic_1);
+
+        return view('Front-end/Home/comic', compact('title','filter', 'filter_sm', 'genres', 'status', 'carousel', 'carousel2', 'authors', 'popular_comic_1', 'popular_comic_2', 'count_pop1'));
     }
 
     public function search_alph(Request $request, $alph)

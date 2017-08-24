@@ -7,10 +7,12 @@ use App\Book;
 use App\Slider_carousel;
 use App\Popular_comic;
 use App\Popular_book;
+use App\User;
 use File;
 use Session;
 use Illuminate\Support\Facades\Storage;
 use DB;
+use Auth;
 
 class BooksController extends Controller
 {
@@ -32,14 +34,16 @@ class BooksController extends Controller
         $popular_comics_1       = Popular_comic::orderBy('counter', 'desc')->take(4)->get();
         $popular_comics_2       = Popular_comic::orderBy('counter', 'desc')->skip(4)->take(4)->get();
 
+        $count_pop1 = count($popular_book_1);
+
         //for new book
         $today          = date("Y-m-d H:i:s");
         $days_3         = time() - (3 * 24 * 60 * 60);  //3 days 24 hours 60 minutes 60 seconds
         $days_3_ago     = date('Y-m-d H:i:s', $days_3);
 
-        $filter         = Book::whereBetween('created_at', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(8);
+        $filter         = Book::whereBetween('created_at', [$days_3_ago, $today])->orderBy('created_at', 'desc')->paginate(4);
         
-    	return view('Front-end/Book/index', compact('title', 'books', 'books2', 'carousel', 'carousel2', 'popular_book_1', 'popular_book_2', 'popular_comics_1', 'popular_comics_2', 'filter'));
+    	return view('Front-end/Book/index', compact('title', 'books', 'books2', 'carousel', 'carousel2', 'popular_book_1', 'popular_book_2', 'popular_comics_1', 'popular_comics_2', 'filter', 'count_pop1'));
     }
 
     public function ListBook()
@@ -112,7 +116,7 @@ class BooksController extends Controller
 
         $title          = 'Bukufi : Detail ' .str_replace('-', ' ', $bookname);
         $book_detail    = Book::where('book_title', $bookname)->get();
-        
+
         return view('Front-end/Book/book_detail', compact('title', 'book_detail'));
     }
 
@@ -125,7 +129,9 @@ class BooksController extends Controller
             $epubs  = $ebook->book_file;
         }
 
-        return view('Front-end/Book/read-book', compact('title', 'epubs'));
+        $book_detail    = Book::where('book_title', $bookname)->get();
+
+        return view('Front-end/Book/read-book', compact('title', 'epubs', 'book_detail'));
     }
 
     public function bookAll()
@@ -133,7 +139,7 @@ class BooksController extends Controller
         $title  = "Bukufi : All Books";
 
         $carousel   = Slider_carousel::orderBy('created_at', 'desc')->limit(1)->get();
-        $carousel2  = Slider_carousel::orderBy('created_at', 'desc')->take(2)->get();
+        $carousel2  = Slider_carousel::orderBy('created_at', 'desc')->skip(1)->take(2)->get();
 
         $list       = Book::all();
 
@@ -161,16 +167,19 @@ class BooksController extends Controller
             'book_description' 	=> 'required',
             'book_author'      	=> 'required',
             'book_publisher'    => 'required',
-            'book_release'     	=> 'required'
+            'book_release'     	=> 'required',
+            'r3'                => 'required'
         ]);
 
         $book_cover			= $request->file('book_image');
-        $book_cover_name   	= $book_cover->getClientOriginalName();
-        $request->file('book_image')->move('theme/book/book_cover/', $book_cover_name);
+        $book_cover_name   	= time().'_'.$book_cover->getClientOriginalName();
+        /*$request->file('book_image')->move('theme/book/book_cover/', $book_cover_name);*/
+        $bookimage = $request->file('book_image')->storeAs('book/book_cover', $book_cover_name);
 
         $book_file          = $request->file('book_file');
         $book_file_name     = $book_file->getClientOriginalName();
-        $request->file('book_file')->move('theme/book/book_files/', $book_file_name);
+        /*$request->file('book_file')->move('theme/book/book_files/', $book_file_name);*/
+        $bookfileimage = $request->file('book_image')->storeAs('book/book_files', $book_file_name);
 
         $books 		= new Book();
         $books->book_title 			= str_replace(' ', '-', $request->book_title);
@@ -180,6 +189,7 @@ class BooksController extends Controller
         $books->book_author			= str_replace(' ', '-', $request->book_author);
         $books->book_publisher		= str_replace(' ', '-', $request->book_publisher);
         $books->book_release		= $request->book_release;
+        $books->membership          = $request->r3;
         $books->save();
 
         Session::flash('notif', 'Book successfully added.');
@@ -203,7 +213,8 @@ class BooksController extends Controller
             'book_description' 	=> 'required',
             'book_author'      	=> 'required',
             'book_publisher'    => 'required',
-            'book_release'     	=> 'required'
+            'book_release'     	=> 'required',
+            'r3'                => 'required'
         ]);
 
 
@@ -215,22 +226,22 @@ class BooksController extends Controller
         }
         else{
 
-        	$image_path = public_path()."\\theme\book\book_cover\\".$books->book_image;
+        	$image_path = public_path()."\\storage\book\book_cover\\".$books->book_image;
         	$deletes = unlink($image_path);
 
-            $file_path  = public_path()."\\theme\book\book_files\\".$books->book_file;
+            $file_path  = public_path()."\\storage\book\book_files\\".$books->book_file;
             $deletes2   = File::delete($file_path);
 
             if($deletes && $deletes2)
             {
                 $file               = $request->file('book_image');
                 $filename           = $file->getClientOriginalName();
-                $request->file('book_image')->move('theme/book/book_cover', $filename);
+                $request->file('book_image')->storeAs('book/book_cover', $filename);
                 $books->book_image  = $filename;
 
                 $book_file          = $request->file('book_file');
                 $book_file_name     = $book_file->getClientOriginalName();
-                $request->file('book_file')->move('theme/book/book_files/', $book_file_name);
+                $request->file('book_image')->storeAs('book/book_files', $book_file_name);
                 $books->book_file   = $book_file_name;
 
             }
@@ -245,32 +256,32 @@ class BooksController extends Controller
         $books->book_author			= str_replace(' ', '-', $request->book_author);
         $books->book_publisher		= str_replace(' ', '-', $request->book_publisher);
         $books->book_release		= $request->book_release;
+        $books->membership          = $request->r3;
         $books->update();
 
         Session::flash('notif', 'Book successfully edited.');
         return redirect()->route('list.book');
     }
     
-    public function deleteBook($id)
+    public function deleteBook($name)
     {
-    	$data = Book::find($id);
+        
+    	$data       = Book::where('book_title', $name)->first();
 
-        $image_path = public_path()."\\theme\book\book_cover\\".$data->book_image;
-        $deletes = unlink($image_path);
+        $image_path = public_path()."\\storage\book\book_cover\\".$data->book_image;
+        $deletes    = unlink($image_path);
 
-        $file_path  = public_path()."\\theme\book\book_files\\".$data->book_file;
+        $file_path  = public_path()."\\storage\book\book_files\\".$data->book_file;
         $deletes2   = File::delete($file_path);
 
-        if($deletes && $deletes2)
-        {
-            $data->delete();
-            
-            Session::flash('notif', 'Book successfully deleted.');
-            return redirect()->route('list.book');
-        }
-        else{
-            return "Cover book doesn't deleted";
-        }
+        //delete
+        $data->delete();
+
+        $popbook                = Popular_book::where('book_title', $name);
+        $popbook->delete();
+                
+        Session::flash('notif', 'Book successfully deleted.');
+        return redirect()->route('list.book'); 
     }
 
     //end for back-end 

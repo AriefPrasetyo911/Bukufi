@@ -31,7 +31,7 @@ class SocialAuthController extends Controller
 
     public function getSocialHandle(SocialAccountService $service)
     {
-        $user   = $service->createOrGetUser(Socialite::driver('google')->user());
+        $user   = $service->createOrGetUser2(Socialite::driver('google')->user());
         Auth::guard('user')->login($user);
         return redirect()->to('user/dashboard/');
     }

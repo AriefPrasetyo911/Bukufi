@@ -260,14 +260,14 @@
                     <tr>
                       <td>{{$no++}}</td>
                       <td>{{str_replace('-', ' ', $book->book_title)}}</td>
-                      <td>{{$book->book_description}}</td>
+                      <td>{{strip_tags($book->book_description)}}</td>
                       <td>{{str_replace('-', ' ', $book->book_author)}}</td>
                       <td>{{str_replace('-', ' ', $book->book_publisher)}}</td>
                       <td>{{$book->book_release}}</td>
                       <td>
                         <a href="{{route('edit.book', $book->id)}}" class="btn btn-info btn-block">Edit</a>
 
-                        <form action="{{route('delete.book', $book->id)}}" class="form-horizontal" method="post">
+                        <form action="{{route('delete.book', $book->book_title)}}" class="form-horizontal" method="post">
                           {{ method_field('delete')}}
                           {{ csrf_field() }}
                           <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('Are you sure want to delete this data?')">Delete</button>

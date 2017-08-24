@@ -756,11 +756,15 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				@foreach($genres as $genre)
-				<ul class="col-sm-6 margin-bottom-5">
-					<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
-				</ul>
-				@endforeach
+				@if(count($genres))
+					@foreach($genres as $genre)
+					<ul class="col-sm-6 margin-bottom-5">
+						<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
+					</ul>
+					@endforeach
+				@else
+					<h5 class="text-center text-info">Sorry there is no comic genre yet</h5>
+				@endif
 			</div>
 		</div>
 
@@ -774,11 +778,15 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				@foreach($genres as $genre)
-				<ul class="col-sm-6 margin-bottom-5">
-					<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
-				</ul>
-				@endforeach
+				@if(count($genres))
+					@foreach($genres as $genre)
+					<ul class="col-sm-6 margin-bottom-5">
+						<a href="{{url('/comic-genre/'.$genre->comic_genre)}}"><p>{{$genre->comic_genre}}</p></a>
+					</ul>
+					@endforeach
+				@else
+					<h5 class="text-center text-info">Sorry there is no comic genre yet</h5>
+				@endif
 			</div>
 		</div>
 
@@ -790,13 +798,17 @@
 				</div>
 			</div>
 			<div class="panel-body">
-				@foreach($comic_statuses as $stat)
-				<ul class="col-sm-12 status margin-bottom-5 no-pl">
-					<a href="{{url('/comic/status/'.$stat->comic_status)}}">
-					<p class="no-pl">{{$stat->comic_status}}</p>
-					</a>
-				</ul>
-				@endforeach
+				@if(count($comic_statuses))
+					@foreach($comic_statuses as $stat)
+					<ul class="col-sm-12 status margin-bottom-5 no-pl">
+						<a href="{{url('/comic/status/'.$stat->comic_status)}}">
+						<p class="no-pl">{{$stat->comic_status}}</p>
+						</a>
+					</ul>
+					@endforeach
+				@else
+					<h5 class="text-center text-info">Sorry there is no comic status yet</h5>
+				@endif
 			</div>
 		</div>
 	</div>

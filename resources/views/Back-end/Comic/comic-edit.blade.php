@@ -18,6 +18,10 @@
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/AdminLTE/jvectormap/jquery-jvectormap.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/AdminLTE/dist/AdminLTE.min.css')}}">
+
+  <!-- icheck plugin -->
+  <link rel="stylesheet" type="text/css" href="{{asset('theme/js/Plugins/iCheck/all.css')}}">
+
   <!-- AdminLTE Skins. Choose a skin from the css/skins
      folder instead of downloading all of them to reduce the load. -->
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/AdminLTE/dist/skins/_all-skins.min.css')}}">
@@ -167,6 +171,19 @@
                 <li class="{{ Request::segment(2) == 'comic-genre' ? 'active' : '' }}"><a href="{{route('comic.genre')}}"><i class="fa fa-angle-double-right"></i> Comic Genre</a></li>
               </ul>
             </li>
+            <!--=============================-->
+            <li class="treeview {{Request::segment(2) == 'slider' ? 'active' : ''}}">
+              <a href="#">
+               <i class="fa fa-slideshare" aria-hidden="true"></i>
+                <span>Slider Carousel</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="{{ Request::segment(2) == 'slider' ? 'active' : '' }}"><a href="{{route('slider')}}"><i class="fa fa-angle-double-right"></i> Slider Carousel</a></li>
+              </ul>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -230,13 +247,28 @@
                 <div class="form-group">
                   <label class="control-label col-md-2">Comic Genre</label>
                   <div class="col-md-10">
-                    <input type="text" name="comic_genre" id="comic_genre" class="form-control" value="{{$item->comic_genre}}">
+                    <select name="comic_genre[]" id="comic_genre" class="form-control" multiple style="height: 155px;">
+                      @foreach($genres as $genre)
+                        <option value="{{$genre->comic_genre}}">{{$genre->comic_genre}}</option>
+                      @endforeach
+                    </select>
                   </div>
                 </div>
                 <div class="form-group">
                   <label class="control-label col-md-2">Comic Release</label>
                   <div class="col-md-10">
                     <input type="text" name="comic_release" id="comic_release" class="form-control" value="{{$item->comic_release}}">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Book Membership</label>
+                  <div class="col-md-10">
+                    <label class="col-md-2" style="padding-left: 0;">
+                      <input type="radio" name="r3" class="flat-red" value="Paid" {{ $item->membership == 'Paid' ? 'checked' : '' }} > Paid
+                    </label>
+                    <label class="col-md-2" style="padding-left: 0;">
+                      <input type="radio" name="r3" class="flat-red" value="Free" {{ $item->membership == 'Free' ? 'checked' : '' }} > Free
+                    </label>
                   </div>
                 </div>
               </div>
@@ -278,10 +310,28 @@
   <script type="text/javascript" src="{{asset('theme/js/AdminLTE/Chart.js/Chart.js')}}"></script>
   <script type="text/javascript" src="{{asset('theme/js/AdminLTE/dist/pages/dashboard2.js')}}"></script>
 
+  <script type="text/javascript" src="{{asset('theme/js/Plugins/iCheck/icheck.min.js')}}"></script>
+
   <script type="text/javascript" src="{{asset('theme/js/AdminLTE/ckeditor/ckeditor.js')}}"></script>
   <script>
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace( 'comic_description' );
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
   </script>
 </html>

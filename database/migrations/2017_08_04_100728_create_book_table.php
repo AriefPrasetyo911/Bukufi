@@ -18,10 +18,11 @@ class CreateBookTable extends Migration
             $table->string('book_image');
             $table->string('book_file');
             $table->string('book_title');
-            $table->string('book_description');
+            $table->text('book_description');
             $table->string('book_author');
             $table->string('book_publisher');
             $table->string('book_release');
+            $table->enum('membership', ['Paid', 'Free']);
             $table->timestamps();
         });
     }

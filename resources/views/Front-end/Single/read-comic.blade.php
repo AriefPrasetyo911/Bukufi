@@ -78,13 +78,13 @@
 		bottom:50px; 
 		right:10px; 
 		cursor:pointer;
-		display:none
+		display:none;
 	}
 </style>
 @endsection
 
 @section('main-content')
-<main class="main-content col-md-12">
+<main class="main-content col-md-12 read-comic">
 	<div class="col-md-12">
 		<!-- carousel started-->
 		<div class="panel panel-default">
@@ -102,11 +102,10 @@
 		            </div>
 		        @endif
 
-
 		        <input type="hidden" name="valuez" id="valuez" value="{{$curr_page}}">
 		        
-				<div class="col-md-12">
-					<div class="col-md-6">
+				<div class="col-md-12 col-sm-12 col-xs-12 pick">
+					<div class="col-md-6 col-sm-6 col-xs-12 left">
 						<div class="pull-left">
 							<select name="comic_chapter" class="form-control pick-chapter" onchange="pickone(this.value)">
 								@foreach($shows as $show)
@@ -115,7 +114,7 @@
 							</select>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-6 col-sm-6 col-xs-12 right">
 						@if(auth()->guard('user')->user())
 							
 							<form action="{{url('bookmark/user/add'.'/'.auth()->guard('user')->user()->id)}}" method="post" class="form-horizontal">
@@ -134,17 +133,14 @@
 						@endif
 					</div>
 				</div>
-				<div class="col-md-12"><hr></div>
 
-				<div class="col-md-8 col-md-offset-2 comic">
-					<!-- <div class="well">
-						@foreach($shows as $show)
-							<h4 class="center">{{str_replace('-', ' ', $show->comic_title)}} chapter {{$show->comic_chapter}} : {{$show->chapter_title}}</h4>
-							<p class="center">Now you read <b>{{$show->comic_title}} chapter {{$show->comic_chapter}} : {{$show->chapter_title}}</b> at Bukufi.com </p> 
-						@endforeach
-					</div> -->
+				<div class="col-md-12 col-sm-12 col-xs-12"><hr></div>
+
+				<div class="col-md-8 col-sm-8 col-xs-12 col-md-offset-2 col-sm-offset-2 comic">
 					@foreach($shows2 as $show)
-						<img src="/theme/images_comic/{{$show->comic_image}}" alt="Comic" class="read">
+
+						<img src="{{asset('storage/comic/comic_files/'.str_replace('-', ' ', $show->comic_title).'/'.$show->comic_image)}}" alt="Comic" class="read">
+
 						<input type="hidden" name="comic_title" id="com_title" value="{{$show->comic_title}}">
 					@endforeach
 				</div>
@@ -211,7 +207,7 @@
 
 	//to protect add bookmark button
 	$('.nologin').on('click', function() {
-		swal("Error!", "You must login first to use this menu", "error");
+		swal("Error!", "You must login first to use this menu. You can login use Facebook or Google account.", "error");
 	});
 	
 

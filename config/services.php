@@ -33,7 +33,7 @@ return [
         'model' => App\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
-    ],
+    ],    
 
     'facebook' => [
         'client_id'     => '1995949823975076',

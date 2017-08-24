@@ -227,7 +227,7 @@
                 <div class="form-group">
                   <label class="control-label col-md-2">Chapter Title</label>
                   <div class="col-md-10">
-                    <input type="text" name="chapter_title" id="chapter_title" class="form-control" placeholder="Ex. Spider Man : Chapter One.">
+                    <input type="text" name="chapter_title" id="chapter_title" class="form-control" placeholder="Ex. Spider Man : Chapter One. Don't add #">
                   </div>
                 </div>
               </div>

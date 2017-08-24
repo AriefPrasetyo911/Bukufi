@@ -133,6 +133,46 @@ h1, h2, h3, h4, h5, h6, p {
   margin-bottom: 15px;
   -webkit-margin-after: 15px; }
 
+.margin-left-13 {
+  margin-left: 13px;
+  -webkit-margin-start: 13px;
+  -moz-margin-start: 13px;
+  -o-margin-start: 13px; }
+
+.margin-right-13 {
+  margin-right: 13px;
+  -webkit-margin-end: 13px;
+  -moz-margin-end: 13px;
+  -o-margin-end: 13px; }
+
+.margin-top-13 {
+  margin-top: 13px;
+  -webkit-margin-before: 13px; }
+
+.margin-bottom-13 {
+  margin-bottom: 13px;
+  -webkit-margin-after: 13px; }
+
+.margin-left-10 {
+  margin-left: 10px;
+  -webkit-margin-start: 10px;
+  -moz-margin-start: 10px;
+  -o-margin-start: 10px; }
+
+.margin-right-10 {
+  margin-right: 10px;
+  -webkit-margin-end: 10px;
+  -moz-margin-end: 10px;
+  -o-margin-end: 10px; }
+
+.margin-top-10 {
+  margin-top: 10px;
+  -webkit-margin-before: 10px; }
+
+.margin-bottom-10 {
+  margin-bottom: 10px;
+  -webkit-margin-after: 10px; }
+
 .padding-left-5 {
   padding-left: 5px;
   -webkit-padding-start: 5px;
@@ -299,7 +339,8 @@ input, .input-group {
   bottom: 50px;
   right: 10px;
   cursor: pointer;
-  display: none; }
+  display: none;
+  z-index: 999; }
 
 .col-md-12, .col-lg-12 {
   padding-right: 0;
@@ -310,6 +351,33 @@ input, .input-group {
   -webkit-padding-start: 0;
   -moz-padding-start: 0;
   -o-padding-start: 0; }
+
+.bold {
+  font-weight: bold; }
+
+.badge-paid {
+  background-color: #cfb53b;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0; }
+
+.badge-free {
+  background-color: #3a87ad;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -o-border-radius: 0; }
+
+.badge-paids {
+  background-color: #cfb53b;
+  color: black;
+  font-weight: bold; }
+
+.badge-frees {
+  background-color: #3a87ad;
+  color: black;
+  font-weight: bold; }
 
 /* ANIMATED X */
 .navbar-toggle.x .icon-bar:nth-of-type(2) {
@@ -380,11 +448,15 @@ input, .input-group {
         -o-margin-start: 15px;
         font-weight: bold;
         color: white; }
+        .container .navbar-header .navbar-brand img {
+          height: 45px;
+          position: absolute;
+          top: 3px;
+          left: 5px;
+          width: initial; }
       .container .navbar-header .navbar-toggle {
         background-color: transparent;
         border-style: none; }
-        .container .navbar-header .navbar-toggle .icon-bar {
-          background-color: white; }
     .container .nav {
       margin: 0;
       padding-right: 5px;
@@ -406,6 +478,9 @@ input, .input-group {
         -o-padding-start: 12px;
         padding-bottom: 5px;
         -webkit-padding-after: 5px;
+        color: #0e9e8a; }
+      .container .nav li a.actived {
+        background-color: #0e9e8a;
         color: white; }
       .container .nav li .logined {
         padding-top: 0;
@@ -445,7 +520,7 @@ input, .input-group {
     .container .main-navbar {
       margin-bottom: 0 !important;
       -webkit-margin-after: 0 !important;
-      background-color: #0cbda4; }
+      background-color: #fff; }
       .container .main-navbar .container-fluid, .container .main-navbar .navbar-collapse {
         padding-left: 0;
         -webkit-padding-start: 0;
@@ -680,7 +755,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .col-xs-3:nth-child(2) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -689,7 +766,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .col-xs-3:nth-child(3) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -698,7 +777,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .col-xs-3:nth-child(4) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -707,7 +788,9 @@ input, .input-group {
       padding-right: 0;
       -webkit-padding-end: 0;
       -moz-padding-end: 0;
-      -o-padding-end: 0; }
+      -o-padding-end: 0;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .col-xs-3:nth-child(5) {
       padding-left: 0;
       -webkit-padding-start: 0;
@@ -716,7 +799,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .col-xs-3:nth-child(6) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -725,7 +810,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .col-xs-3:nth-child(7) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -734,7 +821,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .col-xs-3:nth-child(8) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -743,15 +832,17 @@ input, .input-group {
       padding-right: 0;
       -webkit-padding-end: 0;
       -moz-padding-end: 0;
-      -o-padding-end: 0; }
+      -o-padding-end: 0;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .new-books .thumbnail {
       padding: 0;
       border-radius: 0;
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
       -o-border-radius: 0;
-      margin-bottom: 10px;
-      -webkit-margin-after: 10px; }
+      margin-bottom: 0;
+      -webkit-margin-after: 0; }
       .main-content .col-sm-9 .new-books .thumbnail img {
         height: 120px;
         object-fit: initial; }
@@ -775,7 +866,9 @@ input, .input-group {
         padding-right: 5px;
         -webkit-padding-end: 5px;
         -moz-padding-end: 5px;
-        -o-padding-end: 5px; }
+        -o-padding-end: 5px;
+        margin-bottom: 5px;
+        -webkit-margin-after: 5px; }
       .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3:nth-child(2), .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3:nth-child(2), .main-content .col-sm-9 .trending-books .sales .col-xs-3:nth-child(2) {
         padding-left: 5px;
         -webkit-padding-start: 5px;
@@ -784,7 +877,9 @@ input, .input-group {
         padding-right: 5px;
         -webkit-padding-end: 5px;
         -moz-padding-end: 5px;
-        -o-padding-end: 5px; }
+        -o-padding-end: 5px;
+        margin-bottom: 5px;
+        -webkit-margin-after: 5px; }
       .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3:nth-child(3), .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3:nth-child(3), .main-content .col-sm-9 .trending-books .sales .col-xs-3:nth-child(3) {
         padding-left: 5px;
         -webkit-padding-start: 5px;
@@ -793,7 +888,9 @@ input, .input-group {
         padding-right: 5px;
         -webkit-padding-end: 5px;
         -moz-padding-end: 5px;
-        -o-padding-end: 5px; }
+        -o-padding-end: 5px;
+        margin-bottom: 5px;
+        -webkit-margin-after: 5px; }
       .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3:nth-child(4), .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3:nth-child(4), .main-content .col-sm-9 .trending-books .sales .col-xs-3:nth-child(4) {
         padding-left: 5px;
         -webkit-padding-start: 5px;
@@ -802,15 +899,17 @@ input, .input-group {
         padding-right: 0;
         -webkit-padding-end: 0;
         -moz-padding-end: 0;
-        -o-padding-end: 0; }
+        -o-padding-end: 0;
+        margin-bottom: 5px;
+        -webkit-margin-after: 5px; }
       .main-content .col-sm-9 .trending-books #carouselItems .thumbnail, .main-content .col-sm-9 .trending-books .trending-comics .thumbnail, .main-content .col-sm-9 .trending-books .sales .thumbnail {
         padding: 0;
         border-radius: 0;
         -webkit-border-radius: 0;
         -moz-border-radius: 0;
         -o-border-radius: 0;
-        margin-bottom: 10px;
-        -webkit-margin-after: 10px; }
+        margin-bottom: 0;
+        -webkit-margin-after: 0; }
         .main-content .col-sm-9 .trending-books #carouselItems .thumbnail img, .main-content .col-sm-9 .trending-books .trending-comics .thumbnail img, .main-content .col-sm-9 .trending-books .sales .thumbnail img {
           height: 120px;
           object-fit: initial; }
@@ -1046,41 +1145,70 @@ input, .input-group {
     .book_detail .left #author, .book_detail .left #publisher, .book_detail .left #release {
       margin-top: 10px;
       -webkit-margin-before: 10px; }
-  .book_detail a {
-    background: #ddd; }
-    .book_detail a:hover {
-      background: #ddd; }
-    .book_detail a .right #outer-thumb {
-      padding-left: 0;
-      -webkit-padding-start: 0;
-      -moz-padding-start: 0;
-      -o-padding-start: 0; }
-      .book_detail a .right #outer-thumb .thumbnail {
-        padding: 0;
-        margin-bottom: 0;
-        -webkit-margin-after: 0;
-        border-radius: 0;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        -o-border-radius: 0; }
-        .book_detail a .right #outer-thumb .thumbnail img {
-          width: 100%; }
-    .book_detail a .right #outer-content #title #book_title {
-      margin-bottom: 5px;
-      -webkit-margin-after: 5px;
-      font-weight: bold;
-      color: #ae2b26; }
-    .book_detail a .right #outer-content .btn {
+  .book_detail a .right #outer-thumb {
+    padding-left: 0;
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -o-padding-start: 0; }
+    .book_detail a .right #outer-thumb .thumbnail {
+      padding: 0;
+      margin-bottom: 0;
+      -webkit-margin-after: 0;
       border-radius: 0;
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
-      -o-border-radius: 0;
-      border: 2px solid #ddd;
-      font-weight: bold;
-      padding-right: 15px;
-      -webkit-padding-end: 15px;
-      -moz-padding-end: 15px;
-      -o-padding-end: 15px; }
+      -o-border-radius: 0; }
+      .book_detail a .right #outer-thumb .thumbnail img {
+        width: 100%; }
+  .book_detail a .right #outer-content #title #book_title {
+    margin-bottom: 5px;
+    -webkit-margin-after: 5px;
+    font-weight: bold;
+    color: #ae2b26; }
+  .book_detail a .right #outer-content .btn {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    -o-border-radius: 0;
+    border: 2px solid #ddd;
+    font-weight: bold;
+    padding-right: 15px;
+    -webkit-padding-end: 15px;
+    -moz-padding-end: 15px;
+    -o-padding-end: 15px; }
+  .book_detail .full #outer-thumb {
+    padding-left: 0;
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -o-padding-start: 0;
+    padding-right: 0;
+    -webkit-padding-end: 0;
+    -moz-padding-end: 0;
+    -o-padding-end: 0; }
+    .book_detail .full #outer-thumb .thumbnail {
+      padding: 0;
+      margin-bottom: 15px;
+      -webkit-margin-after: 15px;
+      border-radius: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -o-border-radius: 0; }
+      .book_detail .full #outer-thumb .thumbnail img {
+        width: 100%;
+        height: 100%; }
+  .book_detail .full .col-xs-7 {
+    padding-right: 0;
+    -webkit-padding-end: 0;
+    -moz-padding-end: 0;
+    -o-padding-end: 0; }
+    .book_detail .full .col-xs-7 #description, .book_detail .full .col-xs-7 #author, .book_detail .full .col-xs-7 #publisher, .book_detail .full .col-xs-7 #release, .book_detail .full .col-xs-7 #title {
+      margin-bottom: 5px;
+      -webkit-margin-after: 5px; }
+      .book_detail .full .col-xs-7 #description #comic_desc, .book_detail .full .col-xs-7 #description #comic_author, .book_detail .full .col-xs-7 #description #comic_publisher, .book_detail .full .col-xs-7 #description #comic_release, .book_detail .full .col-xs-7 #description #comic_title, .book_detail .full .col-xs-7 #author #comic_desc, .book_detail .full .col-xs-7 #author #comic_author, .book_detail .full .col-xs-7 #author #comic_publisher, .book_detail .full .col-xs-7 #author #comic_release, .book_detail .full .col-xs-7 #author #comic_title, .book_detail .full .col-xs-7 #publisher #comic_desc, .book_detail .full .col-xs-7 #publisher #comic_author, .book_detail .full .col-xs-7 #publisher #comic_publisher, .book_detail .full .col-xs-7 #publisher #comic_release, .book_detail .full .col-xs-7 #publisher #comic_title, .book_detail .full .col-xs-7 #release #comic_desc, .book_detail .full .col-xs-7 #release #comic_author, .book_detail .full .col-xs-7 #release #comic_publisher, .book_detail .full .col-xs-7 #release #comic_release, .book_detail .full .col-xs-7 #release #comic_title, .book_detail .full .col-xs-7 #title #comic_desc, .book_detail .full .col-xs-7 #title #comic_author, .book_detail .full .col-xs-7 #title #comic_publisher, .book_detail .full .col-xs-7 #title #comic_release, .book_detail .full .col-xs-7 #title #comic_title {
+        font-weight: bold;
+        color: #ae2b26; }
+  .book_detail .full .accordion-toggle {
+    background-color: transparent; }
 
   /* END FOR BOOK DETAIL */
   /* READ BOOK / EPUB */
@@ -1124,7 +1252,22 @@ input, .input-group {
       .readbook #main .arrow:active {
         color: #000; }
 
-  /* READ BOOK / EPUB */ }
+  /* READ BOOK / EPUB */
+  /* READ COMIC */
+  .read-comic .pick .right {
+    position: absolute; }
+    .read-comic .pick .right .add-fav {
+      padding-right: 15px;
+      -webkit-padding-end: 15px;
+      -moz-padding-end: 15px;
+      -o-padding-end: 15px; }
+  .read-comic .comic img {
+    height: 100%; }
+  .read-comic .pager #next {
+    margin-top: 4px;
+    -webkit-margin-before: 4px; }
+
+  /* END READ COMIC */ }
 @media (max-device-width: 767px) and (orientation: portrait) {
   /*# MAIN CONTENT # */
   .img-comic-standard {
@@ -1158,7 +1301,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3:nth-child(2), .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3:nth-child(2), .main-content .col-sm-9 .trending-books .sales .col-xs-3:nth-child(2) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -1167,7 +1312,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3:nth-child(3), .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3:nth-child(3), .main-content .col-sm-9 .trending-books .sales .col-xs-3:nth-child(3) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -1176,7 +1323,9 @@ input, .input-group {
       padding-right: 5px;
       -webkit-padding-end: 5px;
       -moz-padding-end: 5px;
-      -o-padding-end: 5px; }
+      -o-padding-end: 5px;
+      margin-bottom: 10px;
+      -webkit-margin-after: 10px; }
     .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3:nth-child(4), .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3:nth-child(4), .main-content .col-sm-9 .trending-books .sales .col-xs-3:nth-child(4) {
       padding-left: 5px;
       -webkit-padding-start: 5px;
@@ -1185,18 +1334,23 @@ input, .input-group {
       padding-right: 0;
       -webkit-padding-end: 0;
       -moz-padding-end: 0;
-      -o-padding-end: 0; }
-    .main-content .col-sm-9 .trending-books #carouselItems .thumbnail, .main-content .col-sm-9 .trending-books .trending-comics .thumbnail, .main-content .col-sm-9 .trending-books .sales .thumbnail {
-      padding: 0;
-      border-radius: 0;
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      -o-border-radius: 0;
+      -o-padding-end: 0;
       margin-bottom: 10px;
       -webkit-margin-after: 10px; }
-      .main-content .col-sm-9 .trending-books #carouselItems .thumbnail img, .main-content .col-sm-9 .trending-books .trending-comics .thumbnail img, .main-content .col-sm-9 .trending-books .sales .thumbnail img {
-        height: 85px;
-        object-fit: initial; }
+    .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3, .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3, .main-content .col-sm-9 .trending-books .sales .col-xs-3 {
+      margin-bottom: 0;
+      -webkit-margin-after: 0; }
+      .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3 .thumbnail, .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3 .thumbnail, .main-content .col-sm-9 .trending-books .sales .col-xs-3 .thumbnail {
+        padding: 0;
+        border-radius: 0;
+        -webkit-border-radius: 0;
+        -moz-border-radius: 0;
+        -o-border-radius: 0;
+        margin-bottom: 0;
+        -webkit-margin-after: 0; }
+        .main-content .col-sm-9 .trending-books #carouselItems .col-xs-3 .thumbnail img, .main-content .col-sm-9 .trending-books .trending-comics .col-xs-3 .thumbnail img, .main-content .col-sm-9 .trending-books .sales .col-xs-3 .thumbnail img {
+          height: 85px;
+          object-fit: initial; }
   .main-content .col-sm-9 .new-books .col-xs-3:nth-child(1) {
     padding-left: 0;
     -webkit-padding-start: 0;
@@ -1269,17 +1423,20 @@ input, .input-group {
     -webkit-padding-end: 0;
     -moz-padding-end: 0;
     -o-padding-end: 0; }
-  .main-content .col-sm-9 .new-books .thumbnail {
-    padding: 0;
-    border-radius: 0;
-    -webkit-border-radius: 0;
-    -moz-border-radius: 0;
-    -o-border-radius: 0;
+  .main-content .col-sm-9 .new-books .col-xs-3 {
     margin-bottom: 10px;
     -webkit-margin-after: 10px; }
-    .main-content .col-sm-9 .new-books .thumbnail img {
-      height: 85px;
-      object-fit: initial; }
+    .main-content .col-sm-9 .new-books .col-xs-3 .thumbnail {
+      padding: 0;
+      border-radius: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -o-border-radius: 0;
+      margin-bottom: 0;
+      -webkit-margin-after: 0; }
+      .main-content .col-sm-9 .new-books .col-xs-3 .thumbnail img {
+        height: 85px;
+        object-fit: initial; }
   .main-content .col-sm-9 .trending-comics .left {
     padding-left: 0;
     -webkit-padding-start: 0;
@@ -1451,46 +1608,51 @@ input, .input-group {
     .book_detail .left #author, .book_detail .left #publisher, .book_detail .left #release {
       margin-top: 10px;
       -webkit-margin-before: 10px; }
-  .book_detail a {
-    background: #ddd; }
-    .book_detail a:hover {
-      background: #ddd; }
-    .book_detail a .right #outer-thumb {
-      padding-left: 0;
-      -webkit-padding-start: 0;
-      -moz-padding-start: 0;
-      -o-padding-start: 0; }
-      .book_detail a .right #outer-thumb .thumbnail {
-        padding: 0;
-        margin-bottom: 0;
-        -webkit-margin-after: 0;
-        border-radius: 0;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        -o-border-radius: 0; }
-        .book_detail a .right #outer-thumb .thumbnail img {
-          width: 100%; }
-    .book_detail a .right #outer-content {
-      padding-left: 0;
-      -webkit-padding-start: 0;
-      -moz-padding-start: 0;
-      -o-padding-start: 0; }
-      .book_detail a .right #outer-content #title #book_title {
-        margin-bottom: 5px;
-        -webkit-margin-after: 5px;
-        font-weight: bold;
-        color: #ae2b26; }
-      .book_detail a .right #outer-content .btn {
-        border-radius: 0;
-        -webkit-border-radius: 0;
-        -moz-border-radius: 0;
-        -o-border-radius: 0;
-        border: 2px solid #ddd;
-        font-weight: bold;
-        padding-right: 15px;
-        -webkit-padding-end: 15px;
-        -moz-padding-end: 15px;
-        -o-padding-end: 15px; }
+  .book_detail a .right #outer-thumb {
+    padding-left: 0;
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -o-padding-start: 0; }
+    .book_detail a .right #outer-thumb .thumbnail {
+      padding: 0;
+      margin-bottom: 0;
+      -webkit-margin-after: 0;
+      border-radius: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -o-border-radius: 0; }
+      .book_detail a .right #outer-thumb .thumbnail img {
+        width: 100%; }
+  .book_detail a .right #outer-content {
+    padding-left: 0;
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -o-padding-start: 0; }
+    .book_detail a .right #outer-content #title #book_title {
+      margin-bottom: 5px;
+      -webkit-margin-after: 5px;
+      font-weight: bold;
+      color: #ae2b26; }
+    .book_detail a .right #outer-content .btn {
+      border-radius: 0;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      -o-border-radius: 0;
+      border: 2px solid #ddd;
+      font-weight: bold;
+      padding-right: 15px;
+      -webkit-padding-end: 15px;
+      -moz-padding-end: 15px;
+      -o-padding-end: 15px; }
+  .book_detail .full #outer-thumb {
+    padding-right: 0;
+    -webkit-padding-end: 0;
+    -moz-padding-end: 0;
+    -o-padding-end: 0;
+    padding-left: 0;
+    -webkit-padding-start: 0;
+    -moz-padding-start: 0;
+    -o-padding-start: 0; }
 
   /* END FOR BOOK DETAIL */
   /* READ BOOK / EPUB */
@@ -1534,6 +1696,26 @@ input, .input-group {
       .readbook #main .arrow:active {
         color: #000; }
 
-  /* READ BOOK / EPUB */ }
+  /* READ BOOK / EPUB */
+  /* READ COMIC */
+  .read-comic .pick .right {
+    position: relative; }
+    .read-comic .pick .right .add-fav {
+      padding-right: 15px;
+      -webkit-padding-end: 15px;
+      -moz-padding-end: 15px;
+      -o-padding-end: 15px; }
+  .read-comic .pick .left .pull-left {
+    float: right !important; }
+  .read-comic .pick .left .pick-chapter {
+    margin-bottom: 5px;
+    -webkit-margin-after: 5px; }
+  .read-comic .comic img {
+    height: 100%; }
+  .read-comic .pager #next {
+    margin-top: 4px;
+    -webkit-margin-before: 4px; }
+
+  /* END READ COMIC */ }
 
 /*# sourceMappingURL=smartphone-responsive.css.map */

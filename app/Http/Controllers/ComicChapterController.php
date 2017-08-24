@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Redirect;
 use DB;
 use Auth;
+use File;
 
 class ComicChapterController extends Controller
 {
@@ -74,8 +75,57 @@ class ComicChapterController extends Controller
             ]);
 
             
-                $comic_images       = time().'_'.$file->getClientOriginalName();
-                $upload_success     = $file->move('theme/images_comic/', $comic_images);
+            $comic_images       = time().'_'.$file->getClientOriginalName();
+
+            //create directory
+            $folder     = str_replace('-', ' ', $request->comic_title);
+            $path       = public_path('storage\comic\comic_files\\'. $folder);
+
+            //check dir
+            if (File::isDirectory($path)) {
+                
+                //directory exist, just insert data and save
+                $upload_success     = $file->move($path, $comic_images);
+                $uploadCount++;
+
+                //store to database
+                $comic_image_size   = $file->getClientSize();
+
+                $filechapter = new Comic_chapter();
+                $filechapter->comic_id         = $request->comic_id;
+                $filechapter->comic_title      = $request->comic_title;
+                $filechapter->comic_chapter    = $request->comic_chapter;
+
+                $filechapter->comic_image      = $comic_images;
+                $filechapter->comic_image_size = $comic_image_size;
+
+                $filechapter->chapter_title    = $request->chapter_title;
+                $filechapter->save();
+
+                //
+
+                $com_id     = $request->comic_id;
+                $chap_now   = $request->comic_chapter;
+                $chap_title = $request->chapter_title;
+                $check = DB::table('comics')->where('id', $com_id)->get();
+
+                foreach ($check as $check_conf) {
+                    if ($check_conf->last_chapter < $chap_now) {
+                        
+                        $update_chapter = new Comic();
+                        $update_chapter->last_chapter       = $chap_now;
+                        $update_chapter->last_chapter_title = $chap_title;
+                        $update_chapter->update();
+                    }
+                }
+            }
+            else{
+
+                //directory not exist, create dir first
+                File::makeDirectory($path, 0777, true);
+
+                //and save
+                $upload_success     = $file->move($path, $comic_images);
                 $uploadCount++;
 
                 //store to database
@@ -107,6 +157,7 @@ class ComicChapterController extends Controller
                         $update_chapter->update();
                     }
                 }
+            }
         }
 
         if ($uploadCount == $file_count) {
@@ -161,24 +212,26 @@ class ComicChapterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($comic_nm, $title)
     {
-        $data   = Comic_chapter::where('comic_chapter', '=', $id)->get();
+        $folder_name    = str_replace('-', ' ', $comic_nm);
+        $comic_chapter  = $title;
 
-        foreach ($data as $images) {
-            
-            $image_path     = public_path().'/theme/images_comic'.'/'.$images->comic_image;
-            $deletes        = unlink($image_path);
-        }
+        $collection = Comic_chapter::where('chapter_title', $comic_chapter)->get(['chapter_title', 'comic_image']);
+        
+        
+            /*$image_path     = public_path().'/theme/images_comic'.'/'.$images->comic_image;
+            $deletes        = unlink($image_path);*/
+            return $collection->comic_image;
+            //to delete comic image
+            $image_path = public_path()."\\storage\comic\comic_files\\".$folder_name.'\\'.$images->comic_image;
+            return $image_path;
+            $deletes    = unlink($image_path);
+        
 
-        if ($deletes) {
-            
-            $data->delete();
-            Session::flash('notif', 'Comic successfully deleted.');
-            return redirect()->route('comic.chapter');
-        }
-        else{
-            return "image file doesn't deleted";
-        }
+        Comic_chapter::destroy($collection->toArray());
+        /*$data->delete();*/
+        Session::flash('notif', 'Comic successfully deleted.');
+        return redirect()->route('comic.chapter');
     }   
 }

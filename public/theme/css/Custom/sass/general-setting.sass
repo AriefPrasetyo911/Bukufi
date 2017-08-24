@@ -31,6 +31,7 @@ $navbar-color-hover	: #0e9e8a
 $divider-color		: #0cbda4
 $list-hover			: #636363
 $list-hover-blue	: #008b8b
+$white				: #fff
 
 //PADDING, MARGIN, BORDER-RADIUS
 //no padding
@@ -88,6 +89,32 @@ $list-hover-blue	: #008b8b
 
 .margin-bottom-15
 	+margin-bottom(15px)
+
+//margin 13px
+.margin-left-13
+	+margin-left(13px)
+
+.margin-right-13
+	+margin-right(13px)
+
+.margin-top-13
+	+margin-top(13px)
+
+.margin-bottom-13
+	+margin-bottom(13px)
+
+//margin 10px
+.margin-left-10
+	+margin-left(10px)
+
+.margin-right-10
+	+margin-right(10px)
+
+.margin-top-10
+	+margin-top(10px)
+
+.margin-bottom-10
+	+margin-bottom(10px)
 
 //padding 5px
 .padding-left-5
@@ -227,7 +254,29 @@ input , .input-group
 	right: 10px 
 	cursor: pointer
 	display: none
+	z-index: 999
 
 .col-md-12, .col-lg-12
 	+padding-right(0)
 	+padding-left(0)
+
+.bold
+	font-weight: bold
+
+.badge-paid
+	background-color: rgb(207,181,59)
+	+border-radius(0)
+
+.badge-free
+	background-color: #3a87ad
+	+border-radius(0)
+
+.badge-paids
+	background-color: rgb(207,181,59)
+	color: black
+	font-weight: bold
+
+.badge-frees
+	background-color: #3a87ad
+	color: black
+	font-weight: bold

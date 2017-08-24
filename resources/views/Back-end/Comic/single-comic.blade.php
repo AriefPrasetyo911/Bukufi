@@ -85,103 +85,999 @@
 	h5#bold{
 		font-weight: bold;
 	}
+
+	#link:hover{
+		background-color: #ddd;
+	}
 </style>
 @endsection
 
 @section('main-content')
-<main class="main-content col-md-12 col-xs-12 single-comic">
+<main class="main-content col-md-12 col-xs-12 book_detail">
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		<!-- carousel started-->
 		<div class="panel panel-default">
 			<div class="panel-body">
+				<!--show only for lg-->
+				<div class="col-lg-12 visible-lg hidden-xs">
+					@foreach($single_comic as $detail)
+					<div class="col-lg-6 left padding-right-15" style="border-right: 1px solid #ddd;">
+						<figure id="author">
+							<h4 id="book_author">Author</h4>
+							<caption>
+								{{str_replace('-', ' ', $detail->comic_author)}}
+							</caption>
+						</figure>
+						<figure id="publisher">
+							<h4 id="book_publisher">Genre</h4>
+							<caption>
+								{{str_replace('-', ' ', $detail->comic_genre)}}
+							</caption>
+						</figure>
+						<figure id="release">
+							<h4 id="book_release">Year of Release</h4>
+							<caption>
+								{{$detail->comic_release}}
+							</caption>
+						</figure>
+						<figure id="description" class="text-justify">
+							<h4 id="book_desc">Comic Description</h4>
+							<caption>
+								{{strip_tags($detail->comic_description)}}
+							</caption>
+						</figure>
+						@if($detail->membership == "Paid")
+							<figure id="release">
+								<span class="badge badge-paid">
+									{{$detail->membership}} Member
+								</span>
+							</figure>
+						@else
+							<figure id="release">
+								<span class="badge badge-free">
+									{{$detail->membership}} Member
+								</span>
+							</figure>
+						@endif
+					</div>
+
+						@if (auth()->guard('user')->user())
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Paid")
+							<div class="col-lg-6 col-sm-6 right">
+								<div class="col-lg-4 col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-lg-8 col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														@if(count($comic_chapter))
+															@foreach($comic_chapter as $chapter)
+																<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+																<br>
+															@endforeach
+														@else
+															<h4 id="center">Sorry, this comic has no chapter yet</h4>
+														@endif
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Free")
+							<div class="col-lg-6 col-sm-6 right">
+								<div class="col-lg-4 col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-lg-8 col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														@if(count($comic_chapter))
+															@foreach($comic_chapter as $chapter)
+																<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+																<br>
+															@endforeach
+														@else
+															<h4 id="center">Sorry, this comic has no chapter yet</h4>
+														@endif
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Paid")
+							<div class="col-lg-6 col-sm-6 right">
+								<div class="col-lg-4 col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-lg-8 col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														<h4 id="center">Sorry, this comic is for paid member</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Free")
+							<div class="col-lg-6 col-sm-6 right">
+								<div class="col-lg-4 col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-lg-8 col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														@if(count($comic_chapter))
+															@foreach($comic_chapter as $chapter)
+																<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+																<br>
+															@endforeach
+														@else
+															<h4 id="center">Sorry, this comic has no chapter yet</h4>
+														@endif
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+
+						@else
+						<div class="col-lg-6 col-sm-6 right">
+							<div class="col-lg-4 col-md-4 " id="outer-thumb">
+								<div class="thumbnail">
+		                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+		                        </div>
+							</div>
+							<div class="col-lg-8 col-md-8 no-padding-right" id="outer-content">
+								<figure id="title">
+									<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+								</figure>
+
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												@if($detail->membership == "Free")
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+												@else
+													<div class="panel-body">
+														<h4 id="center">Sorry, this comic is for paid member</h4>
+													</div>
+												@endif
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						@endif
+					@endforeach
+				</div>
+
+				<!--show only for md-->
+				<div class="col-md-12 visible-md hidden-xs">
+					@foreach($single_comic as $detail)
+					<div class="col-md-6 left padding-right-15" style="border-right: 1px solid #ddd;">
+						<figure id="author">
+							<h4 id="book_author">Author</h4>
+							<caption>
+								{{str_replace('-', ' ', $detail->comic_author)}}
+							</caption>
+						</figure>
+						<figure id="publisher">
+							<h4 id="book_publisher">Genre</h4>
+							<caption>
+								{{str_replace('-', ' ', $detail->comic_genre)}}
+							</caption>
+						</figure>
+						<figure id="release">
+							<h4 id="book_release">Year of Release</h4>
+							<caption>
+								{{$detail->comic_release}}
+							</caption>
+						</figure>
+						<figure id="description" class="text-justify">
+							<h4 id="book_desc">Comic Description</h4>
+							<caption>
+								{{strip_tags($detail->comic_description)}}
+							</caption>
+						</figure>
+						@if($detail->membership == "Paid")
+							<figure id="release">
+								<span class="badge badge-paid">
+									{{$detail->membership}} Member
+								</span>
+							</figure>
+						@else
+							<figure id="release">
+								<span class="badge badge-free">
+									{{$detail->membership}} Member
+								</span>
+							</figure>
+						@endif
+					</div>
+
+						@if (auth()->guard('user')->user())
+							
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Paid")
+							<div class="col-md-6 col-sm-6 right">
+								<div class="col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														@if(count($comic_chapter))
+															@foreach($comic_chapter as $chapter)
+																<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+																<br>
+															@endforeach
+														@else
+															<h4 id="center">Sorry, this comic has no chapter yet</h4>
+														@endif
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Free")
+							<div class="col-md-6 col-sm-6 right">
+								<div class="col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														@if(count($comic_chapter))
+															@foreach($comic_chapter as $chapter)
+																<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+																<br>
+															@endforeach
+														@else
+															<h4 id="center">Sorry, this comic has no chapter yet</h4>
+														@endif
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Paid")
+							<div class="col-md-6 col-sm-6 right">
+								<div class="col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														<h4 id="center">Sorry, this comic is for paid member</h4>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Free")
+							<div class="col-md-6 col-sm-6 right">
+								<div class="col-md-4 " id="outer-thumb">
+									<div class="thumbnail">
+			                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+			                        </div>
+								</div>
+								<div class="col-md-8 no-padding-right" id="outer-content">
+									<figure id="title">
+										<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+									</figure>
+
+									<div class="comic_chapter">
+										<div class="panel-group" id="accordion">
+											<div class="panel panel-default no-margin-bottom">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+													<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+													Chapter &nbsp;
+													</a>
+													</h4>
+												</div>
+												<div id="collapseOne" class="panel-collapse collapse in">
+													<div class="panel-body">
+														@if(count($comic_chapter))
+															@foreach($comic_chapter as $chapter)
+																<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+																<br>
+															@endforeach
+														@else
+															<h4 id="center">Sorry, this comic has no chapter yet</h4>
+														@endif
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							@endif
+						@else
+						<div class="col-md-6 col-sm-6 right">
+							<div class="col-lg-4 col-md-4 " id="outer-thumb">
+								<div class="thumbnail">
+		                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+		                        </div>
+							</div>
+							<div class="col-lg-8 col-md-8 no-padding-right" id="outer-content">
+								<figure id="title">
+									<h4 id="comic_title">{{str_replace('-', ' ', $detail->comic_title)}}</h4>
+								</figure>
+
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												@if($detail->membership == "Free")
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+												@else
+													<div class="panel-body">
+														<h4 id="center">Sorry, this comic is for paid member</h4>
+													</div>
+												@endif
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</div>
+						</div>
+						@endif
+					@endforeach
+				</div>
 				
-				@foreach($single_comic as $comic)
-					<div class="col-md-12 col-xs-12">
-						<div class="media col-md-2 col-xs-5">
-							<figure>
-								<img src="/theme/images_cover/{{$comic->comic_image}}" class="comic-image" alt="image 1">
-							</figure>
-						</div>
+				<!--show only for sm-->
+				<div class="col-sm-12 visible-sm hidden-xs">
+					@foreach($single_comic as $detail)
+						@if (auth()->guard('user')->user())
+							
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Paid")
+							<div class="col-sm-8 left padding-right-15" style="border-right: 1px solid #ddd;">
+								<figure id="description" class="text-justify">
+									<h4 id="book_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
 
-						<div class="contents col-md-10 col-xs-7">
-							<figure class="caption hidden-xs">
-								<figcaption class="panel-heading" id="posting-title">
-									<h4 id="comic_title">{{str_replace('-', ' ', $comic->comic_title)}}</h4>
-								</figcaption>
-
-								<div class="col-md-12 col-xs-12 panel-body">
-									<div class="col-md-2 col-xs-4">
-										<ul class="list-group">
-											<li class="list-group-item">Author</li>
-											<li class="list-group-item">Genre</li>
-											<li class="list-group-item">Release</li>
-											<li class="list-group-item">Status</li>
-										</ul>
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="col-md-10 col-xs-8">
-										<ul class="list-group">
-											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_author)}}</li>
-											<li class="list-group-item">: {{str_replace('-', ' ', $comic->comic_genre)}}</li>
-											<li class="list-group-item">: {{$comic->comic_release}}</li>
-											<li class="list-group-item">: {{$comic->comic_status}}</li>
-										</ul>
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Free")
+							<div class="col-sm-8 left padding-right-15" style="border-right: 1px solid #ddd;">
+								<figure id="description" class="text-justify">
+									<h4 id="book_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
+
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Paid")
+							<div class="col-sm-8 left padding-right-15" style="border-right: 1px solid #ddd;">
+								<figure id="description" class="text-justify">
+									<h4 id="book_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
+
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													<h4 id="center">Sorry, this comic is for paid member</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Free")
+							<div class="col-sm-8 left padding-right-15" style="border-right: 1px solid #ddd;">
+								<figure id="description" class="text-justify">
+									<h4 id="book_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
+
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+
+						@else
+						<div class="col-sm-8 left padding-right-15" style="border-right: 1px solid #ddd;">
+							<figure id="description" class="text-justify">
+								<h4 id="book_desc">Comic Description</h4>
+								<caption>
+									{{strip_tags($detail->comic_description)}}
+								</caption>
 							</figure>
 
-
-							<figure class="caption visible-xs">
-								<figcaption class="panel-heading no-padding-top no-padding-right" id="posting-title">
-									<h4 id="comic_title">{{str_replace('-', ' ', $comic->comic_title)}}</h4>
-								</figcaption>
-
-								<div class="col-md-12 col-xs-12">
-									<h5 id="bold">Author :</h5>
-									<h5 id="normal">{{str_replace('-', ' ', $comic->comic_author)}}</h5>
-									<h5 id="bold">Genre :</h5>
-									<h5 id="normal">{{str_replace('-', ' ', $comic->comic_genre)}}</h5>
-									<h5 id="bold">Release :</h5>
-									<h5 id="normal">{{$comic->comic_release}}</h5>
-									<h5 id="bold">Status :</h5>
-									<h5 id="normal">{{$comic->comic_status}}</h5>
-								</div>
-							</figure>
-						</div>
-					</div>
-
-					<div class="col-md-12 col-xs-12 sumarry">
-						<h4>Summary</h4>
-						<hr>
-						<p id="comic_desc">{{strip_tags($comic->comic_description)}}</p>
-					</div>
-
-					<div class="col-md-12 col-xs-12 comic_chapter">
-						<div class="panel-group" id="accordion">
-							<div class="panel panel-default no-margin-bottom">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-									<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-									Chapter &nbsp;
-									</a>
-									</h4>
-								</div>
-								<div id="collapseOne" class="panel-collapse collapse in">
-									<div class="panel-body">
-										@if(count($comic_chapter))
-											@foreach($comic_chapter as $chapter)
-												<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
-												<br>
-											@endforeach
-										@else
-											<h4 id="center">Sorry, this comic has no chapter yet</h4>
-										@endif
+							<div class="comic_chapter">
+								<div class="panel-group" id="accordion">
+									<div class="panel panel-default no-margin-bottom">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+											Chapter &nbsp;
+											</a>
+											</h4>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse in">
+											@if($detail->membership == "Free")
+											<div class="panel-body">
+												@if(count($comic_chapter))
+													@foreach($comic_chapter as $chapter)
+														<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+														<br>
+													@endforeach
+												@else
+													<h4 id="center">Sorry, this comic has no chapter yet</h4>
+												@endif
+											</div>
+											@else
+												<div class="panel-body">
+													<h4 id="center">Sorry, this comic is for paid member</h4>
+												</div>
+											@endif
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
+						@endif
+
+					<div class="col-sm-4 right">
+						<div class="col-sm-12 " id="outer-thumb">
+							<div class="thumbnail">
+	                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+	                        </div>
+						</div>
+						<div class="no-padding-right" id="outer-content">
+							<figure id="title">
+								<h4 id="comic_title">Title</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->comic_title)}}
+								</caption>
+							</figure>
+							<figure id="author">
+								<h4 id="book_author">Author</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->comic_author)}}
+								</caption>
+							</figure>
+							<figure id="publisher">
+								<h4 id="book_publisher">Genre</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->comic_genre)}}
+								</caption>
+							</figure>
+							<figure id="release">
+								<h4 id="book_release">Year of Release</h4>
+								<caption>
+									{{$detail->comic_release}}
+								</caption>
+							</figure>
+							@if($detail->membership == "Paid")
+								<figure id="release">
+									<span class="badge badge-paid">
+										{{$detail->membership}} Member
+									</span>
+								</figure>
+							@else
+								<figure id="release">
+									<span class="badge badge-free">
+										{{$detail->membership}} Member
+									</span>
+								</figure>
+							@endif
+						</div>
 					</div>
-				@endforeach
-				
+					@endforeach
+				</div>
+
+				<!--show only for xs-->
+				<div class="col-xs-12 visible-xs">
+					@foreach($single_comic as $detail)
+					<div class="col-xs-12 full padding-right-15">
+						<div class="col-xs-5 " id="outer-thumb">
+							<div class="thumbnail">
+	                            <img src="{{asset('/storage/comic/comic_cover').'/'.$detail->comic_image}}" alt="{{$detail->comic_image}}">
+	                        </div>
+						</div>
+						<div class="col-xs-7">
+							<figure id="title">
+								<h4 id="comic_title">Title</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->comic_title)}}
+								</caption>
+							</figure>
+							<figure id="author">
+								<h4 id="comic_author">Author</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->comic_author)}}
+								</caption>
+							</figure>
+							<figure id="publisher">
+								<h4 id="comic_publisher">Genre</h4>
+								<caption>
+									{{str_replace('-', ' ', $detail->comic_genre)}}
+								</caption>
+							</figure>
+							<figure id="release">
+								<h4 id="comic_release">Year of Release</h4>
+								<caption>
+									{{$detail->comic_release}}
+								</caption>
+							</figure>
+							@if($detail->membership == "Paid")
+								<figure id="release">
+									<span class="badge badge-paid">
+										{{$detail->membership}} Member
+									</span>
+								</figure>
+							@else
+								<figure id="release">
+									<span class="badge badge-free">
+										{{$detail->membership}} Member
+									</span>
+								</figure>
+							@endif
+						</div>
+
+						@if (auth()->guard('user')->user())
+							
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Paid")
+							<div class="col-xs-12">
+								<figure id="description" class="text-justify">
+									<h4 id="comic_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Paid" and $detail->membership == "Free")
+							<div class="col-xs-12">
+								<figure id="description" class="text-justify">
+									<h4 id="comic_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Paid")
+							<div class="col-xs-12">
+								<figure id="description" class="text-justify">
+									<h4 id="comic_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													<h4 id="center">Sorry, this comic is for paid member</h4>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+
+							@if(auth()->guard('user')->user()->membership == "Free" and $detail->membership == "Free")
+							<div class="col-xs-12">
+								<figure id="description" class="text-justify">
+									<h4 id="comic_desc">Comic Description</h4>
+									<caption>
+										{{strip_tags($detail->comic_description)}}
+									</caption>
+								</figure>
+								<div class="comic_chapter">
+									<div class="panel-group" id="accordion">
+										<div class="panel panel-default no-margin-bottom">
+											<div class="panel-heading">
+												<h4 class="panel-title">
+												<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+												Chapter &nbsp;
+												</a>
+												</h4>
+											</div>
+											<div id="collapseOne" class="panel-collapse collapse in">
+												<div class="panel-body">
+													@if(count($comic_chapter))
+														@foreach($comic_chapter as $chapter)
+															<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+															<br>
+														@endforeach
+													@else
+														<h4 id="center">Sorry, this comic has no chapter yet</h4>
+													@endif
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							@endif
+
+						@else
+						<div class="col-xs-12">
+							<figure id="description" class="text-justify">
+								<h4 id="comic_desc">Comic Description</h4>
+								<caption>
+									{{strip_tags($detail->comic_description)}}
+								</caption>
+							</figure>
+							<div class="comic_chapter">
+								<div class="panel-group" id="accordion">
+									<div class="panel panel-default no-margin-bottom">
+										<div class="panel-heading">
+											<h4 class="panel-title">
+											<a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+											Chapter &nbsp;
+											</a>
+											</h4>
+										</div>
+										<div id="collapseOne" class="panel-collapse collapse in">
+											@if($detail->membership == "Free")
+											<div class="panel-body">
+												@if(count($comic_chapter))
+													@foreach($comic_chapter as $chapter)
+														<a href="{{'/show/comic/'.$chapter->comic_title. '/' .$chapter->comic_chapter}}"><i class="fa fa-caret-right" aria-hidden="true"></i> Chapter {{$chapter->comic_chapter}} : {{$chapter->chapter_title}}</a>
+														<br>
+													@endforeach
+												@else
+													<h4 id="center">Sorry, this comic has no chapter yet</h4>
+												@endif
+											</div>
+											@else
+												<div class="panel-body">
+													<h4 id="center">Sorry, this comic is for paid member</h4>
+												</div>
+											@endif
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						@endif
+					</div>
+					@endforeach
+				</div>
 			</div>
 		</div>		
 	</div>

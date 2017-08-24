@@ -271,10 +271,10 @@
                     <td>
                       <a href="{{url('/admin/comic-chapter/' .$comic->id)}}" class="btn btn-primary btn-block">Add Chapter</a>
                       <a href="{{url('/admin/comic/' .$comic->id. '/edit')}}" class="btn btn-info btn-block">Edit</a>
-                      <form action="{{url('/admin/comic/' .$comic->id)}}" class="form-horizontal" method="post">
+                      <form action="{{url('/admin/comic/' .$comic->id.'/'.$comic->comic_title)}}" class="form-horizontal" method="post">
                         {{ method_field('delete')}}
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('Are you sure want to delete this data?')">Delete</button>
+                        <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('Are you sure want to delete this data? THIS WILL ALSO DELETE ALL COMIC CHAPTER FOR THIS COMIC!')">Delete</button>
                       </form>                  
                     </td>
                   </tr>

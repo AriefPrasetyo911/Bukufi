@@ -154,7 +154,7 @@
                 <li class="<?php echo e(Request::segment(2) == 'comic-bookmark' ? 'active' : ''); ?>"><a href="<?php echo e(route('user.bookmark.list', auth()->guard('user')->user()->id)); ?>"><i class="fa fa-angle-double-right"></i> Bookmark List</a></li>
               </ul>
             </li>
-            <li class="treeview <?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>">
+            <!-- <li class="treeview <?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>">
               <a href="#">
                 <i class="fa fa-history" aria-hidden="true"></i>
                 <span>Reading History</span>
@@ -165,7 +165,7 @@
               <ul class="treeview-menu">
                 <li class="<?php echo e(Request::segment(2) == 'comic' ? 'active' : ''); ?>"><a href="<?php echo e(route('comic.list')); ?>"><i class="fa fa-angle-double-right"></i> History List</a></li>
               </ul>
-            </li>
+            </li> -->
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -255,7 +255,7 @@
       <div class="pull-right hidden-xs">
         <b>Version</b> 1.0
       </div>
-      <strong>Copyright &copy; 2017 <a href="#">Kaigangames.com</a>.</strong> All rights
+      <strong>Copyright &copy; 2017 <a href="#">Bukufi</a>.</strong> All rights
       reserved.
     </footer>
 

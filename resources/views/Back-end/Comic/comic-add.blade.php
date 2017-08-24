@@ -168,6 +168,19 @@
                 <li class="{{ Request::segment(2) == 'comic-genre' ? 'active' : '' }}"><a href="{{route('comic.genre')}}"><i class="fa fa-angle-double-right"></i> Comic Genre</a></li>
               </ul>
             </li>
+            <!--=============================-->
+            <li class="treeview {{Request::segment(2) == 'slider' ? 'active' : ''}}">
+              <a href="#">
+               <i class="fa fa-slideshare" aria-hidden="true"></i>
+                <span>Slider Carousel</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="{{ Request::segment(2) == 'slider' ? 'active' : '' }}"><a href="{{route('slider')}}"><i class="fa fa-angle-double-right"></i> Slider Carousel</a></li>
+              </ul>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -258,6 +271,17 @@
                       <option value="{{$stat->comic_status}}">{{$stat->comic_status}}</option>
                       @endforeach
                     </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Book Membership</label>
+                  <div class="col-md-10">
+                    <label class="col-md-2" style="padding-left: 0;">
+                      <input type="radio" name="r3" class="flat-red" value="Paid"> Paid
+                    </label>
+                    <label class="col-md-2" style="padding-left: 0;">
+                      <input type="radio" name="r3" class="flat-red" value="Free"> Free
+                    </label>
                   </div>
                 </div>
               </div>

@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Edit Book : Bukufi</title>
     
-    <link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/style.css')}}">
+  <link rel="stylesheet" type="text/css" href="{{asset('theme/css/Custom/css/style.css')}}">
   <!-- Bootstrap 3.3.7 -->
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/Bootstrap/bootstrap.min.css')}}">
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/Font-awesome/css/font-awesome.min.css')}}">
@@ -16,6 +16,9 @@
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/AdminLTE/Ionicons/css/ionicons.min.css')}}">
   <!-- jvectormap -->
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/AdminLTE/jvectormap/jquery-jvectormap.css')}}">
+  <!-- icheck plugin -->
+  <link rel="stylesheet" type="text/css" href="{{asset('theme/js/Plugins/iCheck/all.css')}}">
+
   <!-- Theme style -->
   <link rel="stylesheet" type="text/css" href="{{asset('theme/css/AdminLTE/dist/AdminLTE.min.css')}}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -184,6 +187,19 @@
                 <li class="{{ Request::segment(2) == 'comic-genre' ? 'active' : '' }}"><a href="{{route('comic.genre')}}"><i class="fa fa-angle-double-right"></i> Comic Genre</a></li>
               </ul>
             </li>
+            <!--=============================-->
+            <li class="treeview {{Request::segment(2) == 'slider' ? 'active' : ''}}">
+              <a href="#">
+               <i class="fa fa-slideshare" aria-hidden="true"></i>
+                <span>Slider Carousel</span>
+                <span class="pull-right-container">
+                  <i class="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="{{ Request::segment(2) == 'slider' ? 'active' : '' }}"><a href="{{route('slider')}}"><i class="fa fa-angle-double-right"></i> Slider Carousel</a></li>
+              </ul>
+            </li>
           </ul>
         </section>
         <!-- /.sidebar -->
@@ -194,11 +210,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
           <h1>
-            Add New Book
+            Edit Book
           </h1>
           <ol class="breadcrumb">
             <li><a href="{{route('admin.dashboard')}}"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li class="active">Add New Book</li>
+            <li class="active">Edit Book</li>
           </ol>
         </section>
 
@@ -274,6 +290,17 @@
                     <input type="number" name="book_release" id="book_release" class="form-control" value="{{$books->book_release}}">
                   </div>
                 </div>
+                <div class="form-group">
+                  <label class="control-label col-md-2">Book Membership</label>
+                  <div class="col-md-10">
+                    <label class="col-md-2" style="padding-left: 0;">
+                      <input type="radio" name="r3" class="flat-red" value="Paid" {{ $books->membership == 'Paid' ? 'checked' : '' }}> Paid
+                    </label>
+                    <label class="col-md-2" style="padding-left: 0;">
+                      <input type="radio" name="r3" class="flat-red" value="Free" {{ $books->membership == 'Free' ? 'checked' : '' }}> Free
+                    </label>
+                  </div>
+                </div>  
               </div>
             </div>
             <div class="box-footer">
@@ -313,10 +340,28 @@
   <script type="text/javascript" src="{{asset('theme/js/AdminLTE/Chart.js/Chart.js')}}"></script>
   <script type="text/javascript" src="{{asset('theme/js/AdminLTE/dist/pages/dashboard2.js')}}"></script>
 
+  <script type="text/javascript" src="{{asset('theme/js/Plugins/iCheck/icheck.min.js')}}"></script>
+
   <script type="text/javascript" src="{{asset('theme/js/AdminLTE/ckeditor/ckeditor.js')}}"></script>
   <script>
     // Replace the <textarea id="editor1"> with a CKEditor
     // instance, using default configuration.
     CKEDITOR.replace( 'book_description' );
+
+    //iCheck for checkbox and radio inputs
+    $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
+      checkboxClass: 'icheckbox_minimal-blue',
+      radioClass   : 'iradio_minimal-blue'
+    })
+    //Red color scheme for iCheck
+    $('input[type="checkbox"].minimal-red, input[type="radio"].minimal-red').iCheck({
+      checkboxClass: 'icheckbox_minimal-red',
+      radioClass   : 'iradio_minimal-red'
+    })
+    //Flat red color scheme for iCheck
+    $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+      checkboxClass: 'icheckbox_flat-green',
+      radioClass   : 'iradio_flat-green'
+    })
   </script>
 </html>

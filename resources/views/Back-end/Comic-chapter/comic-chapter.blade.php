@@ -241,6 +241,7 @@
                     <th>Comic Title</th>
                     <th>Comic Chapter</th>
                     <th>Chapter Title</th>
+                    <!-- <th></th> -->
                   </tr>
                 </thead>
                 <?php $no = 1 ?>
@@ -248,11 +249,11 @@
                   @foreach($chapter as $chap)
                   <tr>
                     <td>{{$no++}}</td>
-                    <td>{{$chap->comic_title}}</td>
+                    <td>{{str_replace('-', ' ', $chap->comic_title)}}</td>
                     <td>{{$chap->comic_chapter}}</td>
                     <td>{{$chap->chapter_title}}</td>
-                    <!-- <td>
-                      <form action="{{url('/admin/comic-chapter/delete/' .$chap->comic_chapter)}}" class="form-horizontal" method="post">
+                   <!--  <td>
+                      <form action="{{url('/admin/comic-chapter/delete/' .$chap->comic_title.'/'.$chap->chapter_title)}}" class="form-horizontal" method="post">
                         {{ method_field('delete')}}
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-danger btn-block" onclick="return confirm('Are you sure want to delete this data?')">Delete</button>

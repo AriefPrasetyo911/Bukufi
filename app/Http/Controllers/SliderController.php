@@ -25,7 +25,8 @@ class SliderController extends Controller
 
         $image_slider		= $request->file('slider_image');
         $image_slider_name  = time().'_'.$image_slider->getClientOriginalName();
-        $request->file('slider_image')->move('theme/Slider_carousel/', $image_slider_name);
+        /*$request->file('slider_image')->move('theme/Slider_carousel/', $image_slider_name);*/
+        $request->file('slider_image')->storeAs('slider_carousel', $image_slider_name);
 
         $carousel 						= new Slider_carousel();
         $carousel->slider_image 		= $image_slider_name;
@@ -38,7 +39,7 @@ class SliderController extends Controller
     public function deleteSlider($id)
     {
     	$data = Slider_carousel::find($id);
-    	$image_path = public_path()."\\theme\Slider_carousel\\".$data->slider_image;
+    	$image_path = public_path()."\\storage\slider_carousel\\".$data->slider_image;
     	
         $deletes = unlink($image_path);
 
